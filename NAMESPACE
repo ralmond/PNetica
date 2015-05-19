@@ -1,0 +1,38 @@
+import(methods)
+
+export(dputToString, dgetFromString)
+
+S3method(is.Pnet, NeticaBN)
+S3method(PnetPriorWeight, NeticaBN)
+S3method("PnetPriorWeight<-", NeticaBN)
+S3method(PnetPnodes, NeticaBN)
+S3method(calcPnetLLike, NeticaBN)
+S3method(calcExpTables, NeticaBN)
+S3method(maxAllTableParams, NeticaBN)
+S3method(maxCPTParam, NeticaBN)
+
+S3method(is.Pnode, NeticaBN)
+S3method(PnodeNet, NeticaBN)
+S3method(PnodeQ, NeticaBN)
+S3method("PnodeQ<-", NeticaBN)
+S3method(PnodePriorWeight, NeticaBN)
+S3method("PnodePriorWeight<-", NeticaBN)
+S3method(PnodeRules, NeticaBN)
+S3method("PnodeRules<-", NeticaBN)
+S3method(PnodeLink, NeticaBN)
+S3method("PnodeLink<-", NeticaBN)
+S3method(PnodeLnAlpha, NeticaBN)
+S3method("PnodeLnAlpha<-", NeticaBN)
+S3method(PnodeBetas, NeticaBN)
+S3method("PnodeBetas<-", NeticaBN)
+S3method(PnodeLinkScale, NeticaBN)
+S3method("PnodeLinkScale<-", NeticaBN)
+S3method(BuildTable, NeticaBN)
+S3method(PnodeParentTvals, NeticaBN)
+S3method(maxCPTParam, NeticaBN)
+
+
+
+
+
+
