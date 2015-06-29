@@ -1,19 +1,5 @@
 ### Parameterized networks.
 
-## A utility function for converting objects to strings and vise
-## versa.
-dputToString <- function (obj) {
-  con <- textConnection(NULL,open="w")
-  tryCatch({dput(obj,con);
-           textConnectionValue(con)},
-           finally=close(con))
-}
-
-dgetFromString <- function (str) {
-  con <- textConnection(str,open="r")
-  tryCatch(dget(con), finally=close(con))
-}
-
 
 ## Parameterized networks have the following properties:
 
@@ -26,19 +12,27 @@ is.Pnet.NeticaBN <- function (x) {
   length(NetworkNodesInSet(x,"Pnodes")) > 0
 }
 
+as.Pnet.NeticaBN <- function (x) {
+  if (!("Pnet" %in% class(x)))
+    class(x) <- c(class(x),"Pnet")
+  x
+}
+
 PnetPriorWeight.NeticaBN <- function (net) {
-  result <- dgetFromString(NetworkUserField(net,"priorWeight"))
-  if (is.na(result)) result <- NULL
-  result
+  NetworkUserObj(net,"priorWeight")
 }
 
 "PnetPriorWeight<-.NeticaBN" <- function (net,value) {
-  NetworkUserField(net,"priorWeight") <- dputToString(value)
-  net
+  NetworkUserObj(net,"priorWeight") <- value
+  invisible(net)
 }
 
 PnetPnodes.NeticaBN <- function (net) {
   NetworkNodesInSet(net,"pnodes")
+}
+"PnetPnodes<-.NeticaBN" <- function (net, value) {
+  NetworkNodesInSet(net,"pnodes") <- value
+  invisible(net)
 }
 
 
@@ -52,8 +46,10 @@ PnetPnodes.NeticaBN <- function (net) {
 ## priorWeight -- a numeric value or a vector of numeric values for
 ## each row of the CPT.   Inherits from the net if not available.
 
-is.Pnode.NeticaNode <- function (x) {
-  "pnodes" %in% NodeSets(x)
+as.Pnode.NeticaNode <- function (x) {
+  if (!("Pnode" %in% class(x)))
+    class(x) <- c(class(x),"Pnode")
+  x
 }
 
 PnodeNet.NeticaNode <- function (node) {
@@ -61,69 +57,66 @@ PnodeNet.NeticaNode <- function (node) {
 }
 
 PnodeRules.NeticaNode <- function (node) {
-  dgetFromString(NodeUserField(node,"rules"))
+  NodeUserObj(node,"rules")
 }
 
 "PnodeRules<-.NeticaNode" <- function (node,value) {
-  NodeUserField(node,"rules") <- dputToString(value)
+  NodeUserObj(node,"rules") <- value
   node
 }
 
 PnodeLink.NeticaNode <- function (node) {
-  dgetFromString(NodeUserField(node,"link"))
+  NodeUserObj(node,"link")
 }
 
 "PnodeLink<-.NeticaNode" <- function (node,value) {
-  NodeUserField(node,"link") <- dputToString(value)
+  NodeUserObj(node,"link") <- value
   node
 }
 
 PnodeQ.NeticaNode <- function (node) {
-  dgetFromString(NodeUserField(node,"Q"))
+  NodeUserObj(node,"Q")
 }
 
 "PnodeQ<-.NeticaNode" <- function (node,value) {
-  NodeUserField(node,"Q") <- dputToString(value)
+  NodeUserObj(node,"Q") <- value
   node
 }
 
 PnodeLnAlphas.NeticaNode <- function (node) {
-  dgetFromString(NodeUserField(node,"lnAlphas"))
+  NodeUserObj(node,"lnAlphas")
 }
 
 "PnodeLnAlphas<-.NeticaNode" <- function (node,value) {
-  NodeUserField(node,"lnAlphas") <- dputToString(value)
+  NodeUserObj(node,"lnAlphas") <- value
   node
 }
 
 PnodeBetas.NeticaNode <- function (node) {
-  dgetFromString(NodeUserField(node,"betas"))
+  NodeUserObj(node,"betas")
 }
 
 "PnodeBetas<-.NeticaNode" <- function (node,value) {
-  NodeUserField(node,"betas") <- dputToString(value)
+  NodeUserObj(node,"betas") <- value
   node
 }
 
 
 PnodeLinkScale.NeticaNode <- function (node) {
-  dgetFromString(NodeUserField(node,"linkScale"))
+  NodeUserObj(node,"linkScale")
 }
 
 "PnodeLinkScale<-.NeticaNode" <- function (node,value) {
-  NodeUserField(node,"linkScale") <- dputToString(value)
+  NodeUserObj(node,"linkScale") <- value
   node
 }
 
 PnodePriorWeight.NeticaNode <- function (node) {
-  result <- dgetFromString(NodeUserField(node,"priorWeight"))
-  ## RNetic returns NA, not null for missing field.
-  if (is.na(result)) result <- NULL
-  result
+  NodeUserObj(node,"priorWeight")
 }
 
 "PnodePriorWeight<-.NeticaNode" <- function (node,value) {
-  NodeUserField(node,"priorWeight") <- dgetFromString(value)
+  NodeUserObj(node,"priorWeight") <- value
   node
 }
 
@@ -131,29 +124,74 @@ PnodeParentTvals.NeticaNode <- function (node) {
   lapply(NodeParents(node),NodeLevels)
 }
 
+Pnode.NeticaNode <- function (node, lnAlphas, betas, rules="Compensatory",
+                           link="partialCredit",Q=TRUE,linkScale=NULL,
+                           priorWeight=NULL) {
+  if (!("Pnode" %in% class(node)))
+    class(node) <- c(class(node),"Pnode")
+  if (missing(lnAlphas)) {
+    if (is.list(rules)) {
+      lnAlphas <- lapply(rules, function(rule) defaultAlphas(node,rule))
+    } else {
+      lnAlphas <- defaultAlphas(node,rules)
+    }
+  }
+  PnodeLnAlphas(node) <- lnAlphas
+  if (missing(betas)) {
+    if (is.list(rules)) {
+      betas <- lapply(rules, function(rule) defaultBetas(node,rule))
+    } else {
+      betas <- defaultBetas(node,rules)
+    }
+  }
+  PnodeBetas(node) <- betas
+  PnodeRules(node) <- rules
+  PnodeLink(node) <- link
+  PnodeQ(node) <- Q
+  PnodeLinkScale(node) <- linkScale
+  PnodePriorWeight(node) <- priorWeight
+  node
+}
+
+defaultAlphas <- function (node, rule) {
+  if (is.character(rule) && grepl("Offset",rule[1])) {
+    return(0)
+  }
+  rep(0, length(NodeParents(node)))
+}
+
+defaultBetas <- function (node, rule) {
+  if (!is.character(rule) || !grepl("Offset",rule[1])) {
+    return(0)
+  }
+  rep(0, length(NodeParents(node)))
+}
+
 ### Build CPTs from parameters
 
 BuildTable.NeticaNode <- function (node) {
-  node[] <- bcalcDPCFrame(ParentStates(node),NodeStates(node),
+  node[] <- calcDPCFrame(ParentStates(node),NodeStates(node),
                           PnodeLnAlphas(node), PnodeBetas(node),
                           PnodeRules(node),PnodeLink(node),
-                          PnodeLinkScale(node),PnetQ(node),
+                          PnodeLinkScale(node),PnodeQ(node),
                           PnodeParentTvals(node))
   NodeExperience(node) <- GetPriorWeight(node)
   invisible(node)
 }
+
 
 calcPnetLLike.NeticaBN <- function (net,cases){
   llike <- 0
   nextRec <- "FIRST"
   onodes <- NetworkNodesInSet(net,"onodes")
   pos <- 0
-  WithOpenCaseStream(cases,
+  stream <- CaseFileStream(cases)
+  WithOpenCaseStream(stream,
     while(!is.na(pos)) {
-      ReadFindings(onodes,cases,nextRec)
+      ReadFindings(onodes,stream,nextRec)
       nextRec <- "NEXT"
-      pos <- getCaseStreamPos(cases)
-      w <- getCaseStreamLastFreq(cases)
+      pos <- getCaseStreamPos(stream)
+      w <- getCaseStreamLastFreq(stream)
       if (w<0) w<-1
       llike <- llike + w*log(FindingsProbability(net))
       lapply(onodes,RetractNodeFinding)
@@ -165,18 +203,34 @@ calcExpTables.NeticaBN <- function (net, cases, Estepit=1,
                                     tol=sqrt(.Machine$double.eps)) {
   pnodes <- NetworkNodesInSet(net,"pnodes")
   LearnCPTs(cases,pnodes,"EM",Estepit,tol)
+  invisible(net)
 }
 
 
-maxCPTParam.NeticaNode <- function (node, Mstepit=3,
+## This function is designed to suppress lack of convergence warnings,
+## as we are frequently not wanting to run the M-step to convergence.
+muffler <- function (w) {
+  if (conditionMessage(w) == "" ||
+      grepl("converge",conditionMessage(w)))
+    invokeRestart("muffleWarning")
+}
+
+
+maxCPTParam.NeticaNode <- function (node, Mstepit=5,
                                     tol=sqrt(.Machine$double.eps)) {
   ## Get the posterior pseudo-counts by multiplying each row of the
-  ## CPT by its experience.
+  ## node's CPT by its experience.
   counts <- sweep(node[[]],1,NodeExperience(node),"*")
-  mapDPC(counts,ParentStates(node),NodeStates(node),
-         PnodeLnAlphas(node), PnodeBeta(node),
-         PnodeRules(node),PnodeLink(node),
-         PnodeLinkScale(node),PnodeQ(node),
-         control=list(reltol=tol,maxits=Mstepit)
-         )
+  withCallingHandlers(
+      est <- mapDPC(counts,ParentStates(node),NodeStates(node),
+                    PnodeLnAlphas(node), PnodeBetas(node),
+                    PnodeRules(node),PnodeLink(node),
+                    PnodeLinkScale(node),PnodeQ(node),
+                    control=list(reltol=tol,maxit=Mstepit)
+                    ),
+      warning=muffler)
+  PnodeLnAlphas(node) <- est$lnAlphas
+  PnodeBetas(node) <- est$betas
+  PnodeLinkScale(node) <- est$linkScale
+  invisible(node)
 }

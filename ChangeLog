@@ -1,3 +1,19 @@
+2015-06-06  Russell G. Almond  <ralmond@Limu>
+
+	* R/PnetNetica.R (Pnode.default, as.Pnode.NeticaNode): Added
+	constructors. 
+	(as.Pnet.NeticaBN): Added constructors.
+	("PnetPnodes<-".NeticaBN): Added setter.
+
+2015-06-05  Russell G. Almond  <ralmond@Limu>
+
+	* R/PnetNetica.R (PnetPriorWeight.NeticaBN)
+	(PnodeRules.NeticaNode, PnodeLink.NeticaNode)
+	("PnodeLink<-.NeticaNode", PnodeQ.NeticaNode)
+	(PnodeLnAlphas.NeticaNode, PnodeBetas.NeticaNode)
+	(PnodeLinkScale.NeticaNode, PnodePriorWeight.NeticaNode): Reworked
+	to use NodeUserObj/NetworkUserObj
+
 2015-05-19  Russell G. Almond  <ralmond@Limu>
 
 	* R/PnetNetica.R ("PnodeQ<-.NeticaNode", PnodeQ.NeticaNode): Added.
