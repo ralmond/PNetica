@@ -1,10 +1,10 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 5.04 on 05/10/2015 at 04:41:27 PM.
+// File created by an unlicensed user using Netica 5.04 on 06/21/2015 at 04:32:55 PM.
 
 bnet IRT10_2PL {
 autoupdate = FALSE;
-whenchanged = 1431290483;
+whenchanged = 1434918713;
 user U1 {
 	priorWeight = "10";
 	};
@@ -37,12 +37,13 @@ node item1 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290483;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -61,12 +62,13 @@ node item2 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290483;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -85,12 +87,13 @@ node item3 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290483;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -109,12 +112,13 @@ node item4 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290483;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -133,12 +137,13 @@ node item5 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290483;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -157,12 +162,13 @@ node item6 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290482;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -181,12 +187,13 @@ node item7 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290482;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -205,12 +212,13 @@ node item8 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290482;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -229,12 +237,13 @@ node item9 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290482;
+	whenchanged = 1434918713;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
 
@@ -253,14 +262,17 @@ node item10 {
 		   0.2908043,   0.7091957,    // Low   
 		   0.1016853,   0.8983147);   // VL    ;
 	numcases = 10;
-	whenchanged = 1431290482;
+	whenchanged = 1434918712;
 	user U1 {
 		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
 		lnAlphas = "0";
 		betas = "0";
+		Q = "TRUE";
 		};
 	};
-NodeSet pnodes {Nodes = (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10);};
-NodeSet observables {Nodes = (item1, item2, item3, item4, item5, item6, item7, item8, item9, item10);};
+NodeSet pnodes {Nodes = (item10, item9, item8, item7, item6, item5, item4, item3, item2, item1);};
+NodeSet observables {Nodes = (item10, item9, item8, item7, item6, item5, item4, item3, item2, item1);};
+NodeSet onodes {Nodes = (item10, item9, item8, item7, item6, item5, item4, item3, item2, item1);};
+ElimOrder = (item1, item2, item3, item4, item5, item6, item7, item8, item9, theta, item10);
 };
