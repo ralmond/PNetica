@@ -8,10 +8,6 @@
 ## A field called "priorWeight" which gives the default prior weight
 ## to use.
 
-is.Pnet.NeticaBN <- function (x) {
-  length(NetworkNodesInSet(x,"Pnodes")) > 0
-}
-
 as.Pnet.NeticaBN <- function (x) {
   if (!("Pnet" %in% class(x)))
     class(x) <- c(class(x),"Pnet")
