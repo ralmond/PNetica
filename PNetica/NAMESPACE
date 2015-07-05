@@ -1,8 +1,9 @@
-import(methods)
+#import(methods)
+import(Peanut)
+import(RNetica)
+import(CPTtools)
 
-export(dputToString, dgetFromString)
 
-S3method(is.Pnet, NeticaBN)
 S3method(as.Pnet, NeticaBN)
 S3method(PnetPriorWeight, NeticaBN)
 S3method("PnetPriorWeight<-", NeticaBN)
