@@ -36,7 +36,7 @@
   can stop after the first iteration of the internal EM algorithm.
 
   This method expects the \code{cases} argument to be a pathname
-  pointing to a Netica cases file containg the training or test data (see
+  pointing to a Netica cases file containing the training or test data (see
   \code{\link[RNetica]{write.CaseFile}}).  Also, it expects that there
   is a nodeset (see \code{\link[RNetica]{NetworkNodesInSet}}) attached
   to the network called \dQuote{onodes} which 
@@ -60,9 +60,9 @@
   \code{\link[RNetica]{LearnCPTs}}.  Note that the outer EM
   algorithm assumes that the expected table counts given the current
   values of the parameters, so the default value of one is sufficient.
-  (It is possible that a higher value will spead up convergence, the
+  (It is possible that a higher value will speed up convergence, the
   parameter is left open for experimentation.)  The tolerance is largely
-  irrelvant as the outer EM algorithm does the tolerance test.
+  irrelevant as the outer EM algorithm does the tolerance test.
 
 }
 \value{

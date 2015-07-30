@@ -50,8 +50,8 @@
   algorithm, the M-step does not need to be run to convergence, a couple
   of iterations are sufficient.  The value of \code{Mstepit} may
   influence the speed of convergence, so the optimal value may vary by
-  applicatoin.  The tolerance is largely
-  irrelvant (if \code{Mstepit} is small) as the outer EM algorithm does
+  application.  The tolerance is largely
+  irrelevant (if \code{Mstepit} is small) as the outer EM algorithm does
   the tolerance test. 
 
   

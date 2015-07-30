@@ -40,7 +40,7 @@
 \value{
 
   The \code{node} argument is returned invisibly.
-  As a side effect the conditional proability table and experience of
+  As a side effect the conditional probability table and experience of
   \code{node} is modified.
 
 }
