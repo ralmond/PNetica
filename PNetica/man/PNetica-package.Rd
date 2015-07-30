@@ -16,7 +16,7 @@ The DESCRIPTION file:
 The \code{\link[Peanut]{Peanut}} package provides a set of generic
 functions for manipulation parameterized networks, in particular, for
 the abstract \code{\link[Peanut]{Pnet}} and \code{\link[Peanut]{Pnode}}
-classes.  This package provides concrete implemenations of those classes
+classes.  This package provides concrete implementations of those classes
 using the built in classes of \code{\link[RNetica]{RNetica}}.  In
 particular, \code{\link{Pnet.NeticaBN}} extends
 \code{\link[RNetica]{NeticaBN}} and \code{\link{Pnode.NeticaNode}} extends
@@ -37,7 +37,7 @@ the \dQuote{Pnet} or \dQuote{Pnode} class is not necessary, but it is
 recommended in case this is used in the future.
 
 }
-\section{PNetica Specific Implemenation Details}{
+\section{PNetica Specific Implementation Details}{
 
   Here are some Netica specific details which may not be apparent from
   the description of the generic functions in the
@@ -114,7 +114,7 @@ Maintainer: \packageMaintainer{PNetica}
 \keyword{ graphs }
 \seealso{
 
-  \code{PNetica} depends ont the following other packages.
+  \code{PNetica} depends on the following other packages.
   \describe{
     \item{\code{\link[RNetica]{RNetica}}}{A binding
       of the Netica C API into R.}
@@ -122,7 +122,7 @@ Maintainer: \packageMaintainer{PNetica}
       the generic functions for which this package provides
       implementations.}
     \item{\code{\link[CPTtools:CPTtools-package]{CPTtools}}}{A
-      collection of implemenation independent Bayes net utilities.}
+      collection of implementation independent Bayes net utilities.}
     }
 
 }

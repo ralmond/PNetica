@@ -4,7 +4,7 @@
 \description{
 
   In constructing a conditional probability table using the discrete
-  parital credit framework (see \code{\link[CPTtools]{calcDPCTable}}),
+  partial credit framework (see \code{\link[CPTtools]{calcDPCTable}}),
   each state of each parent variable is mapped onto a real value called
   the effective theta.  The  \code{PnodeParentTvals} method for Netica
   nodes returns the result of applying \code{\link[RNetica]{NodeLevels}}

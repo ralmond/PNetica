@@ -29,7 +29,7 @@
   This function gives the log likelihood of the data.
 
   This method expects the \code{cases} argument to be a pathname
-  pointing to a Netica cases file containg the training or test data (see
+  pointing to a Netica cases file containing the training or test data (see
   \code{\link[RNetica]{write.CaseFile}}).  Also, it expects that there
   is a nodeset (see \code{\link[RNetica]{NetworkNodesInSet}})
   attached to the network called \dQuote{onodes} which

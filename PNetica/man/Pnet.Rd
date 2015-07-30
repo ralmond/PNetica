@@ -5,7 +5,7 @@
 \alias{PnetPriorWeight<-.NeticaBN}
 \alias{PnetPnodes.NeticaBN}
 \alias{PnetPnodes<-.NeticaBN}
-\title{RNetica implemenation of the Pnet class}
+\title{RNetica implementation of the Pnet class}
 \description{
 
   This documentation file describes the use of a

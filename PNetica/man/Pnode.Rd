@@ -9,7 +9,7 @@
 \alias{PnodeLnAlphas.NeticaNode}
 \alias{PnodeBetas.NeticaNode}
 \alias{PnodeLinkScale.NeticaNode}
-\title{RNetica implemenation of the Pnode class}
+\title{RNetica implementation of the Pnode class}
 \description{
 
   This documentation file describes the use of a
@@ -54,7 +54,7 @@
   \item{link}{The name of the link function or the link function
     itself.  See \code{\link[Peanut]{PnodeLink}} for a description of the link
     function.}
-  \item{Q}{A logical matrix or the constant \code{TRUE} (indicaticating
+  \item{Q}{A logical matrix or the constant \code{TRUE} (indicating
     that the Q-matrix should be a matrix of \code{TRUE}s).  See
     \code{\link[Peanut]{PnodeQ}} for a description of this parameter.}
   \item{linkScale}{A numeric vector of link scale parameters or
@@ -79,7 +79,7 @@
   The \code{as.Pnode.NeticaNode} method merely adds \dQuote{Pnode} to
   \code{class(net)}.  The \code{NeticaNode} method of
   \code{\link[Peanut]{Pnode}} calls \code{as.Pnode} and also sets
-  default values for various pnode fields.  This is the recommended
+  default values for various Pnode fields.  This is the recommended
   approach for creating new \code{Pnode} objects.  Note that calling
   \code{Pnode.NeticaNode} will calculate defaults for the
   \code{\link[Peanut]{PnodeLnAlphas}} and \code{\link[Peanut]{PnodeBetas}}
