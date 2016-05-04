@@ -149,19 +149,6 @@ Pnode.NeticaNode <- function (node, lnAlphas, betas, rules="Compensatory",
   node
 }
 
-defaultAlphas <- function (node, rule) {
-  if (is.character(rule) && grepl("Offset",rule[1])) {
-    return(0)
-  }
-  rep(0, length(NodeParents(node)))
-}
-
-defaultBetas <- function (node, rule) {
-  if (!is.character(rule) || !grepl("Offset",rule[1])) {
-    return(0)
-  }
-  rep(0, length(NodeParents(node)))
-}
 
 ### Build CPTs from parameters
 

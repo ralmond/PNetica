@@ -1,3 +1,7 @@
+2016-05-04  Almond  <ralmond@macox.com>
+
+	* R/BNNetica.R : Added translations for basic BN functions here.
+
 2015-06-06  Russell G. Almond  <ralmond@Limu>
 
 	* R/PnetNetica.R (Pnode.default, as.Pnode.NeticaNode): Added
