@@ -1,10 +1,10 @@
 Package: PNetica
-Version: 0.1-3
-Date: 2015/07/05
+Version: 0.2-1
+Date: 2016/05/04
 Title: Parameterized Bayesian Networks Netica Interface
 Author: Russell Almond
 Maintainer: Russell Almond <ralmond@fsu.edu>
-Depends: R (>= 3.0), RNetica (>= 0.4), CPTtools (>= 0.3), Peanut (>= 0.1)
+Depends: R (>= 3.0), RNetica (>= 0.4), CPTtools (>= 0.4), Peanut (>= 0.2)
 Description: This package provides RNetica implementation of Peanut interface.
 License: Artistic-2.0 
 URL: http://pluto.coe.fsu.edu/RNetica

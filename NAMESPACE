@@ -33,6 +33,13 @@ S3method(BuildTable, NeticaNode)
 S3method(PnodeParentTvals, NeticaNode)
 S3method(maxCPTParam, NeticaNode)
 
+S3method(PnodeName,NeticaNode)
+S3method(PnodeStates,NeticaNode)
+S3method(PnodeNumStates,NeticaNode)
+S3method(PnodeParents,NeticaNode)
+S3method(PnodeParentNames,NeticaNode)
+S3method(PnodeNumParents,NeticaNode)
+
 
 
 
