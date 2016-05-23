@@ -12,8 +12,13 @@ PnodeNumStates.NeticaNode <- function (node)
 PnodeParents.NeticaNode <- function (node)
   NodeParents(node)
 
-PnodeParentNames.NeticaNode <- function (node)
-  sapply(NodeParents(node),NodeName)
+PnodeParentNames.NeticaNode <- function (node) {
+  if (PnodeNumParents(node)==0) {
+    character()
+  } else {
+    sapply(NodeParents(node),NodeName)
+  }
+}
 
 PnodeNumParents.NeticaNode <- function (node)
   length(NodeParents(node))
