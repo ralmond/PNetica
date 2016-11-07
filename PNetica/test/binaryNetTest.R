@@ -65,7 +65,7 @@ PnodeBetas(obs$disj) <- 0
 NodeParents(obs$odis) <- rev(thetas)
 PnodeRules(obs$odis) <- "OffsetDisjunctive"
 PnodeLnAlphas(obs$odis) <- 0
-PnodeBetas(obs$odis) <- c(theta1=.5,theta1=-.5)
+PnodeBetas(obs$odis) <- c(theta1=.5,theta0=-.5)
 
 binAll.Q <- Pnet2Qmat(binAll,obs,thetas,defaultBeta=0)
 write.csv(binAll.Q,"binall.Q.csv",na="",row.names=FALSE)

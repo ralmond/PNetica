@@ -203,12 +203,18 @@ maxCPTParam.NeticaNode <- function (node, Mstepit=5,
                                     tol=sqrt(.Machine$double.eps)) {
   ## Get the posterior pseudo-counts by multiplying each row of the
   ## node's CPT by its experience.
-  counts <- sweep(NodeProbs(node),1,NodeExperience(node),"*")
+  np <- length(NodeParents(node))
+  if (np==0L) {
+    counts <- NodeProbs(node)*NodeExperience(node)
+  } else {
+    counts <- sweep(NodeProbs(node),1L:np,NodeExperience(node),"*")
+  }
   withCallingHandlers(
       est <- mapDPC(counts,ParentStates(node),NodeStates(node),
                     PnodeLnAlphas(node), PnodeBetas(node),
                     PnodeRules(node),PnodeLink(node),
                     PnodeLinkScale(node),PnodeQ(node),
+                    PnodeParentTvals(node),
                     control=list(reltol=tol,maxit=Mstepit)
                     ),
       warning=muffler)
