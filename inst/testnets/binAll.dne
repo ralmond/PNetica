@@ -1,0 +1,418 @@
+// ~->[DNET-1]->~
+
+// File created by an unlicensed user using Netica 4.09 on Nov 04, 2016 at 13:41:05.
+
+bnet binAll {
+AutoCompile = TRUE;
+autoupdate = TRUE;
+whenchanged = 1478281242;
+
+visual V4 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 10;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	windowposn = (37, 39, 1101, 487);
+	resolution = 72;
+	magnification = 1.18921;
+	drawingbounds = (16062, 6255);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0xc0c0c0;};
+	NodeSet Nature {BuiltIn = 1; Color = 0xf8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0xd3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0xc8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0xffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0xffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0xffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0xdee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0xf0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0xffffff;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		landscape = FALSE;
+		magnify = 1;
+		};
+	};
+user U1 {
+	priorWeight = "11";
+	};
+
+node theta0 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Low, Med, High);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	parents = ();
+	probs = 
+		// Low          Med          High         
+		  (0.3333333,   0.3333333,   0.3333333);
+	numcases = 11;
+	whenchanged = 1478278758;
+	belief = (0.3333334, 0.3333334, 0.3333333);
+	user U1 {
+		rules = "\"Compensatory\"";
+		link = "\"normalLink\"";
+		Q = "TRUE";
+		betas = "0";
+		lnAlphas = "numeric(0)";
+		linkScale = "1";
+		};
+	visual V4 {
+		center = (654, 186);
+		height = 1;
+		};
+	};
+
+node theta1 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Low, Med, High);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	parents = (theta0);
+	probs = 
+		// Low          Med          High           // theta0 
+		 ((0.5742313,   0.3226493,   0.1031194),    // Low    
+		  (0.2951473,   0.4097054,   0.2951473),    // Med    
+		  (0.1031194,   0.3226493,   0.5742313));   // High   ;
+	numcases = 11;
+	whenchanged = 1478281242;
+	belief = (0.324166, 0.3516681, 0.3241659);
+	user U1 {
+		rules = "\"Compensatory\"";
+		link = "\"normalLink\"";
+		Q = "TRUE";
+		betas = "0";
+		lnAlphas = "-0.510825623765991";
+		linkScale = "0.8";
+		};
+	visual V4 {
+		center = (618, 324);
+		height = 2;
+		};
+	};
+
+node t0 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta0);
+	probs = 
+		// Yes          No             // theta0 
+		 ((0.8381621,   0.1618378),    // Low    
+		  (0.5,         0.5),          // Med    
+		  (0.1618378,   0.8381621));   // High   ;
+	numcases = 25;
+	whenchanged = 0;
+	belief = (0.5, 0.5);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Compensatory\"";
+		Q = "TRUE";
+		lnAlphas = "0";
+		betas = "0";
+		priorWeight = "25";
+		};
+	visual V4 {
+		center = (516, 426);
+		height = 3;
+		};
+	};
+
+node t2 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta0);
+	probs = 
+		// Yes          No             // theta0 
+		 ((0.8381621,   0.1618378),    // Low    
+		  (0.5,         0.5),          // Med    
+		  (0.1618378,   0.8381621));   // High   ;
+	numcases = 25;
+	whenchanged = 0;
+	belief = (0.5, 0.5);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Compensatory\"";
+		Q = "TRUE";
+		lnAlphas = "0";
+		betas = "0";
+		priorWeight = "25";
+		};
+	visual V4 {
+		center = (378, 462);
+		height = 4;
+		};
+	};
+
+node comp {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta0, theta1);
+	probs = 
+		// Yes          No              // theta0 theta1 
+		(((0.8377206,   0.1622794),     // Low    Low    
+		  (0.6760511,   0.3239489),     // Low    Med    
+		  (0.4576021,   0.5423979)),    // Low    High   
+		 ((0.6760511,   0.3239489),     // Med    Low    
+		  (0.4576021,   0.5423979),     // Med    Med    
+		  (0.2543239,   0.7456761)),    // Med    High   
+		 ((0.4576021,   0.5423979),     // High   Low    
+		  (0.2543239,   0.7456761),     // High   Med    
+		  (0.1211734,   0.8788266)));   // High   High   ;
+	numcases = 11;
+	whenchanged = 0;
+	belief = (0.4690889, 0.5309111);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Compensatory\"";
+		Q = "TRUE";
+		lnAlphas = "structure(c(-0.25, -0.25), .Names = c(\"theta0\", \"theta1\"))";
+		betas = "0.1";
+		};
+	visual V4 {
+		center = (240, 426);
+		height = 5;
+		};
+	};
+
+node conj {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta0, theta1);
+	probs = 
+		// Yes          No              // theta0 theta1 
+		(((0.3312605,   0.6687395),     // Low    Low    
+		  (0.1544653,   0.8455347),     // Low    Med    
+		  (0.06312042,  0.9368796)),    // Low    High   
+		 ((0.1544653,   0.8455347),     // Med    Low    
+		  (0.1544653,   0.8455347),     // Med    Med    
+		  (0.06312042,  0.9368796)),    // Med    High   
+		 ((0.03407189,  0.9659281),     // High   Low    
+		  (0.03407189,  0.9659281),     // High   Med    
+		  (0.03407189,  0.9659281)));   // High   High   ;
+	numcases = 11;
+	whenchanged = 0;
+	belief = (0.1360481, 0.8639519);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Conjunctive\"";
+		Q = "TRUE";
+		lnAlphas = "structure(c(0, -0.5), .Names = c(\"theta0\", \"theta1\"))";
+		betas = "1";
+		};
+	visual V4 {
+		center = (138, 324);
+		height = 6;
+		};
+	};
+
+node oconj {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta0, theta1);
+	probs = 
+		// Yes          No              // theta0 theta1 
+		(((0.4861577,   0.5138423),     // Low    Low    
+		  (0.4861577,   0.5138423),     // Low    Med    
+		  (0.4861577,   0.5138423)),    // Low    High   
+		 ((0.1544653,   0.8455347),     // Med    Low    
+		  (0.1544653,   0.8455347),     // Med    Med    
+		  (0.1544653,   0.8455347)),    // Med    High   
+		 ((0.03407189,  0.9659281),     // High   Low    
+		  (0.03407189,  0.9659281),     // High   Med    
+		  (0.03407189,  0.9659281)));   // High   High   ;
+	numcases = 11;
+	whenchanged = 0;
+	belief = (0.2248983, 0.7751017);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"OffsetConjunctive\"";
+		Q = "TRUE";
+		lnAlphas = "0";
+		betas = "structure(c(1, -1), .Names = c(\"theta0\", \"theta1\"))";
+		};
+	visual V4 {
+		center = (102, 186);
+		height = 7;
+		};
+	};
+
+node disj {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta1, theta0);
+	probs = 
+		// Yes          No              // theta1 theta0 
+		(((0.9377027,   0.06229732),    // Low    Low    
+		  (0.9377027,   0.06229732),    // Low    Med    
+		  (0.9377027,   0.06229732)),   // Low    High   
+		 ((0.7305688,   0.2694312),     // Med    Low    
+		  (0.5,         0.5),           // Med    Med    
+		  (0.5,         0.5)),          // Med    High   
+		 ((0.7305688,   0.2694312),     // High   Low    
+		  (0.5,         0.5),           // High   Med    
+		  (0.2694312,   0.7305688)));   // High   High   ;
+	numcases = 11;
+	whenchanged = 0;
+	belief = (0.630478, 0.3695219);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Disjunctive\"";
+		Q = "TRUE";
+		lnAlphas = "structure(c(0.5, -0.5), .Names = c(\"theta1\", \"theta0\"))";
+		betas = "0";
+		};
+	visual V4 {
+		center = (138, 48);
+		height = 8;
+		};
+	};
+
+node odis {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta1, theta0);
+	probs = 
+		// Yes          No              // theta1 theta0 
+		(((0.9237636,   0.07623643),    // Low    Low    
+		  (0.7005671,   0.2994328),     // Low    Med    
+		  (0.6888217,   0.3111782)),    // Low    High   
+		 ((0.9237636,   0.07623643),    // Med    Low    
+		  (0.7005671,   0.2994328),     // Med    Med    
+		  (0.3111782,   0.6888217)),    // Med    High   
+		 ((0.9237636,   0.07623643),    // High   Low    
+		  (0.7005671,   0.2994328),     // High   Med    
+		  (0.3111782,   0.6888217)));   // High   High   ;
+	numcases = 11;
+	whenchanged = 0;
+	belief = (0.6581504, 0.3418495);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"OffsetDisjunctive\"";
+		Q = "TRUE";
+		lnAlphas = "0";
+		betas = "structure(c(0.5, -0.5), .Names = c(\"theta1\", \"theta0\"))";
+		};
+	visual V4 {
+		center = (240, 38);
+		height = 9;
+		};
+	};
+
+node t1 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta1);
+	probs = 
+		// Yes          No             // theta1 
+		 ((0.8381621,   0.1618378),    // Low    
+		  (0.5,         0.5),          // Med    
+		  (0.1618378,   0.8381621));   // High   ;
+	numcases = 25;
+	whenchanged = 0;
+	belief = (0.5, 0.5);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Compensatory\"";
+		Q = "TRUE";
+		lnAlphas = "0";
+		betas = "0";
+		priorWeight = "25";
+		};
+	visual V4 {
+		center = (378, 38);
+		height = 10;
+		};
+	};
+
+node t3 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta1);
+	probs = 
+		// Yes          No             // theta1 
+		 ((0.8381621,   0.1618378),    // Low    
+		  (0.5,         0.5),          // Med    
+		  (0.1618378,   0.8381621));   // High   ;
+	numcases = 25;
+	whenchanged = 0;
+	belief = (0.5, 0.5);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Compensatory\"";
+		Q = "TRUE";
+		lnAlphas = "0";
+		betas = "0";
+		priorWeight = "25";
+		};
+	visual V4 {
+		center = (516, 38);
+		height = 11;
+		};
+	};
+
+node t4 {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (Yes, No);
+	levels = (1, 0);
+	parents = (theta1);
+	probs = 
+		// Yes          No             // theta1 
+		 ((0.8381621,   0.1618378),    // Low    
+		  (0.5,         0.5),          // Med    
+		  (0.1618378,   0.8381621));   // High   ;
+	numcases = 25;
+	whenchanged = 0;
+	belief = (0.5, 0.5);
+	user U1 {
+		link = "\"partialCredit\"";
+		rules = "\"Compensatory\"";
+		Q = "TRUE";
+		lnAlphas = "0";
+		betas = "0";
+		priorWeight = "25";
+		};
+	visual V4 {
+		center = (618, 54);
+		height = 12;
+		};
+	};
+NodeSet pnodes {Nodes = (theta0, theta1, t0, t1, t2, t3, t4, comp, conj, disj, oconj, odis);};
+NodeSet Proficiency {Nodes = (theta0, theta1);};
+NodeSet onodes {Nodes = (t0, t1, t2, t3, t4, comp, conj, disj, oconj, odis);};
+NodeSet Observables {Nodes = (t0, t1, t2, t3, t4, comp, conj, disj, oconj, odis);};
+ElimOrder = (t0, t2, t1, t3, t4, comp, conj, oconj, disj, theta0, theta1, odis);
+};
