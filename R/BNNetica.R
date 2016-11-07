@@ -24,3 +24,6 @@ PnodeNumParents.NeticaNode <- function (node)
   length(NodeParents(node))
 
 
+PnetFindNode.NeticaNetwork <- function(net,name)
+  NetworkFindNode(net,name)
+
