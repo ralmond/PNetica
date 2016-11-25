@@ -2,6 +2,7 @@
 ## This script builds the networks and data files for running this test.
 
 ## Build network.
+library(PNetica)
 IRT10.2PL <- CreateNetwork("IRT10_2PL")
 PnetPriorWeight(IRT10.2PL) <- 10
 
@@ -26,7 +27,9 @@ for (j in 1:J) {
   PnodeLnAlphas(items[[j]]) <- lnatrue[j]
   PnodeBetas(items[[j]]) <- btrue[j]
 }
-PnetBuildTables(IRT10.2PL)
+# BuildAllTables(IRT10.2PL,debug=TRUE) #instead of the line below, should I use this line to build the tables
+
+PnetBuildTables(IRT10.2PL) #gives error, could nt find the function "PnetBuildTables"
 WriteNetworks(IRT10.2PL,"IRT10.2PL.true.dne")
 
 ## Generate some case files.

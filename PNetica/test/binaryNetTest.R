@@ -1,13 +1,13 @@
 
 ## Network with two proficiency variables and observables for each
 ## different type of rule
-
-binAll <- CreateNetwork("binAll")
+library(PNetica)
+binAll <- CreateNetwork("binAll") # creates network in Netica
 PnetPriorWeight(binAll) <- 11           #Give it something to see.
 
 ## Set up Proficiency Model.
 thetas <- NewDiscreteNode(binAll,paste("theta",0:1,sep=""),
-                          c("Low","Med","High"))
+                          c("Low","Med","High")) # Create the variable with 3 levels
 names(thetas) <- paste("theta",0:1,sep="")
 NodeParents(thetas[[2]]) <- thetas[1]
 
@@ -15,13 +15,13 @@ for (nd in thetas) {
   NodeLevels(nd) <- effectiveThetas(NodeNumStates(nd))
   PnodeRules(nd) <- "Compensatory"
   PnodeLink(nd) <- "normalLink"
-  PnodeBetas(nd) <- 0
-  NodeSets(nd) <- c("pnodes","Proficiency")
+  PnodeBetas(nd) <- 0 # A numeric vector of intercept parameters
+  NodeSets(nd) <- c("pnodes","Proficiency") # A character vector containing the names of the node sets
 }
 
 ## Standard normal prior.
-PnodeAlphas(thetas[[1]]) <- numeric()
-PnodeLinkScale(thetas[[1]]) <- 1
+PnodeAlphas(thetas[[1]]) <- numeric() # A numeric vector of (log) slope parameters
+PnodeLinkScale(thetas[[1]]) <- 1 # A positive numeric value, or NULL if the scale parameter is not used for the link function.
 ## Regression with a correlation of .6
 PnodeAlphas(thetas[[2]]) <- .6
 PnodeLinkScale(thetas[[2]]) <- .8
