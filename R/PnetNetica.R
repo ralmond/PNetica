@@ -8,6 +8,7 @@
 ## A field called "priorWeight" which gives the default prior weight
 ## to use.
 
+
 as.Pnet.NeticaBN <- function (x) {
   if (!("Pnet" %in% class(x)))
     class(x) <- c(class(x),"Pnet")
@@ -30,6 +31,71 @@ PnetPnodes.NeticaBN <- function (net) {
   NetworkNodesInSet(net,"pnodes") <- value
   invisible(net)
 }
+
+## To fit PnetFactory Protocol
+
+Make.NeticaBN <- function (name,data) {
+  pname <- as.character(data$Pathname)
+  if (!is.null(pname) && file.exists(pname)) {
+    net <-ReadNetworks(pname)
+    PnetName(net) <- name
+  } else {
+    net <- as.Pnet(CreateNetwork(name))
+  }
+  if (!is.null(data$Hub))
+    PnetHub(net) <- as.character(data$Hub)
+  if (!is.null(data$Title))
+    PnetTitle(net) <- as.character(data$Title)
+  if (!is.null(data$Pathname))
+    PnetPathname(net) <- as.character(data$Pathname)
+  if (!is.null(data$Description))
+    PnetDescription(net) <- as.character(data$Description)
+  net
+}
+
+## Leave this as a no-op for now.
+Free.NeticaBN <- function (obj) {invisible(NULL)}
+
+
+Save.NeticaBN <- function (net,pathname) {
+  if (missing(pathname) || is.null(pathname))
+    pathname <- PnetPathname(net)
+  WriteNetworks(net,pathname)
+}
+
+Reload.NeticaBN <- function (net,pathname) {
+  if (missing(pathname) || is.null(pathname))
+    pathname <- PnetPathname(net)
+  DeleteNetwork(net)
+  ReadNetworks(pathname)
+}
+Delete.NeticaBN <- function (obj) {
+  if (!is.null(obj))
+    DeleteNetwork(obj)
+}
+
+### Hub and spoke model.
+
+## To make a stub, copy the node into the new net.  It will become a stub when it is
+## deleted later
+PnetMakeStubNode.NeticaBN <- function (net,node) {
+  CopyNodes(list(node),newnet=net)[[1]]
+}
+
+## Deleting the node makes it a stub.
+PnetRemoveStubNodes.NeticaBN <- function (net,nodes) {
+  DeleteNodes(nodes)
+}
+
+PnetAdjoin.NeticaBN <- function (hub, spoke) {
+  AdjoinNetwork(hub,spoke,paste("Spoke",NetworkName(spoke),sep="_"))
+}
+
+PnetDetach.NeticaBN <- function (motif, spoke) {
+  AbsorbNodes(NetworkNodesInSet(motif,paste("Spoke",NetworkName(spoke),sep="_")))
+}
+
+
 
 
 ## A parameterized node has the following fields:
@@ -222,4 +288,43 @@ maxCPTParam.NeticaNode <- function (node, Mstepit=5,
   PnodeBetas(node) <- est$betas
   PnodeLinkScale(node) <- est$linkScale
   invisible(node)
+}
+
+### Implementation of the factory protocol
+
+## No-op for now.  Explicitly call delete.
+Free.NeticaNode <- function (obj) {
+  invisible(NULL)
+}
+
+Delete.NeticaNode <- function (obj) {
+  DeleteNodes(obj)
+}
+
+MakePnode.NeticaNode <- function (net, name, data) {
+  node <-PnetFindNode(net,name)
+  if (is.null(node)) {
+    node <- NewDiscreteNode(net,name,as.character(data$StateName))
+  }
+  if (nrow(data) != as.integer(data$Nstates[1]))
+    stop("Must be one row in data for each state.")
+  if (!is.null(data$NodeTitle))
+    PnodeTitle(node) <- as.character(data$NodeTitle[1])
+  if (!is.null(data$NodeDescription))
+    PnodeDescription(node) <- as.character(data$NodeDescription[1])
+  if (!is.null(data$NodeLabels)) {
+    labels <- strsplit(data$NodeLabels[1],",")[[1]]
+    PnodeLabels(node) <- as.character(labels)
+  }
+
+  PnodeStates(node) <- as.character(data$StateName)
+  if (!is.null(data$StateTitle))
+    PnodeStateTitles(node) <- as.character(data$StateTitle)
+  if (!is.null(data$StateDescription))
+    PnodeStateDescriptions(node) <- as.character(data$StateDescription)
+  if (!is.null(data$StateValues))
+    PnodeStateValues(node) <- as.character(data$StateValue)
+
+  node
+
 }

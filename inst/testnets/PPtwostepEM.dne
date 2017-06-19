@@ -1,0 +1,97 @@
+// ~->[DNET-1]->~
+
+// File created by an unlicensed user using Netica 5.04 on 06/12/2017 at 02:57:23 PM.
+
+bnet PPtwostepEM {
+autoupdate = TRUE;
+title = "Two-step Evidence Model";
+comment = "An evidence model with an observable which has different mechanisms for each level.";
+whenchanged = 1497293805;
+
+visual V3 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	windowposn = (88, 88, 913, 543);
+	resolution = 72;
+	drawingbounds = (1080, 720);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00E1E1E1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00F8EED2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00D3CAA6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00C8C8C8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00FFFFFF;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00FFFFB4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00FFBDBD;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00DEE8FF;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00F0FAFA;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00FFFFFF;};
+	NodeSet pnodes {Disabled = 1; Color = 0x00C8C8C8;};
+	NodeSet Observables {Disabled = 1; Color = 0x00C8C8C8;};
+	NodeSet onodes {Disabled = 1; Color = 0x00C8C8C8;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
+user U1 {
+	Hub = "miniPP_CM";
+	Pathname = "PPtwostepEM.dne";
+	};
+
+param X_EnergyTransfer_1 {
+	kind = DISCONNECTED;
+	discrete = TRUE;
+	states = (High, Medium, Low);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	title = "EnergyTransfer";
+	whenchanged = 1497121385;
+	};
+
+param X_IterativeD_1 {
+	kind = DISCONNECTED;
+	discrete = TRUE;
+	states = (High, Medium, Low);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	title = "IterativeD";
+	whenchanged = 1497121385;
+	};
+
+node TwoStepObs {
+	kind = NATURE;
+	discrete = TRUE;
+	states = (Full, Partial, None);
+	statetitles = ("Complete Solution", "First step but not second", "No attempt of failed first step");
+	inputs = (EnergyTransfer, IterativeD);
+	parents = (X_EnergyTransfer_1, X_IterativeD_1);
+	title = "Partial Credit observable";
+	comment = "A partial credit response where each step requires different inputs.";
+	whenchanged = 1497293805;
+	user U1 {
+		Q = "structure(c(TRUE, TRUE, FALSE, TRUE), .Dim = c(2L, 2L), .Dimnames = list(     NULL, \
+			c(\"EnergyTransfer\", \"IterativeD\")))";
+		rules = "list(\"Compensatory\", \"OffsetConjunctive\")";
+		link = "\"partialCredit\"";
+		lnAlphas = "list(0, 0)";
+		betas = "list(0.5, structure(c(1, 0.1), .Names = c(\"EnergyTransfer\", \"IterativeD\" )))";
+		};
+	visual V3 {
+		center = (75, 114);
+		height = 6;
+		link 1 {
+			labelposn = (111, 56, 194, 71);
+			path = ((109, 56), (94, 81));
+			};
+		link 2 {
+			labelposn = (49, 52, 101, 67);
+			path = ((39, 52), (56, 81));
+			};
+		};
+	};
+NodeSet pnodes {Nodes = (TwoStepObs);};
+NodeSet Observables {Nodes = (TwoStepObs);};
+NodeSet onodes {Nodes = (TwoStepObs);};
+};
