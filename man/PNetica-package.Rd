@@ -144,9 +144,11 @@ Maintainer: \packageMaintainer{PNetica}
 
 }
 \examples{
+sess <- NeticaSession()
+startSession(sess)
 
 ## Building CPTs
-tNet <- CreateNetwork("TestNet")
+tNet <- CreateNetwork("TestNet", session=sess)
 
 
 theta1 <- NewDiscreteNode(tNet,"theta1",
@@ -192,9 +194,8 @@ BuildTable(partial4)
 
 ## Fitting Model to data
 
-irt10.base <- ReadNetworks(paste(library(help="PNetica")$path,
-                           "testnets","IRT10.2PL.base.dne",
-                           sep=.Platform$file.sep))
+irt10.base <- ReadNetworks(file.path(library(help="PNetica")$path,
+                           "testnets","IRT10.2PL.base.dne"), session=sess)
 irt10.base <- as.Pnet(irt10.base)  ## Flag as Pnet, fields already set.
 irt10.theta <- NetworkFindNode(irt10.base,"theta")
 irt10.items <- PnetPnodes(irt10.base)
@@ -205,9 +206,8 @@ for (i in 1:length(irt10.items)) {
 }
 
 
-casepath <- paste(library(help="PNetica")$path,
-                           "testdat","IRT10.2PL.200.items.cas",
-                           sep=.Platform$file.sep)
+casepath <- file.path(library(help="PNetica")$path,
+                           "testdat","IRT10.2PL.200.items.cas")
 ## Record which nodes in the casefile we should pay attention to
 NetworkNodesInSet(irt10.base,"onodes") <-
    NetworkNodesInSet(irt10.base,"observables")
@@ -226,6 +226,6 @@ gemout <- GEMfit(irt10.base,casepath)
 
 DeleteNetwork(irt10.base)
 DeleteNetwork(tNet)
-
+stopSession(sess)
 
 }

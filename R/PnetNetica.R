@@ -9,38 +9,42 @@
 ## to use.
 
 
-as.Pnet.NeticaBN <- function (x) {
-  if (!("Pnet" %in% class(x)))
-    class(x) <- c(class(x),"Pnet")
-  x
-}
+setMethod("as.Pnet","NeticaBN",function(x) x)
+setMethod("is.Pnet","NeticaBN",function(x) TRUE)
 
-PnetPriorWeight.NeticaBN <- function (net) {
+
+## as.Pnet.NeticaBN <- function (x) {
+##   if (!("Pnet" %in% class(x)))
+##     class(x) <- c(class(x),"Pnet")
+##   x
+## }
+
+setMethod("PnetPriorWeight","NeticaBN", function (net) {
   NetworkUserObj(net,"priorWeight")
-}
+})
 
-"PnetPriorWeight<-.NeticaBN" <- function (net,value) {
+setMethod("PnetPriorWeight<-","NeticaBN", function (net,value) {
   NetworkUserObj(net,"priorWeight") <- value
   invisible(net)
-}
+})
 
-PnetPnodes.NeticaBN <- function (net) {
+setMethod("PnetPnodes","NeticaBN", function (net) {
   NetworkNodesInSet(net,"pnodes")
-}
-"PnetPnodes<-.NeticaBN" <- function (net, value) {
+})
+setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
   NetworkNodesInSet(net,"pnodes") <- value
   invisible(net)
-}
+})
 
 ## To fit PnetFactory Protocol
 
-Make.NeticaBN <- function (name,data) {
+MakePnet.NeticaBN <-function (sess,name,data) {
   pname <- as.character(data$Pathname)
   if (!is.null(pname) && file.exists(pname)) {
-    net <-ReadNetworks(pname)
+    net <-as.Pnet(ReadNetworks(pname,sess))
     PnetName(net) <- name
   } else {
-    net <- as.Pnet(CreateNetwork(name))
+    net <- as.Pnet(CreateNetwork(name,sess))
   }
   if (!is.null(data$Hub))
     PnetHub(net) <- as.character(data$Hub)
@@ -78,22 +82,22 @@ Delete.NeticaBN <- function (obj) {
 
 ## To make a stub, copy the node into the new net.  It will become a stub when it is
 ## deleted later
-PnetMakeStubNode.NeticaBN <- function (net,node) {
+setMethod("PnetMakeStubNode","NeticaBN", function (net,node) {
   CopyNodes(list(node),newnet=net)[[1]]
-}
+})
 
 ## Deleting the node makes it a stub.
-PnetRemoveStubNodes.NeticaBN <- function (net,nodes) {
+setMethod("PnetRemoveStubNodes","NeticaBN", function (net,nodes) {
   DeleteNodes(nodes)
-}
+})
 
-PnetAdjoin.NeticaBN <- function (hub, spoke) {
+setMethod("PnetAdjoin","NeticaBN", function (hub, spoke) {
   AdjoinNetwork(hub,spoke,paste("Spoke",NetworkName(spoke),sep="_"))
-}
+})
 
-PnetDetach.NeticaBN <- function (motif, spoke) {
+setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
   AbsorbNodes(NetworkNodesInSet(motif,paste("Spoke",NetworkName(spoke),sep="_")))
-}
+})
 
 
 
@@ -108,89 +112,93 @@ PnetDetach.NeticaBN <- function (motif, spoke) {
 ## priorWeight -- a numeric value or a vector of numeric values for
 ## each row of the CPT.   Inherits from the net if not available.
 
-as.Pnode.NeticaNode <- function (x) {
-  if (!("Pnode" %in% class(x)))
-    class(x) <- c(class(x),"Pnode")
-  x
-}
 
-PnodeNet.NeticaNode <- function (node) {
+setMethod("as.Pnode","NeticaNode",function(x) x)
+setMethod("is.Pnode","NeticaNode",function(x) TRUE)
+
+
+## as.Pnode.NeticaNode <- function (x) {
+##   if (!("Pnode" %in% class(x)))
+##     class(x) <- c(class(x),"Pnode")
+##   x
+## }
+
+setMethod("PnodeNet","NeticaNode", function (node) {
   NodeNet(node)
-}
+})
 
-PnodeRules.NeticaNode <- function (node) {
+setMethod("PnodeRules","NeticaNode", function (node) {
   NodeUserObj(node,"rules")
-}
+})
 
-"PnodeRules<-.NeticaNode" <- function (node,value) {
+setMethod("PnodeRules<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"rules") <- value
   node
-}
+})
 
-PnodeLink.NeticaNode <- function (node) {
+setMethod("PnodeLink","NeticaNode", function (node) {
   NodeUserObj(node,"link")
-}
+})
 
-"PnodeLink<-.NeticaNode" <- function (node,value) {
+setMethod("PnodeLink<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"link") <- value
   node
-}
+})
 
-PnodeQ.NeticaNode <- function (node) {
+setMethod("PnodeQ","NeticaNode", function (node) {
   NodeUserObj(node,"Q")
-}
+})
 
-"PnodeQ<-.NeticaNode" <- function (node,value) {
+setMethod("PnodeQ<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"Q") <- value
   node
-}
+})
 
-PnodeLnAlphas.NeticaNode <- function (node) {
+setMethod("PnodeLnAlphas","NeticaNode", function (node) {
   NodeUserObj(node,"lnAlphas")
-}
+})
 
-"PnodeLnAlphas<-.NeticaNode" <- function (node,value) {
+setMethod("PnodeLnAlphas<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"lnAlphas") <- value
   node
-}
+})
 
-PnodeBetas.NeticaNode <- function (node) {
+setMethod("PnodeBetas","NeticaNode", function (node) {
   NodeUserObj(node,"betas")
-}
+})
 
-"PnodeBetas<-.NeticaNode" <- function (node,value) {
+setMethod("PnodeBetas<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"betas") <- value
   node
-}
+})
 
 
-PnodeLinkScale.NeticaNode <- function (node) {
+setMethod("PnodeLinkScale","NeticaNode", function (node) {
   NodeUserObj(node,"linkScale")
-}
+})
 
-"PnodeLinkScale<-.NeticaNode" <- function (node,value) {
+setMethod("PnodeLinkScale<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"linkScale") <- value
   node
-}
+})
 
-PnodePriorWeight.NeticaNode <- function (node) {
+setMethod("PnodePriorWeight","NeticaNode", function (node) {
   NodeUserObj(node,"priorWeight")
-}
+})
 
-"PnodePriorWeight<-.NeticaNode" <- function (node,value) {
+setMethod("PnodePriorWeight<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"priorWeight") <- value
   node
-}
+})
 
-PnodeParentTvals.NeticaNode <- function (node) {
+setMethod("PnodeParentTvals","NeticaNode", function (node) {
   lapply(NodeParents(node),NodeLevels)
-}
+})
 
-Pnode.NeticaNode <- function (node, lnAlphas, betas, rules="Compensatory",
+setMethod("Pnode","NeticaNode",
+          function (node, lnAlphas, betas, rules="Compensatory",
                            link="partialCredit",Q=TRUE,linkScale=NULL,
                            priorWeight=NULL) {
-  if (!("Pnode" %in% class(node)))
-    class(node) <- c(class(node),"Pnode")
   if (missing(lnAlphas)) {
     if (is.list(rules)) {
       lnAlphas <- lapply(rules, function(rule) defaultAlphas(node,rule))
@@ -213,12 +221,12 @@ Pnode.NeticaNode <- function (node, lnAlphas, betas, rules="Compensatory",
   PnodeLinkScale(node) <- linkScale
   PnodePriorWeight(node) <- priorWeight
   node
-}
+})
 
 
 ### Build CPTs from parameters
 
-BuildTable.NeticaNode <- function (node) {
+setMethod("BuildTable","NeticaNode", function (node) {
   node[] <- calcDPCFrame(ParentStates(node),NodeStates(node),
                           PnodeLnAlphas(node), PnodeBetas(node),
                           PnodeRules(node),PnodeLink(node),
@@ -226,10 +234,10 @@ BuildTable.NeticaNode <- function (node) {
                           PnodeParentTvals(node))
   NodeExperience(node) <- GetPriorWeight(node)
   invisible(node)
-}
+})
 
 
-calcPnetLLike.NeticaBN <- function (net,cases){
+setMethod("calcPnetLLike","NeticaBN", function (net,cases){
   llike <- 0
   nextRec <- "FIRST"
   onodes <- NetworkNodesInSet(net,"onodes")
@@ -246,14 +254,14 @@ calcPnetLLike.NeticaBN <- function (net,cases){
       lapply(onodes,RetractNodeFinding)
     })
   llike
-}
+})
 
-calcExpTables.NeticaBN <- function (net, cases, Estepit=1,
+setMethod("calcExpTables","NeticaBN", function (net, cases, Estepit=1,
                                     tol=sqrt(.Machine$double.eps)) {
   pnodes <- NetworkNodesInSet(net,"pnodes")
   LearnCPTs(cases,pnodes,"EM",Estepit,tol)
   invisible(net)
-}
+})
 
 
 ## This function is designed to suppress lack of convergence warnings,
@@ -265,7 +273,7 @@ muffler <- function (w) {
 }
 
 
-maxCPTParam.NeticaNode <- function (node, Mstepit=5,
+setMethod("maxCPTParam","NeticaNode", function (node, Mstepit=5,
                                     tol=sqrt(.Machine$double.eps)) {
   ## Get the posterior pseudo-counts by multiplying each row of the
   ## node's CPT by its experience.
@@ -288,12 +296,12 @@ maxCPTParam.NeticaNode <- function (node, Mstepit=5,
   PnodeBetas(node) <- est$betas
   PnodeLinkScale(node) <- est$linkScale
   invisible(node)
-}
+})
 
 ### Implementation of the factory protocol
 
 ## No-op for now.  Explicitly call delete.
-Free.NeticaNode <- function (obj) {
+Free.NeticaNode <-function (obj) {
   invisible(NULL)
 }
 
@@ -306,6 +314,7 @@ MakePnode.NeticaNode <- function (net, name, data) {
   if (is.null(node)) {
     node <- NewDiscreteNode(net,name,as.character(data$StateName))
   }
+  node <- as.Pnode(node)
   if (nrow(data) != as.integer(data$Nstates[1]))
     stop("Must be one row in data for each state.")
   if (!is.null(data$NodeTitle))
@@ -322,7 +331,7 @@ MakePnode.NeticaNode <- function (net, name, data) {
     PnodeStateTitles(node) <- as.character(data$StateTitle)
   if (!is.null(data$StateDescription))
     PnodeStateDescriptions(node) <- as.character(data$StateDescription)
-  if (!is.null(data$StateValues))
+  if (!is.null(data$StateValue) && !any(is.na(data$StateValue)))
     PnodeStateValues(node) <- as.character(data$StateValue)
 
   node

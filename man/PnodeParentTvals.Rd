@@ -70,7 +70,9 @@
        \code{\link{maxCPTParam.NeticaNode}}
 }
 \examples{
-tNet <- CreateNetwork("TestNet")
+sess <- NeticaSession()
+startSession(sess)
+tNet <- CreateNetwork("TestNet", session=sess)
 
 theta1 <- NewDiscreteNode(tNet,"theta1",
                          c("VH","High","Mid","Low","VL"))
@@ -94,6 +96,7 @@ PnodeParentTvals(partial3)
 do.call("expand.grid",PnodeParentTvals(partial3))
 
 DeleteNetwork(tNet)
+stopSession(sess)
 }
 \keyword{ attrib }
 
