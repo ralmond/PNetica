@@ -132,9 +132,11 @@
   
 }
 \examples{
+sess <- NeticaSession()
+startSession(sess)
 #########################################
 ## Create network structure using RNetica calls
-IRT10.2PL <- CreateNetwork("IRT10_2PL")
+IRT10.2PL <- CreateNetwork("IRT10_2PL", session=sess)
 
 theta <- NewDiscreteNode(IRT10.2PL,"theta",
                          c("VH","High","Mid","Low","VL"))
@@ -162,9 +164,8 @@ DeleteNetwork(IRT10.2PL)
 
 ####################################
 ## Restore a network from a file.
-irt10.base <- ReadNetworks(paste(library(help="PNetica")$path,
-                           "testnets","IRT10.2PL.base.dne",
-                           sep=.Platform$file.sep))
+irt10.base <- ReadNetworks(file.path(library(help="PNetica")$path,
+                           "testnets","IRT10.2PL.base.dne"), session=sess)
 irt10.base <- as.Pnet(irt10.base)  ## Flag as Pnet, fields already set.
 irt10.theta <- NetworkFindNode(irt10.base,"theta")
 irt10.items <- PnetPnodes(irt10.base)
@@ -174,6 +175,7 @@ for (i in 1:length(irt10.items)) {
 }
 
 DeleteNetwork(irt10.base)
+stopSession(sess)
 
 
 }

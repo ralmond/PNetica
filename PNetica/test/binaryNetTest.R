@@ -1,8 +1,10 @@
+sess <- NeticaSession()
+startSession(sess)
 
 ## Network with two proficiency variables and observables for each
 ## different type of rule
-library(PNetica)
-binAll <- CreateNetwork("binAll") # creates network in Netica
+
+binAll <- CreateNetwork("binAll", session=sess)
 PnetPriorWeight(binAll) <- 11           #Give it something to see.
 
 ## Set up Proficiency Model.
@@ -21,7 +23,9 @@ for (nd in thetas) {
 
 ## Standard normal prior.
 PnodeAlphas(thetas[[1]]) <- numeric() # A numeric vector of (log) slope parameters
-PnodeLinkScale(thetas[[1]]) <- 1 # A positive numeric value, or NULL if the scale parameter is not used for the link function.
+PnodeLinkScale(thetas[[1]]) <- 1 # A positive numeric value, or NULL
+                                 # if the scale parameter is not used
+                                 # for the link function.
 ## Regression with a correlation of .6
 PnodeAlphas(thetas[[2]]) <- .6
 PnodeLinkScale(thetas[[2]]) <- .8
@@ -72,6 +76,7 @@ write.csv(binAll.Q,"binall.Q.csv",na="",row.names=FALSE)
 
 binAll.Omega <- Pnet2Omega(binall,thetas)
 write.csv(binAll.Omega,"binall.Omega.csv",na="",row.names=FALSE)
+stopSession(sess)
 
 
 

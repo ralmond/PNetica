@@ -1,12 +1,12 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 5.04 on 06/12/2017 at 02:57:08 PM.
+// File created by AlmondR at FloridaStateU using Netica 5.05 on Jun 29, 2017 at 12:39:40.
 
 bnet miniPP_CM {
 autoupdate = TRUE;
 title = "Physics Playground Excerpt";
 comment = "A few selected nodes from Physics Playground for testing Peanut/PNetica";
-whenchanged = 1497293805;
+whenchanged = 1498754364;
 
 visual V1 {
 	defdispform = BELIEFBARS;
@@ -162,9 +162,9 @@ node NTL {
 		   6.360015e-6, 0.007365868, 0.9926278);   // Lowest 1/3  Low            ;
 	numcases = 10;
 	EqnDirty = TRUE;
-	title = "Newton's Third Law?";
+	title = "Newton's Third Law";
 	comment = "Force pairs act in opposite directions\nForce pairs have equal magnitudes";
-	whenchanged = 1496354959;
+	whenchanged = 1498754364;
 	user U1 {
 		Q = "TRUE";
 		rules = "\"Compensatory\"";

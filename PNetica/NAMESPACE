@@ -3,76 +3,49 @@ import(Peanut)
 import(RNetica)
 import(CPTtools)
 
+exportMethods(is.Pnet,as.Pnet,PnetPriorWeight,
+              "PnetPriorWeight<-", PnetPnodes,
+              "PnetPnodes<-", calcPnetLLike, calcExpTables) # NeticaBN
 
-S3method(as.Pnet, NeticaBN)
-S3method(PnetPriorWeight, NeticaBN)
-S3method("PnetPriorWeight<-", NeticaBN)
-S3method(PnetPnodes, NeticaBN)
-S3method("PnetPnodes<-", NeticaBN)
-S3method(calcPnetLLike, NeticaBN)
-S3method(calcExpTables, NeticaBN)
+exportMethods(is.Pnode,as.Pnode, Pnode, PnodeNet,
+              PnodeQ, "PnodeQ<-", PnodePriorWeight,
+              "PnodePriorWeight<-", PnodeRules,
+              "PnodeRules<-", PnodeLink, "PnodeLink<-",
+              PnodeLnAlphas, "PnodeLnAlphas<-",
+              PnodeBetas, "PnodeBetas<-",
+              PnodeLinkScale, "PnodeLinkScale<-",
+              BuildTable, PnodeParentTvals,
+              maxCPTParam)  #NeticaNode
 
-S3method(as.Pnode, NeticaNode)
-S3method(Pnode, NeticaNode)
-S3method(PnodeNet, NeticaNode)
-S3method(PnodeQ, NeticaNode)
-S3method("PnodeQ<-", NeticaNode)
-S3method(PnodePriorWeight, NeticaNode)
-S3method("PnodePriorWeight<-", NeticaNode)
-S3method(PnodeRules, NeticaNode)
-S3method("PnodeRules<-", NeticaNode)
-S3method(PnodeLink, NeticaNode)
-S3method("PnodeLink<-", NeticaNode)
-S3method(PnodeLnAlphas, NeticaNode)
-S3method("PnodeLnAlphas<-", NeticaNode)
-S3method(PnodeBetas, NeticaNode)
-S3method("PnodeBetas<-", NeticaNode)
-S3method(PnodeLinkScale, NeticaNode)
-S3method("PnodeLinkScale<-", NeticaNode)
-S3method(BuildTable, NeticaNode)
-S3method(PnodeParentTvals, NeticaNode)
-S3method(maxCPTParam, NeticaNode)
+exportMethods(PnodeName,"PnodeName<-",
+              PnodeTitle,"PnodeTitle<-",
+              PnodeDescription,"PnodeDescription<-",
+              PnodeLabels,"PnodeLabels<-",
+              PnodeStates,"PnodeStates<-",
+              PnodeNumStates,PnodeStateTitles,
+              "PnodeStateTitles<-",PnodeStateDescriptions,
+              "PnodeStateDescriptions<-",PnodeStateValues,
+              "PnodeStateValues<-",PnodeParents,
+              PnodeParentNames,PnodeNumParents) #NeticaNode
 
-S3method(PnodeName,NeticaNode)
-S3method("PnodeName<-",NeticaNode)
-S3method(PnodeTitle,NeticaNode)
-S3method("PnodeTitle<-",NeticaNode)
-S3method(PnodeDescription,NeticaNode)
-S3method("PnodeDescription<-",NeticaNode)
-S3method(PnodeLabels,NeticaNode)
-S3method("PnodeLabels<-",NeticaNode)
-S3method(PnodeStates,NeticaNode)
-S3method("PnodeStates<-",NeticaNode)
-S3method(PnodeNumStates,NeticaNode)
-S3method(PnodeStateTitles,NeticaNode)
-S3method("PnodeStateTitles<-",NeticaNode)
-S3method(PnodeStateDescriptions,NeticaNode)
-S3method("PnodeStateDescriptions<-",NeticaNode)
-S3method(PnodeStateValues,NeticaNode)
-S3method("PnodeStateValues<-",NeticaNode)
-S3method(PnodeParents,NeticaNode)
-S3method(PnodeParentNames,NeticaNode)
-S3method(PnodeNumParents,NeticaNode)
+exportMethods(PnetName,"PnetName<-",
+              PnetTitle,"PnetTitle<-",
+              PnetDescription,"PnetDescription<-",
+              PnetPathname,"PnetPathname<-",
+              PnetHub,"PnetHub<-") #NeticaBN
 
-S3method(PnetName,NeticaBN)
-S3method("PnetName<-",NeticaBN)
-S3method(PnetTitle,NeticaBN)
-S3method("PnetTitle<-",NeticaBN)
-S3method(PnetDescription,NeticaBN)
-S3method("PnetDescription<-",NeticaBN)
-S3method(PnetPathname,NeticaBN)
-S3method("PnetPathname<-",NeticaBN)
-S3method(PnetHub,NeticaBN)
-S3method("PnetHub<-",NeticaBN)
+exportMethods(PnetFindNode)
+export(MakePnet.NeticaBN,MakePnode.NeticaNode) ## Not actually S3 Methods
+export(BNWarehouse,NNWarehouse)
+exportMethods(ClearWarehouse,
+              WarehouseManifest,"WarehouseManifest<-",
+       WarehouseData,WarehouseFetch,
+       WarehouseMake,WarehouseFree,
+       is.PnodeWarehouse,is.PnetWarehouse)
 
-S3method(PnetFindNode,NeticaBN)
-export(Make.NeticaBN,MakePnode.NeticaNode) ## Not actually S3 Methods
-S3method(Free,NeticaBN)
-S3method(Free,NeticaNode)
-S3method(Save,NeticaBN)
-S3method(Reload,NeticaBN)
-S3method(Delete,NeticaBN)
-S3method(Delete,NeticaNode)
+#export(Free,Save,Reload,Delete)     #Warehouse protocol
+#exportMethods(Free,Save,Reload,Delete)     #Warehouse protocol
+
 
 
 

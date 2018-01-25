@@ -25,7 +25,7 @@
   The fields of the \code{\link{Pnode}} object correspond to the
   arguments of the \code{\link[CPTtools]{calcDPCTable}} function.  The
   output conditional probability table is then set in the node object in
-  using the \code{\link[RNetica]{[.NeticaNode}} operator. % ]
+  using the \code{[]} (\link[RNetica]{Extract.NeticaNode}) operator. 
 
   In addition to setting the CPT, the weight given to the nodes in the
   EM algorithm are set to \code{\link[Peanut]{GetPriorWeight}(node)},

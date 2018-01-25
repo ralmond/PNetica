@@ -9,7 +9,7 @@ Height and GPE are directly related","Proficiencies,pnodes,LowLevel,Proficiency"
 7,miniPP_CM,EnergyTransfer,,Energy can Transfer,Energy can transfer from one object to another.,"Proficiencies,pnodes,LowLevel,Proficiency",3,High,,Can use to solve difficult problems,0.9674215661
 8,miniPP_CM,EnergyTransfer,,,,,NA,Medium,,Can use to solve simple but not difficult problems,0
 9,miniPP_CM,EnergyTransfer,,,,,NA,Low,,Can not solve simple problems.,-0.9674215661
-10,miniPP_CM,NTL,,Newton's Third Law?,"Force pairs act in opposite directions
+10,miniPP_CM,NTL,,Newton's Third Law,"Force pairs act in opposite directions
 Force pairs have equal magnitudes","Proficiencies,pnodes,LowLevel,Proficiency",3,High,,,0.9674215661
 11,miniPP_CM,NTL,,,,,NA,Medium,,,0
 12,miniPP_CM,NTL,,,,,NA,Low,,,-0.9674215661

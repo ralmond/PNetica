@@ -1,5 +1,5 @@
-"","Node","NStates","States","Link","LinkScale","POfMom","NTL","EnergyTransfer","IterativeD","Physics","Rules","A.POfMom","A.NTL","A.EnergyTransfer","A.IterativeD","A.Physics","B","PriorWeight"
-"1","CompensatoryObs",2,"Right","partialCredit",0,1,1,0,0,0,"""Compensatory""",0.0953101798043249,-0.105360515657826,NA,NA,NA,0.3,""
-"2","ConjunctiveObs",2,"Right","partialCredit",0,1,0,1,0,0,"""OffsetConjunctive""",0.5,NA,-0.5,NA,NA,0,""
-"3","TwoStepObs",3,"Full","partialCredit",0,0,1,1,0,1,"""Compensatory""",NA,NA,0,0,NA,0.5,""
-"4","TwoStepObs",NA,"Partial","",0,0,1,1,1,0,"""OffsetConjunctive""",NA,NA,1,0.1,NA,0,""
+"","Model","NStates","States","Link","LinkScale","POfMom","NTL","EnergyTransfer","IterativeD","Physics","Rules","A.POfMom","A.NTL","A.EnergyTransfer","A.IterativeD","A.Physics","B","PriorWeight"
+"1","CompensatoryObs",2,"Right","partialCredit",0,1,1,0,0,0,"""Compensatory""",0.0953101798043249,0.9,NA,NA,NA,0.3,NA
+"2","ConjunctiveObs",2,"Right","partialCredit",0,1,0,1,0,0,"""OffsetConjunctive""",0.5,NA,-0.5,NA,NA,0,NA
+"3","TwoStepObs",3,"Full","partialCredit",0,0,1,1,0,1,"""Compensatory""",NA,NA,1,1,NA,0.5,NA
+"4","TwoStepObs",NA,"Partial","",0,0,1,1,1,0,"""OffsetConjunctive""",NA,NA,1,0.1,NA,0,NA
