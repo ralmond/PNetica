@@ -67,27 +67,13 @@ DeleteNetwork(EMs)
 ## Test Building From Manifest
 
 
-Omega1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
-                           "miniPP-omega.csv", sep=.Platform$file.sep),
-                     row.names=1,stringsAsFactors=FALSE)
-## ##Kludge until I redo the file.
-## Omega1a <- Omega1[,-c(2,3)]
-## write.csv(Omega1,"~/Projects/PNetica/inst/auxdata/miniPP-omega.csv")
-## Omega1 <- Omega1a
+## Omega1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+##                            "miniPP-omega.csv", sep=.Platform$file.sep),
+##                      row.names=1,stringsAsFactors=FALSE)
 
-Q1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
-                           "miniPP-Q.csv", sep=.Platform$file.sep),
-                     stringsAsFactors=FALSE)
-
-
-## Another Kludge until I redo Q export
-## Q1[["X"]] <- netman1$X[c(2:4,4)]
-## names(Q1)[1] <- "Model"
-## ## Change from lnAlpha to Alpha
-## Q1[c(1,3),13:15] <- exp(Q1[c(1,3),13:15])
-## Q1[c(2,4),18] <- exp(Q1[c(2,4),18])
-## write.csv(Q1,"~/Projects/PNetica/inst/auxdata/miniPP-Q.csv")
-
+## Q1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+##                            "miniPP-Q.csv", sep=.Platform$file.sep),
+##                      stringsAsFactors=FALSE)
 
 nodeman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
                            "Mini-PP-Nodes.csv", sep=.Platform$file.sep),
