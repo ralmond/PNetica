@@ -16,6 +16,8 @@ nodeman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
 omegamat <- read.csv(paste(library(help="PNetica")$path, "auxdata",
                            "miniPP-omega.csv", sep=.Platform$file.sep),
                      row.names=1,stringsAsFactors=FALSE)
+class(omegamat) <- c("OmegMat",class(omegamat))
+
 Q1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
                            "miniPP-Q.csv", sep=.Platform$file.sep),
                      stringsAsFactors=FALSE)
@@ -29,7 +31,10 @@ Nodehouse <- NNWarehouse(manifest=nodeman1,
 
 ## Test building with the Omega matrix.  Start by making a blank net.
 CM <- WarehouseSupply(Nethouse,"miniPP_CM")
-CM1 <- Omega2Pnet(omegamat,CM,Nodehouse,debug=TRUE)
+CM1 <- Omega2Pnet(omegamat,CM,Nodehouse,override=TRUE,debug=TRUE)
+
+Om2 <- Pnet2Omega(CM1,NetworkAllNodes(CM1))
+stopifnot(all.equal(Om2,omegamat))
 
 
 
