@@ -88,6 +88,7 @@ setMethod("PnodeParents","NeticaNode", function (node)
 )
 setMethod("PnodeParents<-","NeticaNode", function (node,value) {
   NodeParents(node) <- value
+  invisible(node)
 })
 
 

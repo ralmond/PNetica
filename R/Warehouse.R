@@ -39,7 +39,7 @@ setMethod(WarehouseMake,"BNWarehouse",
             sess <- warehouse@session
             if (!is.null(sess$nets[[name]])) {
               warning("Deleting old network ",name)
-              DeleteNetworks(sess$nets[[name]])
+              DeleteNetwork(sess$nets[[name]])
             }
             dat <- WarehouseData(warehouse,name)
             MakePnet.NeticaBN(sess,name,dat)
