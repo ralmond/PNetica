@@ -48,10 +48,6 @@ Q2 <- Pnet2Qmat(obs,NetworkAllNodes(CM),debug=TRUE)
 
 ## Fix columns marked as logical because they were blank.
 Q1$LinkScale <- as.numeric(Q1$LinkScale)
-Q1$A.Physics <- as.numeric(Q1$A.Physics)
-Q1$A.IterativeD <- as.numeric(Q1$A.IterativeD)
-Q1$B.Physics <- as.numeric(Q1$B.Physics)
-Q1$B.NTL <- as.numeric(Q1$B.NTL)
 Q1$PriorWeight <- rep("",nrow(Q1)) #Coverted to logical on read.
 
 all.equal(Q1[,-1],Q2)
