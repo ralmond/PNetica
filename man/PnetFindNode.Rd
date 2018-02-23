@@ -6,7 +6,7 @@ Finds nodes in a Netica network.
 }
 \description{
 The function \code{PnetFindNode} finds a node in a
-  \code{\link{NeticaBN}} with the given name.  If no node with the
+  \code{\link{Pnet}} with the given name.  If no node with the
   specified name found, it will return \code{NULL}. The function
   \code{PnetAllNodes()} returns a list of all nodes in the network.
 }
@@ -17,7 +17,7 @@ PnetAllNodes(net)
 
 \arguments{
   \item{net}{
-    The \code{NeticaBN} to search.
+    The \code{Pnet} to search.
 }
   \item{name}{
     A character vector giving the name or names of the desired nodes.
