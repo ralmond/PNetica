@@ -115,7 +115,7 @@ setMethod(WarehouseMake,"NNWarehouse",
 
 setMethod(WarehouseFree,"NNWarehouse",
           function(warehouse,name) {
-            ##No-op.  Deliberately delete net
+            warning("Delete the node to free it.")
           })
 
 setMethod(is.PnodeWarehouse,"NNWarehouse",
