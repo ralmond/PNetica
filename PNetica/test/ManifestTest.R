@@ -23,7 +23,7 @@ for (n in 1:length(Nets)) {
 
 netman <- BuildNetManifest(Nets)
 
-netman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+netman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                           "Mini-PP-Nets.csv", sep=.Platform$file.sep),
                     row.names=1, stringsAsFactors=FALSE)
 
@@ -47,7 +47,7 @@ for (n in 1:length(EMs)) {
 ## Again, only needed once.
 ## write.csv(nodeman,"Mini-PP-Nodes.csv")
 
-nodeman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+nodeman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                            "Mini-PP-Nodes.csv", sep=.Platform$file.sep),
                      row.names=1,stringsAsFactors=FALSE)
 
@@ -67,28 +67,30 @@ DeleteNetwork(EMs)
 ## Test Building From Manifest
 
 
-## Omega1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+## Omega1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
 ##                            "miniPP-omega.csv", sep=.Platform$file.sep),
 ##                      row.names=1,stringsAsFactors=FALSE)
 
-## Q1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+## Q1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
 ##                            "miniPP-Q.csv", sep=.Platform$file.sep),
 ##                      stringsAsFactors=FALSE)
 
-nodeman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+nodeman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                            "Mini-PP-Nodes.csv", sep=.Platform$file.sep),
                      row.names=1,stringsAsFactors=FALSE)
 
-netman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+netman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                           "Mini-PP-Nets.csv", sep=.Platform$file.sep),
                     row.names=1, stringsAsFactors=FALSE)
 
 
 ### Test Net building
 Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name")
+stopifnot(is.PnetWarehouse(Nodehouse))
 
 setwd(paste(library(help="PNetica")$path, "testnets",sep=.Platform$file.sep))
 CM <- WarehouseSupply(Nethouse,"miniPP_CM")
+stopifnot(is.null(WarehouseFetch(Nethouse,"PPcompEM")))
 
 
 EMs <- lapply(c("PPcompEM","PPconjEM", "PPtwostepEM"),
@@ -114,6 +116,7 @@ stopifnot(length(CM.nodes)==5L)
 Nodehouse <- NNWarehouse(manifest=nodeman1,
                          key=c("Model","NodeName"),
                          session=sess)
+stopifnot(is.PnodeWarehouse(Nodehouse))
 
 phyd <- WarehouseData(Nodehouse,c("miniPP_CM","Physics"))
 

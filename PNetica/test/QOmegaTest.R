@@ -5,20 +5,20 @@ curd <- getwd()
 setwd(tempdir())
 
 
-netman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+netman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                           "Mini-PP-Nets.csv", sep=.Platform$file.sep),
                     row.names=1,stringsAsFactors=FALSE)
 
-nodeman1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+nodeman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                            "Mini-PP-Nodes.csv", sep=.Platform$file.sep),
                      row.names=1,stringsAsFactors=FALSE)
 
-omegamat <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+omegamat <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                            "miniPP-omega.csv", sep=.Platform$file.sep),
                      row.names=1,stringsAsFactors=FALSE)
 class(omegamat) <- c("OmegMat",class(omegamat))
 
-Q1 <- read.csv(paste(library(help="PNetica")$path, "auxdata",
+Q1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
                            "miniPP-Q.csv", sep=.Platform$file.sep),
                stringsAsFactors=FALSE)
 class(Q1) <- c("Qmat",class(Q1))
