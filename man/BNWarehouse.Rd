@@ -1,9 +1,7 @@
 \name{BNWarehouse}
 \alias{BNWarehouse}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{A warehouse for Bayesian networks.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

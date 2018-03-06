@@ -1,6 +1,8 @@
 \name{PnetTitle}
 \alias{PnetTitle}
-
+\alias{PnetDescription}
+\alias{PnetTitle<-}
+\alias{PnetDescription<-}
 \title{
 Gets the title or comments associated with a Netica network.
 }
@@ -11,10 +13,9 @@ The title is a longer name for a network which is not subject to the
 }
 \usage{
 PnetTitle(net)
-PnetTitle(net)
 PnetTitle(net) <- value
-PnetTitle(net)
-PnetTitle(net) <- value
+PnetDescription(net)
+PnetDescription(net) <- value
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

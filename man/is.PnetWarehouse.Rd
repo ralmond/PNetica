@@ -1,9 +1,6 @@
 \name{is.PnetWarehouse}
 \alias{is.PnetWarehouse}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Tests if an object is a PnetWarehouse or not}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

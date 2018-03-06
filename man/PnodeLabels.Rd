@@ -1,9 +1,6 @@
 \name{PnodeLabels}
 \alias{PnodeLabels}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Accesses labels associated with a Pnode}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

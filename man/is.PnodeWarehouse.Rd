@@ -1,9 +1,6 @@
 \name{is.PnodeWarehouse}
 \alias{is.PnodeWarehouse}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Test is an object is a PnodeWarehouse or not}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

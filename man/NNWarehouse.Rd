@@ -1,9 +1,6 @@
 \name{NNWarehouse}
 \alias{NNWarehouse}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Creates a Warehouse for Netica Nodes}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

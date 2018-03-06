@@ -1,9 +1,6 @@
 \name{MakePnode.NeticaNode}
 \alias{MakePnode.NeticaNode}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Makes a Pnode which is also a Netica Node}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

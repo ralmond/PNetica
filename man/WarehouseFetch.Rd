@@ -1,9 +1,6 @@
 \name{WarehouseFetch}
 \alias{WarehouseFetch}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Fetches an item from the Warehouse if it exsits.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

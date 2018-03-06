@@ -1,9 +1,6 @@
 \name{WarehouseMake}
 \alias{WarehouseMake}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Makes a new item of the specified type using manifest description.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
