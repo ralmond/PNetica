@@ -1,9 +1,6 @@
 \name{PnetHub}
 \alias{PnetHub}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Returns the name of the hub net if this is a spoke net.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

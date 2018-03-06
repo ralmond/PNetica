@@ -1,9 +1,6 @@
 \name{PnetPathname}
 \alias{PnetPathname}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Returns the path associated with a network.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }

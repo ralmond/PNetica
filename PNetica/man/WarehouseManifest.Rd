@@ -1,18 +1,20 @@
 \name{WarehouseManifest}
 \alias{WarehouseManifest}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\alias{WarehouseManifest<-}
+\title{Accesses the manifest for a warehouse.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
 WarehouseManifest(warehouse)
+WarehouseManifest(warehouse) <- value
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{warehouse}{
+%%     ~~Describe \code{warehouse} here~~
+}
+  \item{value}{
 %%     ~~Describe \code{warehouse} here~~
 }
 }

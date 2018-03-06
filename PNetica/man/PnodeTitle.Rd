@@ -1,14 +1,13 @@
 \name{PnodeTitle}
 \alias{PnodeTitle}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\alias{PnodeDescription}
+\title{Access the title or description of a node.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
 PnodeTitle(node)
+PnodeDescription(node)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

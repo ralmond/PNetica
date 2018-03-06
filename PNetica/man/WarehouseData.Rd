@@ -1,9 +1,6 @@
 \name{WarehouseData}
 \alias{WarehouseData}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-}
+\title{Fetches the manifest data asscoiated with an item in the manifest.}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
