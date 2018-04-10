@@ -1,45 +1,25 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 5.04 on 06/12/2017 at 02:57:23 PM.
+// File created by an unlicensed user using Netica 5.04 on 04/09/2018 at 07:32:19 PM.
 
 bnet PPcompEM {
-autoupdate = TRUE;
+autoupdate = FALSE;
 title = "Compensatory Evidence Model";
 comment = "An evidence model with a single compensatory observable";
-whenchanged = 1497293805;
-
-visual V1 {
-	defdispform = BELIEFBARS;
-	nodelabeling = TITLE;
-	NodeMaxNumEntries = 50;
-	nodefont = font {shape= "Arial"; size= 9;};
-	linkfont = font {shape= "Arial"; size= 9;};
-	windowposn = (44, 44, 869, 499);
-	resolution = 72;
-	drawingbounds = (1080, 720);
-	showpagebreaks = FALSE;
-	usegrid = TRUE;
-	gridspace = (6, 6);
-	NodeSet Node {BuiltIn = 1; Color = 0x00E1E1E1;};
-	NodeSet Nature {BuiltIn = 1; Color = 0x00F8EED2;};
-	NodeSet Deterministic {BuiltIn = 1; Color = 0x00D3CAA6;};
-	NodeSet Finding {BuiltIn = 1; Color = 0x00C8C8C8;};
-	NodeSet Constant {BuiltIn = 1; Color = 0x00FFFFFF;};
-	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00FFFFB4;};
-	NodeSet Utility {BuiltIn = 1; Color = 0x00FFBDBD;};
-	NodeSet Decision {BuiltIn = 1; Color = 0x00DEE8FF;};
-	NodeSet Documentation {BuiltIn = 1; Color = 0x00F0FAFA;};
-	NodeSet Title {BuiltIn = 1; Color = 0x00FFFFFF;};
-	NodeSet pnodes {Disabled = 1; Color = 0x00C8C8C8;};
-	NodeSet Observables {Disabled = 1; Color = 0x00C8C8C8;};
-	NodeSet onodes {Disabled = 1; Color = 0x00C8C8C8;};
-	PrinterSetting A {
-		margins = (1270, 1270, 1270, 1270);
-		};
-	};
+whenchanged = 1523316631;
 user U1 {
 	Hub = "miniPP_CM";
 	Pathname = "PPcompEM.dne";
+	priorWeight = "10";
+	};
+
+param X_NTL_2 {
+	kind = DISCONNECTED;
+	discrete = TRUE;
+	states = (High, Medium, Low);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	title = "NTL";
+	whenchanged = 1523314216;
 	};
 
 param X_POfMom_1 {
@@ -48,48 +28,40 @@ param X_POfMom_1 {
 	states = (High, Medium, Low);
 	levels = (0.967421566101701, 0, -0.967421566101701);
 	title = "POfMom";
-	whenchanged = 1497121307;
-	};
-
-param X_NTL_1 {
-	kind = DISCONNECTED;
-	discrete = TRUE;
-	states = (High, Medium, Low);
-	levels = (0.967421566101701, 0, -0.967421566101701);
-	title = "NTL";
-	whenchanged = 1497121307;
+	whenchanged = 1523314216;
 	};
 
 node CompensatoryObs {
 	kind = NATURE;
 	discrete = TRUE;
+	chance = CHANCE;
 	states = (Right, Wrong);
-	inputs = (POfMom, NTL);
-	parents = (X_POfMom_1, X_NTL_1);
+	inputs = (NTL, POfMom);
+	parents = (X_NTL_2, X_POfMom_1);
+	probs = 
+		// Right        Wrong         // NTL    POfMom 
+		  (0.8600661,   0.1399339,    // High   High   
+		   0.6310276,   0.3689724,    // High   Medium 
+		   0.3224394,   0.6775606,    // High   Low    
+		   0.6833503,   0.3166497,    // Medium High   
+		   0.3751935,   0.6248065,    // Medium Medium 
+		   0.1431694,   0.8568306,    // Medium Low    
+		   0.4310874,   0.5689126,    // Low    High   
+		   0.1741311,   0.8258689,    // Low    Medium 
+		   0.05541794,  0.944582);    // Low    Low    ;
+	numcases = 10;
 	title = "Compensatory Observable";
 	comment = "A binary response which requires both parent variables for high probability of success.";
-	whenchanged = 1497293805;
+	whenchanged = 1523316631;
 	user U1 {
-		Q = "TRUE";
-		rules = "\"Compensatory\"";
 		link = "\"partialCredit\"";
-		lnAlphas = "structure(c(0.0953101798043249, -0.105360515657826), .Names = c(\"POfMom\",  \"NTL\"))";
+		rules = "\"Compensatory\"";
+		Q = "TRUE";
+		lnAlphas = "structure(c(-0.105360515657826, 0.0953101798043249), .Names = c(\"NTL\",  \"POfMom\"))";
 		betas = "0.3";
 		};
-	visual V1 {
-		center = (162, 102);
-		height = 1;
-		link 1 {
-			labelposn = (136, 40, 183, 55);
-			path = ((126, 40), (147, 76));
-			};
-		link 2 {
-			labelposn = (194, 51, 216, 66);
-			path = ((192, 51), (177, 76));
-			};
-		};
 	};
-NodeSet pnodes {Nodes = (CompensatoryObs);};
-NodeSet Observables {Nodes = (CompensatoryObs);};
 NodeSet onodes {Nodes = (CompensatoryObs);};
+NodeSet Observables {Nodes = (CompensatoryObs);};
+NodeSet pnodes {Nodes = (CompensatoryObs);};
 };
