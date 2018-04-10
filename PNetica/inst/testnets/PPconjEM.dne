@@ -1,45 +1,26 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 5.04 on 06/12/2017 at 02:57:23 PM.
+// File created by an unlicensed user using Netica 5.04 on 04/09/2018 at 07:32:19 PM.
 
 bnet PPconjEM {
-autoupdate = TRUE;
+autoupdate = FALSE;
 title = "Conjuctive Evidence Model";
 comment = "An evidence model with a single conjuctive observable";
-whenchanged = 1497293805;
-
-visual V2 {
-	defdispform = BELIEFBARS;
-	nodelabeling = TITLE;
-	NodeMaxNumEntries = 50;
-	nodefont = font {shape= "Arial"; size= 9;};
-	linkfont = font {shape= "Arial"; size= 9;};
-	windowposn = (66, 66, 891, 521);
-	resolution = 72;
-	drawingbounds = (1080, 720);
-	showpagebreaks = FALSE;
-	usegrid = TRUE;
-	gridspace = (6, 6);
-	NodeSet Node {BuiltIn = 1; Color = 0x00E1E1E1;};
-	NodeSet Nature {BuiltIn = 1; Color = 0x00F8EED2;};
-	NodeSet Deterministic {BuiltIn = 1; Color = 0x00D3CAA6;};
-	NodeSet Finding {BuiltIn = 1; Color = 0x00C8C8C8;};
-	NodeSet Constant {BuiltIn = 1; Color = 0x00FFFFFF;};
-	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00FFFFB4;};
-	NodeSet Utility {BuiltIn = 1; Color = 0x00FFBDBD;};
-	NodeSet Decision {BuiltIn = 1; Color = 0x00DEE8FF;};
-	NodeSet Documentation {BuiltIn = 1; Color = 0x00F0FAFA;};
-	NodeSet Title {BuiltIn = 1; Color = 0x00FFFFFF;};
-	NodeSet pnodes {Disabled = 1; Color = 0x00C8C8C8;};
-	NodeSet Observables {Disabled = 1; Color = 0x00C8C8C8;};
-	NodeSet onodes {Disabled = 1; Color = 0x00C8C8C8;};
-	PrinterSetting A {
-		margins = (1270, 1270, 1270, 1270);
-		};
-	};
+whenchanged = 1523316634;
 user U1 {
 	Hub = "miniPP_CM";
 	Pathname = "PPconjEM.dne";
+	priorWeight = "10";
+	};
+
+param X_EnergyTransfer_2 {
+	kind = DISCONNECTED;
+	discrete = TRUE;
+	states = (High, Medium, Low);
+	StateComments = ("Can use to solve difficult problems", "Can use to solve simple but not difficult problems", "Can not solve simple problems.");
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	title = "EnergyTransfer";
+	whenchanged = 1523314216;
 	};
 
 param X_POfMom_1 {
@@ -48,48 +29,40 @@ param X_POfMom_1 {
 	states = (High, Medium, Low);
 	levels = (0.967421566101701, 0, -0.967421566101701);
 	title = "POfMom";
-	whenchanged = 1497121350;
-	};
-
-param X_EnergyTransfer_1 {
-	kind = DISCONNECTED;
-	discrete = TRUE;
-	states = (High, Medium, Low);
-	levels = (0.967421566101701, 0, -0.967421566101701);
-	title = "EnergyTransfer";
-	whenchanged = 1497121350;
+	whenchanged = 1523314216;
 	};
 
 node ConjunctiveObs {
 	kind = NATURE;
 	discrete = TRUE;
+	chance = CHANCE;
 	states = (Right, Wrong);
-	inputs = (POfMom, EnergyTransfer);
-	parents = (X_POfMom_1, X_EnergyTransfer_1);
+	inputs = (EnergyTransfer, POfMom);
+	parents = (X_EnergyTransfer_2, X_POfMom_1);
+	probs = 
+		// Right        Wrong         // EnergyTransfer POfMom 
+		  (0.6888217,   0.3111782,    // High           High   
+		   0.2994328,   0.7005671,    // High           Medium 
+		   0.07623643,  0.9237636,    // High           Low    
+		   0.6888217,   0.3111782,    // Medium         High   
+		   0.2994328,   0.7005671,    // Medium         Medium 
+		   0.07623643,  0.9237636,    // Medium         Low    
+		   0.3111782,   0.6888217,    // Low            High   
+		   0.2994328,   0.7005671,    // Low            Medium 
+		   0.07623643,  0.9237636);   // Low            Low    ;
+	numcases = 10;
 	title = "Conjunctive Observable";
 	comment = "A binary response whose probability of success is related to average of parent variables.";
-	whenchanged = 1497293805;
+	whenchanged = 1523316634;
 	user U1 {
-		Q = "TRUE";
-		rules = "\"OffsetConjunctive\"";
 		link = "\"partialCredit\"";
+		rules = "\"OffsetConjunctive\"";
+		Q = "TRUE";
 		lnAlphas = "0";
-		betas = "structure(c(0.5, -0.5), .Names = c(\"POfMom\", \"EnergyTransfer\" ))";
-		};
-	visual V2 {
-		center = (144, 96);
-		height = 1;
-		link 1 {
-			labelposn = (118, 34, 165, 49);
-			path = ((108, 34), (129, 70));
-			};
-		link 2 {
-			labelposn = (176, 45, 259, 60);
-			path = ((174, 45), (159, 70));
-			};
+		betas = "structure(c(-0.5, 0.5), .Names = c(\"EnergyTransfer\", \"POfMom\" ))";
 		};
 	};
-NodeSet pnodes {Nodes = (ConjunctiveObs);};
-NodeSet Observables {Nodes = (ConjunctiveObs);};
 NodeSet onodes {Nodes = (ConjunctiveObs);};
+NodeSet Observables {Nodes = (ConjunctiveObs);};
+NodeSet pnodes {Nodes = (ConjunctiveObs);};
 };

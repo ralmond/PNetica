@@ -97,7 +97,8 @@ setMethod("PnetAdjoin","NeticaBN", function (hub, spoke) {
 })
 
 setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
-  AbsorbNodes(NetworkNodesInSet(motif,paste("Spoke",NetworkName(spoke),sep="_")))
+  # Bug in RN_AbsorbNodes
+  # AbsorbNodes(NetworkNodesInSet(motif,paste("Spoke",NetworkName(spoke),sep="_")))
 })
 
 

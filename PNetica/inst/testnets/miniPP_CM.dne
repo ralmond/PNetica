@@ -1,0 +1,250 @@
+// ~->[DNET-1]->~
+
+// File created by an unlicensed user using Netica 5.04 on 04/09/2018 at 07:32:19 PM.
+
+bnet miniPP_CM {
+autoupdate = TRUE;
+title = "Physics Playground Excerpt";
+comment = "A few selected nodes from Physics Playground for testing Peanut/PNetica";
+whenchanged = 1523316533;
+
+visual V1 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	windowposn = (451, 0, 902, 545);
+	resolution = 72;
+	drawingbounds = (1515, 782);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00E1E1E1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00F8EED2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00D3CAA6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00C8C8C8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00FFFFFF;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00FFFFB4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00FFBDBD;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00DEE8FF;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00F0FAFA;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00FFFFFF;};
+	NodeSet HighLevel {Color = 0x00FF8080;};
+	NodeSet Proficiency {Disabled = 1; Color = 0x00C8C8C8;};
+	NodeSet LowLevel {Color = 0x00FF8000;};
+	NodeSet pnode {Disabled = 1; Color = 0x00C8C8C8;};
+	NodeSet pnodes {Disabled = 1; Color = 0x00C8C8C8;};
+	NodeSet Proficiencies {Disabled = 1; Color = 0x00C8C8C8;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
+user U1 {
+	priorWeight = "10";
+	Hub = "";
+	Pathname = "miniPP-CM.dne";
+	};
+
+node Physics {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (High, Medium, Low);
+	statetitles = ("Highest 1/3", "Middle 1/3", "Lowest 1/3");
+	StateComments = ("Highest third of target population", "Middle Third of target Population", "Lowest third of target population");
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	parents = ();
+	probs = 
+		// Highest 1/3  Middle 1/3   Lowest 1/3   
+		  (0.3333333,   0.3333333,   0.3333333);
+	numcases = 10;
+	EqnDirty = TRUE;
+	title = "Physics Understanding";
+	comment = "General understanding of Newtonian mechanics.";
+	whenchanged = 1497293635;
+	user U1 {
+		Q = "TRUE";
+		rules = "\"Compensatory\"";
+		link = "\"normalLink\"";
+		linkScale = "1";
+		lnAlphas = "1";
+		betas = "0";
+		};
+	visual V1 {
+		center = (186, 198);
+		dispform = LABELBOX;
+		height = 4;
+		};
+	};
+
+node IterativeD {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (High, Medium, Low);
+	StateComments = ("Complete Mastery", "Partial Mastery", "No Mastery");
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	parents = (Physics);
+	probs = 
+		// High         Medium       Low           // Physics     
+		  (0.922039,    0.07754987,  4.111278e-4,  // Highest 1/3 
+		   0.3029545,   0.6178272,   0.07921831,   // Middle 1/3  
+		   0.007127648, 0.2928399,   0.7000325);   // Lowest 1/3  ;
+	numcases = 10;
+	EqnDirty = TRUE;
+	title = "Use iterative design to solve a problem";
+	comment = "Mass and GPE are directly related\nHeight and GPE are directly related";
+	whenchanged = 1523316533;
+	user U1 {
+		Q = "TRUE";
+		rules = "\"Compensatory\"";
+		link = "\"normalLink\"";
+		linkScale = "0.447213595499958";
+		lnAlphas = "structure(-0.111571775657105, .Names = \"Physics\")";
+		betas = "-0.2";
+		};
+	visual V1 {
+		center = (468, 54);
+		dispform = LABELBOX;
+		height = 5;
+		};
+	};
+
+node EnergyTransfer {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (High, Medium, Low);
+	StateComments = ("Can use to solve difficult problems", "Can use to solve simple but not difficult problems", "Can not solve simple problems.");
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	parents = (Physics);
+	probs = 
+		// High         Medium       Low           // Physics     
+		  (0.834402,    0.1637201,   0.001877881,  // Highest 1/3 
+		   0.1677398,   0.6645205,   0.1677398,    // Middle 1/3  
+		   0.001877881, 0.1637201,   0.834402);    // Lowest 1/3  ;
+	numcases = 10;
+	EqnDirty = TRUE;
+	title = "Energy can Transfer";
+	comment = "Energy can transfer from one object to another.";
+	whenchanged = 1523316533;
+	user U1 {
+		Q = "TRUE";
+		rules = "\"Compensatory\"";
+		link = "\"normalLink\"";
+		linkScale = "0.447213595499958";
+		lnAlphas = "structure(-0.111571775657105, .Names = \"Physics\")";
+		betas = "0";
+		};
+	visual V1 {
+		center = (450, 282);
+		dispform = LABELBOX;
+		height = 3;
+		};
+	};
+
+node NTL {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (High, Medium, Low);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	parents = (Physics, EnergyTransfer);
+	probs = 
+		// High         Medium       Low           // Physics     EnergyTransfer 
+		  (0.8636695,   0.1350801,   0.001250477,  // Highest 1/3 High           
+		   0.4274682,   0.531904,    0.04062774,   // Highest 1/3 Medium         
+		   0.07178815,  0.6067694,   0.3214425,    // Highest 1/3 Low            
+		   0.3616029,   0.5804327,   0.05796443,   // Middle 1/3  High           
+		   0.05113405,  0.5638431,   0.3850228,    // Middle 1/3  Medium         
+		   0.001785668, 0.1599221,   0.8382922,    // Middle 1/3  Low            
+		   0.03551311,  0.512626,    0.4518609,    // Lowest 1/3  High           
+		   0.001017459, 0.1222479,   0.8767347,    // Lowest 1/3  Medium         
+		   6.360015e-6, 0.007365868, 0.9926278);   // Lowest 1/3  Low            ;
+	numcases = 10;
+	EqnDirty = TRUE;
+	title = "Newton's Third Law";
+	comment = "Force pairs act in opposite directions\nForce pairs have equal magnitudes";
+	whenchanged = 1498754364;
+	user U1 {
+		Q = "TRUE";
+		rules = "\"Compensatory\"";
+		link = "\"normalLink\"";
+		linkScale = "0.447213595499958";
+		lnAlphas = "structure(c(-0.0526802578289132, -0.178337471969366), .Names = c(\"Physics\",  \
+			\"EngergyTransfer\"))";
+		betas = "0.3";
+		};
+	visual V1 {
+		center = (462, 132);
+		dispform = LABELBOX;
+		height = 1;
+		};
+	};
+
+node POfMom {
+	kind = NATURE;
+	discrete = TRUE;
+	chance = CHANCE;
+	states = (High, Medium, Low);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	parents = (Physics, EnergyTransfer, NTL);
+	probs = 
+		// High         Medium       Low           // Physics     EnergyTransfer NTL    
+		  (0.9912012,   0.008790335, 8.53042e-6,   // Highest 1/3 High           High   
+		   0.8828059,   0.1162757,   9.184728e-4,  // Highest 1/3 High           Medium 
+		   0.5017099,   0.4715212,   0.02676892,   // Highest 1/3 High           Low    
+		   0.8828059,   0.1162757,   9.184728e-4,  // Highest 1/3 Medium         High   
+		   0.5017099,   0.4715212,   0.02676892,   // Highest 1/3 Medium         Medium 
+		   0.1188891,   0.6531904,   0.2279206,    // Highest 1/3 Medium         Low    
+		   0.5017099,   0.4715212,   0.02676892,   // Highest 1/3 Low            High   
+		   0.1188891,   0.6531904,   0.2279206,    // Highest 1/3 Low            Medium 
+		   0.009005226, 0.3212777,   0.6697171,    // Highest 1/3 Low            Low    
+		   0.9202201,   0.07935004,  4.298454e-4,  // Middle 1/3  High           High   
+		   0.5877298,   0.3964125,   0.01585767,   // Middle 1/3  High           Medium 
+		   0.1677398,   0.6645205,   0.1677398,    // Middle 1/3  High           Low    
+		   0.5877298,   0.3964125,   0.01585767,   // Middle 1/3  Medium         High   
+		   0.1677398,   0.6645205,   0.1677398,    // Middle 1/3  Medium         Medium 
+		   0.01585767,  0.3964125,   0.5877298,    // Middle 1/3  Medium         Low    
+		   0.1677398,   0.6645205,   0.1677398,    // Middle 1/3  Low            High   
+		   0.01585767,  0.3964125,   0.5877298,    // Middle 1/3  Low            Medium 
+		   4.298454e-4, 0.07935004,  0.9202201,    // Middle 1/3  Low            Low    
+		   0.6697171,   0.3212777,   0.009005226,  // Lowest 1/3  High           High   
+		   0.2279206,   0.6531904,   0.1188891,    // Lowest 1/3  High           Medium 
+		   0.02676892,  0.4715212,   0.5017099,    // Lowest 1/3  High           Low    
+		   0.2279206,   0.6531904,   0.1188891,    // Lowest 1/3  Medium         High   
+		   0.02676892,  0.4715212,   0.5017099,    // Lowest 1/3  Medium         Medium 
+		   9.184728e-4, 0.1162757,   0.8828059,    // Lowest 1/3  Medium         Low    
+		   0.02676892,  0.4715212,   0.5017099,    // Lowest 1/3  Low            High   
+		   9.184728e-4, 0.1162757,   0.8828059,    // Lowest 1/3  Low            Medium 
+		   8.53042e-6,  0.008790335, 0.9912012);   // Lowest 1/3  Low            Low    ;
+	numcases = 10;
+	EqnDirty = TRUE;
+	title = "Properties of momentum";
+	comment = "Momentum is directly related to mass\n\
+		Momentum is directly related to velocity\n\
+		Momentum is parallel to velocity";
+	whenchanged = 1496355066;
+	user U1 {
+		Q = "TRUE";
+		rules = "\"Compensatory\"";
+		link = "\"normalLink\"";
+		linkScale = "0.447213595499958";
+		lnAlphas = "structure(c(-0.255412811882995, -0.0526802578289132, -0.0526802578289132 ), .Names = \
+			c(\"Physics\", \"EngergyTransfer\", \"NTL\"))";
+		betas = "0";
+		};
+	visual V1 {
+		center = (582, 186);
+		dispform = LABELBOX;
+		height = 2;
+		};
+	};
+NodeSet HighLevel {Nodes = ();};
+NodeSet Proficiency {Nodes = (Physics, IterativeD, EnergyTransfer, NTL, POfMom);};
+NodeSet LowLevel {Nodes = (IterativeD, EnergyTransfer, NTL, POfMom);};
+NodeSet pnode {Nodes = (Physics);};
+NodeSet pnodes {Nodes = (IterativeD, EnergyTransfer, NTL, POfMom);};
+NodeSet Proficiencies {Nodes = (IterativeD, EnergyTransfer, NTL, POfMom);};
+};

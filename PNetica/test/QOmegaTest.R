@@ -53,5 +53,13 @@ Q1$PriorWeight <- rep("",nrow(Q1)) #Coverted to logical on read.
 all.equal(Q1[,-1],Q2)
 
 
+if (false) {
+  setwd("~/Projects/PNetica/inst/testnets/")
+  Nets <- GetNamedNetworks(ls(sess$nets),sess)
+  sapply(Nets,function(n) PnetPriorWeight(n) <- 10)
+  sapply(Nets,BuildAllTables)
+  WriteNetworks(Nets,paste(ls(sess$nets),"dne",sep="."))
+}
+
 stopSession(sess)
 setwd(curd)
