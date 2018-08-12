@@ -173,3 +173,27 @@ setMethod("PnetDescription<-","NeticaBN", function (net, value) {
 setMethod("PnetFindNode","NeticaBN", function(net,name)
   NetworkFindNode(net,name))
 
+
+setMethod("PnetSerialize","NeticaBN",
+          function (net) {
+            factory <- net$Session$SessionName
+            name <- PnetName(net)
+            tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
+            WriteNetworks(net,tmpfile)
+            data <- serialize(readLines(tmpfile),NULL)
+            list(name=name,factory=factory,data=data)
+          })
+
+
+setMethod("unserializePnet","NeticaSession",
+          function(factory,data) {
+            name <- data$name
+            tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
+            writeLines(unserialize(data$data),tmpfile)
+            oldnet <- factory$findNet(name)
+            if (is.active(oldnet)) {
+              DeleteNetwork(oldnet)
+            }
+            ReadNetworks(tmpfile,factory)
+          })
+

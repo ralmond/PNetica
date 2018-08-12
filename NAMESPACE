@@ -6,6 +6,7 @@ import(CPTtools)
 exportMethods(is.Pnet,as.Pnet,PnetPriorWeight,
               "PnetPriorWeight<-", PnetPnodes,
               "PnetPnodes<-", calcPnetLLike, calcExpTables) # NeticaBN
+exportMethods("PnetSerialize","unserializePnet")
 
 exportMethods(is.Pnode,as.Pnode, Pnode, PnodeNet,
               PnodeQ, "PnodeQ<-", PnodePriorWeight,
