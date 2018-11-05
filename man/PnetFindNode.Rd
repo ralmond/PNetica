@@ -62,7 +62,10 @@ PnetAllNodes(net)
   \code{\link{NodeNet}()} retrieves the network from the node.
 }
 \examples{
-tnet <- CreateNetwork("TestNet")
+sess <- NeticaSession()
+startSession(sess)
+
+tnet <- CreateNetwork("TestNet",sess)
 nodes <- NewDiscreteNode(tnet,c("A","B","C"))
 
 nodeA <- PnetFindNode(tnet,"A")
@@ -72,9 +75,14 @@ nodeBC <- PnetFindNode(tnet,c("B","C"))
 stopifnot(nodeBC[[1]]==nodes[[2]])
 stopifnot(nodeBC[[2]]==nodes[[3]])
 
-allnodes <- PnetAllNodes(tnet)
+allnodes <- PnetPnodes(tnet)
+stopifnot(length(allnodes)==0)
+
+## Need to mark nodes a Pnodes before they will be seen.
+nodes <- lapply(nodes,as.Pnode)
+allnodes <- PnetPnodes(tnet)
 stopifnot(length(allnodes)==3)
-stopifnot(any(nodeA==allnodes)) ## NodeA in there somewhere.
+stopifnot(any(sapply(allnodes,"==",nodeA))) ## NodeA in there somewhere.
 
 \dontrun{
 ## Safe way to preserve node and network objects across R sessions.
@@ -82,7 +90,9 @@ tnet <- WriteNetworks(tnet,"Tnet.neta")
 q(save="yes")
 # R
 library(RNetica)
-tnet <- ReadNetworks(tnet)
+sess <- NeticaSession()
+startSession(sess)
+tnet <- ReadNetworks(tnet,sess)
 nodes <- NetworkFindNodes(tnet,as.character(nodes))
 }
 DeleteNetwork(tnet)

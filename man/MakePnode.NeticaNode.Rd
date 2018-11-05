@@ -45,37 +45,6 @@ MakePnode.NeticaNode(net, name, data)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (net, name, data) 
-{
-    node <- PnetFindNode(net, name)
-    if (is.null(node)) {
-        node <- NewDiscreteNode(net, name, as.character(data$StateName))
-    }
-    node <- as.Pnode(node)
-    if (nrow(data) != as.integer(data$Nstates[1])) 
-        stop("Must be one row in data for each state.")
-    if (!is.null(data$NodeTitle)) 
-        PnodeTitle(node) <- as.character(data$NodeTitle[1])
-    if (!is.null(data$NodeDescription)) 
-        PnodeDescription(node) <- as.character(data$NodeDescription[1])
-    if (!is.null(data$NodeLabels)) {
-        labels <- strsplit(data$NodeLabels[1], ",")[[1]]
-        PnodeLabels(node) <- as.character(labels)
-    }
-    PnodeStates(node) <- as.character(data$StateName)
-    if (!is.null(data$StateTitle)) 
-        PnodeStateTitles(node) <- as.character(data$StateTitle)
-    if (!is.null(data$StateDescription)) 
-        PnodeStateDescriptions(node) <- as.character(data$StateDescription)
-    if (!is.null(data$StateValue) && !any(is.na(data$StateValue))) 
-        PnodeStateValues(node) <- as.character(data$StateValue)
-    node
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

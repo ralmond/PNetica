@@ -39,19 +39,6 @@ is.PnetWarehouse(obj)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-structure(function (obj) 
-standardGeneric("is.PnetWarehouse"), generic = structure("is.PnetWarehouse", package = "Peanut"), package = "Peanut", group = list(), valueClass = character(0), signature = "obj", default = structure(function (obj) 
-{
-    is(obj, "PnetWarehouse")
-  }, target = structure("ANY", class = structure("signature", package = "methods"), .Names = "obj", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "obj", package = "methods"), generic = structure("is.PnetWarehouse", package = "Peanut"), class = structure("derivedDefaultMethod", package = "methods")), skeleton = (structure(function (obj) 
-{
-    is(obj, "PnetWarehouse")
-  }, target = structure("ANY", class = structure("signature", package = "methods"), .Names = "obj", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "obj", package = "methods"), generic = structure("is.PnetWarehouse", package = "Peanut"), class = structure("derivedDefaultMethod", package = "methods")))(obj), class = structure("standardGeneric", package = "methods"))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

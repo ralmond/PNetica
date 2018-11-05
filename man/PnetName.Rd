@@ -60,24 +60,18 @@ The name of the network as a character vector of length 1.
   \code{\link{GetNamedNetworks}()}, \code{\link{PnetTitle}()} 
 }
 \examples{
-net <- CreateNetwork("funNet")
+sess <- NeticaSession()
+startSession(sess)
+
+net <- CreateNetwork("funNet",sess)
 netcached <- net
 
 stopifnot(PnetName(net)=="funNet")
 
 PnetName(net)<-"SomethingElse"
-stopifnot(as.character(net)=="SomethingElse")
+stopifnot(PnetName(net)=="SomethingElse")
 
-##Warning, the following expression is true!
-as.character(netcached) != PnetName(netcached)
-## But this one holds
 stopifnot(PnetName(net)==PnetName(netcached))
-## And this one
-stopifnot(net==netcached)
-
-## This fixes the problem
-PnetName(netcached) <- PnetName(netcached)
-stopifnot(as.character(netcached) == PnetName(netcached))
 
 DeleteNetwork(net)
 }

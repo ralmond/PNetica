@@ -54,7 +54,10 @@ A character vector of length 1 providing the title or comment.
 
 }
 \examples{
-firstNet <- CreateNetwork("firstNet")
+sess <- NeticaSession()
+startSession(sess)
+
+firstNet <- CreateNetwork("firstNet",sess)
 
 PnetTitle(firstNet) <- "My First Bayesian Network"
 stopifnot(PnetTitle(firstNet)=="My First Bayesian Network")

@@ -39,15 +39,7 @@ PnetHub(net)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-structure(function (net) 
-standardGeneric("PnetHub"), generic = structure("PnetHub", package = "Peanut"), package = "Peanut", group = list(), valueClass = character(0), signature = "net", default = structure(function (net) 
-UseMethod("PnetHub"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "net", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "net", package = "methods"), generic = structure("PnetHub", package = "Peanut"), class = structure("derivedDefaultMethod", package = "methods")), skeleton = (structure(function (net) 
-UseMethod("PnetHub"), target = structure("ANY", class = structure("signature", package = "methods"), .Names = "net", package = "methods"), defined = structure("ANY", class = structure("signature", package = "methods"), .Names = "net", package = "methods"), generic = structure("PnetHub", package = "Peanut"), class = structure("derivedDefaultMethod", package = "methods")))(net), class = structure("standardGeneric", package = "methods"))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
