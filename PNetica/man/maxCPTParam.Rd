@@ -82,20 +82,6 @@
 }
 \examples{
 
-## The function is currently defined as
-function (node, Mstepit = 5, tol = sqrt(.Machine$double.eps)) 
-{
-    counts <- sweep(node[[]], 1, NodeExperience(node), "*")
-    withCallingHandlers(est <- mapDPC(counts, ParentStates(node), 
-        NodeStates(node), PnodeLnAlphas(node), PnodeBetas(node), 
-        PnodeRules(node), PnodeLink(node), PnodeLinkScale(node), 
-        PnodeQ(node), control = list(reltol = tol, maxit = Mstepit)), 
-        warning = muffler)
-    PnodeLnAlphas(node) <- est$lnAlphas
-    PnodeBetas(node) <- est$betas
-    PnodeLinkScale(node) <- est$linkScale
-    invisible(node)
-  }
 }
 \keyword{ manip }
 

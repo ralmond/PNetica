@@ -1,3 +1,10 @@
+2018-11-04  Rusell Almond  <ralmond@Cherry>
+
+	* R/PnetNetica.R (## calcPnetLL.NeticaBN): Changed to get session
+	from network.
+	(## calcExpTables.NeticaBN): Same thing.
+	(as.Pnode.NeticaNode): Changed to use "pnodes" node set.
+
 2016-05-04  Almond  <ralmond@macox.com>
 
 	* R/BNNetica.R : Added translations for basic BN functions here.

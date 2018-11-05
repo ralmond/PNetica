@@ -65,17 +65,6 @@
 
 }
 \examples{
-\dontrun{
-## The method is currently defined as
-function (node) 
-{
-    node[] <- calcDPCFrame(ParentStates(node), NodeStates(node), 
-        PnodeLnAlphas(node), PnodeBetas(node), PnodeRules(node), 
-        PnodeLink(node), PnodeLinkScale(node), PnodeQ(node), 
-        PnodeParentTvals(node))
-    NodeExperience(node) <- GetPriorWeight(node)
-    invisible(node)
-  }
-}}
+}
 \keyword{ distribution }
 

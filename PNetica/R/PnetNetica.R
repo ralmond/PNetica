@@ -115,8 +115,12 @@ setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
 ## each row of the CPT.   Inherits from the net if not available.
 
 
-setMethod("as.Pnode","NeticaNode",function(x) x)
-setMethod("is.Pnode","NeticaNode",function(x) TRUE)
+setMethod("as.Pnode","NeticaNode",function(x) {
+  NodeSets(x) <- union("pnodes",NodeSets(x))
+  x})
+setMethod("is.Pnode","NeticaNode",function(x)
+  "pnodes" %in% NodeSets(x)
+  )
 
 
 ## as.Pnode.NeticaNode <- function (x) {
@@ -244,7 +248,7 @@ setMethod("calcPnetLLike","NeticaBN", function (net,cases){
   nextRec <- "FIRST"
   onodes <- NetworkNodesInSet(net,"onodes")
   pos <- 0
-  stream <- CaseFileStream(cases)
+  stream <- CaseFileStream(cases,net$Session)
   WithOpenCaseStream(stream,
     while(!is.na(pos)) {
       ReadFindings(onodes,stream,nextRec)
@@ -261,7 +265,8 @@ setMethod("calcPnetLLike","NeticaBN", function (net,cases){
 setMethod("calcExpTables","NeticaBN", function (net, cases, Estepit=1,
                                     tol=sqrt(.Machine$double.eps)) {
   pnodes <- NetworkNodesInSet(net,"pnodes")
-  LearnCPTs(cases,pnodes,"EM",Estepit,tol)
+  casestream <- CaseFileStream(cases,session=net$Session)
+  LearnCPTs(casestream,pnodes,"EM",Estepit,tol)
   invisible(net)
 })
 
