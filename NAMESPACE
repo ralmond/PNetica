@@ -44,9 +44,13 @@ exportMethods(ClearWarehouse,
        WarehouseData,WarehouseFetch,
        WarehouseMake,WarehouseFree,
        is.PnodeWarehouse,is.PnetWarehouse)
+##export(Free,Save,Reload,Delete)     #Warehouse protocol
+##exportMethods(Free,Save,Reload,Delete)     #Warehouse protocol
 
-#export(Free,Save,Reload,Delete)     #Warehouse protocol
-#exportMethods(Free,Save,Reload,Delete)     #Warehouse protocol
+
+exportMethods(PnodeMargin, PnodeEAP, PnodeSD, PnodeMedian,
+              PnodeMode)
+
 
 
 
