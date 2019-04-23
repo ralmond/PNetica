@@ -39,6 +39,7 @@ exportMethods(PnetName,"PnetName<-",
 exportMethods(PnetFindNode)
 export(MakePnet.NeticaBN,MakePnode.NeticaNode) ## Not actually S3 Methods
 export(BNWarehouse,NNWarehouse)
+exportClasses(BNWarehouse,NNWarehouse)
 exportMethods(ClearWarehouse,
               WarehouseManifest,"WarehouseManifest<-",
        WarehouseData,WarehouseFetch,
