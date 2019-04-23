@@ -1,6 +1,6 @@
 Package: PNetica
-Version: 0.5-1
-Date: 2018/11/04
+Version: 0.5-2
+Date: 2019/04/22
 Title: Parameterized Bayesian Networks Netica Interface
 Author: Russell Almond
 Maintainer: Russell Almond <ralmond@fsu.edu>
