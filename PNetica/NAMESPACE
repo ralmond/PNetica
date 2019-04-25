@@ -43,7 +43,7 @@ exportClasses(BNWarehouse,NNWarehouse)
 exportMethods(ClearWarehouse,
               WarehouseManifest,"WarehouseManifest<-",
        WarehouseData,WarehouseFetch,
-       WarehouseMake,WarehouseFree,
+       WarehouseMake,WarehouseFree, WarehouseUnpack,
        is.PnodeWarehouse,is.PnetWarehouse)
 ##export(Free,Save,Reload,Delete)     #Warehouse protocol
 ##exportMethods(Free,Save,Reload,Delete)     #Warehouse protocol

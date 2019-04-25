@@ -54,6 +54,13 @@ setMethod(WarehouseFree,"BNWarehouse",
 setMethod(is.PnetWarehouse,"BNWarehouse",
           function(obj) {TRUE})
 
+setMethod("WarehouseUnpack", "BNWarehouse",
+          function(warehouse,serial) {
+            unserializePnet(warehouse$session,serial)
+            warehouse$session$nets[[name]]
+          })
+
+
 
 #######  Node Warehouse
 
