@@ -191,7 +191,7 @@ setMethod("unserializePnet","NeticaSession",
             tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
             writeLines(unserialize(data$data),tmpfile)
             oldnet <- factory$findNet(name)
-            if (is.active(oldnet)) {
+            if (!is.null(oldnet) && is.active(oldnet)) {
               DeleteNetwork(oldnet)
             }
             ReadNetworks(tmpfile,factory)
