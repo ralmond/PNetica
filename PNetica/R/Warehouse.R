@@ -32,6 +32,18 @@ setMethod(WarehouseFetch,"BNWarehouse",
             warehouse@session$nets[[name]]
           })
 
+setMethod("WarehouseSupply", c("ANY"), function(warehouse,name) {
+  val <- WarehouseFetch(warehouse,name)
+  if (is.null(val))
+    val <- WarehouseMake(warehouse,name)
+  if (!is.active(val)) {
+    warehouse@session$nets[[name]] <- NULL
+    val <- WarehouseMake(warehouse,name)
+  }
+  val
+})
+
+
 setMethod(WarehouseMake,"BNWarehouse",
           function(warehouse,name) {
             if (length(name) != 1L)
@@ -56,8 +68,8 @@ setMethod(is.PnetWarehouse,"BNWarehouse",
 
 setMethod("WarehouseUnpack", "BNWarehouse",
           function(warehouse,serial) {
-            unserializePnet(warehouse$session,serial)
-            warehouse$session$nets[[name]]
+            unserializePnet(warehouse@session,serial)
+            warehouse@session$nets[[serial$name]]
           })
 
 
