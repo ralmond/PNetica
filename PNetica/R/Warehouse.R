@@ -28,7 +28,7 @@ setMethod(WarehouseData,"BNWarehouse",
 setMethod(WarehouseFetch,"BNWarehouse",
           function(warehouse,name) {
             if (length(name) != 1L)
-              stop("Expected name to be unique.")
+              stop("Expected name ",name," to be unique.")
             warehouse@session$nets[[name]]
           })
 
