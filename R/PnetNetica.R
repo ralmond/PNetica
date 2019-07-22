@@ -317,13 +317,17 @@ Delete.NeticaNode <- function (obj) {
 }
 
 MakePnode.NeticaNode <- function (net, name, data) {
-  node <-PnetFindNode(net,name)
-  if (is.null(node)) {
-    node <- NewDiscreteNode(net,name,as.character(data$StateName))
-  }
-  node <- as.Pnode(node)
   if (nrow(data) != as.integer(data$Nstates[1]))
     stop("Must be one row in data for each state.")
+  node <-PnetFindNode(net,name)
+  cont <- isTRUE(as.logical(data$Continuous[1]))
+  if (is.null(node)) {
+    if (cont)
+      node <- NewContinuousNodes(net,name)
+    else
+      node <- NewDiscreteNode(net,name,as.character(data$StateName))
+  }
+  node <- as.Pnode(node)
   if (!is.null(data$NodeTitle))
     PnodeTitle(node) <- as.character(data$NodeTitle[1])
   if (!is.null(data$NodeDescription))
@@ -332,14 +336,18 @@ MakePnode.NeticaNode <- function (net, name, data) {
     labels <- strsplit(data$NodeLabels[1],",")[[1]]
     PnodeLabels(node) <- as.character(labels)
   }
-
+  if (cont) {
+    ## Need to set values to create states.
+    PnetStateValues(node) <-c(as.numeric(data$StateValue),
+                              max(as.numeric(data$UpperBound),na.rm=TRUE))
+  }
   PnodeStates(node) <- as.character(data$StateName)
   if (!is.null(data$StateTitle))
     PnodeStateTitles(node) <- as.character(data$StateTitle)
   if (!is.null(data$StateDescription))
     PnodeStateDescriptions(node) <- as.character(data$StateDescription)
-  if (!is.null(data$StateValue) && !any(is.na(data$StateValue)))
-    PnodeStateValues(node) <- as.character(data$StateValue)
+  if (!cont && !is.null(data$StateValue) && !any(is.na(data$StateValue)))
+    PnodeStateValues(node) <- as.numeric(data$StateValue)
 
   node
 
