@@ -78,6 +78,8 @@ setMethod("PnodeStateValues<-","NeticaNode", function (node,value) {
   invisible(node)
 })
 
+setMethod("isPnodeContinuous","NeticaNode", function (node)
+  is.continuous(node))
 
 #### Parents
 

@@ -27,7 +27,7 @@ exportMethods(PnodeName,"PnodeName<-",
               "PnodeStateTitles<-",PnodeStateDescriptions,
               "PnodeStateDescriptions<-",PnodeStateValues,
               "PnodeStateValues<-",PnodeParents,
-              "PnodeParents<-",
+              "PnodeParents<-", isPnodeContinuous,
               PnodeParentNames,PnodeNumParents) #NeticaNode
 
 exportMethods(PnetName,"PnetName<-",
