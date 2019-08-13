@@ -27,6 +27,7 @@ exportMethods(PnodeName,"PnodeName<-",
               "PnodeStateTitles<-",PnodeStateDescriptions,
               "PnodeStateDescriptions<-",PnodeStateValues,
               "PnodeStateValues<-",PnodeParents,
+              PnodeStateBounds, "PnodeStateBounds<-",
               "PnodeParents<-", isPnodeContinuous,
               PnodeParentNames,PnodeNumParents) #NeticaNode
 
@@ -44,6 +45,7 @@ exportMethods(ClearWarehouse,
               WarehouseManifest,"WarehouseManifest<-",
        WarehouseData,WarehouseFetch,WarehouseSupply,
        WarehouseMake,WarehouseFree, WarehouseUnpack,
+       WarehouseInventory,
        is.PnodeWarehouse,is.PnetWarehouse)
 ##export(Free,Save,Reload,Delete)     #Warehouse protocol
 ##exportMethods(Free,Save,Reload,Delete)     #Warehouse protocol

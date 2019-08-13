@@ -1,3 +1,10 @@
+2019-07-29  Rusell Almond  <ralmond@Cherry>
+
+	* R/Warehouse.R: Added trimws to key columsn.
+
+	* R/PnetNetica.R (MakePnet.NeticaBN): Added some trimws.
+	(MakePnode.NeticaNode): Added some trimws.
+
 2018-11-04  Rusell Almond  <ralmond@Cherry>
 
 	* R/PnetNetica.R (## calcPnetLL.NeticaBN): Changed to get session
