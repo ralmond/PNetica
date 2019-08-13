@@ -31,9 +31,7 @@ visual V1 {
 	NodeSet Documentation {BuiltIn = 1; Color = 0x00F0FAFA;};
 	NodeSet Title {BuiltIn = 1; Color = 0x00FFFFFF;};
 	NodeSet HighLevel {Color = 0x00FF8080;};
-	NodeSet Proficiency {Disabled = 1; Color = 0x00C8C8C8;};
 	NodeSet LowLevel {Color = 0x00FF8000;};
-	NodeSet pnode {Disabled = 1; Color = 0x00C8C8C8;};
 	NodeSet pnodes {Disabled = 1; Color = 0x00C8C8C8;};
 	NodeSet Proficiencies {Disabled = 1; Color = 0x00C8C8C8;};
 	PrinterSetting A {
@@ -240,9 +238,7 @@ node POfMom {
 		};
 	};
 NodeSet HighLevel {Nodes = ();};
-NodeSet Proficiency {Nodes = (Physics, IterativeD, EnergyTransfer, NTL, POfMom);};
 NodeSet LowLevel {Nodes = (IterativeD, EnergyTransfer, NTL, POfMom);};
-NodeSet pnode {Nodes = (Physics);};
 NodeSet pnodes {Nodes = (IterativeD, EnergyTransfer, NTL, POfMom);};
-NodeSet Proficiencies {Nodes = (IterativeD, EnergyTransfer, NTL, POfMom);};
+NodeSet Proficiencies {Nodes = (Physics, IterativeD, EnergyTransfer, NTL, POfMom);};
 };

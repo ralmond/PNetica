@@ -10,7 +10,11 @@ setMethod(ClearWarehouse,"BNWarehouse",
 setMethod(WarehouseManifest,"BNWarehouse",
           function(warehouse) {warehouse@manifest})
 setMethod("WarehouseManifest<-",c("BNWarehouse","data.frame"),
-          function(warehouse,value) {warehouse@manifest<-value; warehouse})
+          function(warehouse,value) {
+            for (ky in key) {
+              value[[ky]] <- trimws(value[[ky]])
+            }
+            warehouse@manifest<-value; warehouse})
 
 setMethod(WarehouseData,"BNWarehouse",
           function(warehouse,name) {
@@ -63,6 +67,15 @@ setMethod(WarehouseFree,"BNWarehouse",
             warning("To free network, call DeleteNetworks.")
           })
 
+setMethod(WarehouseInventory,"BNWarehouse",
+          function(warehouse) {
+            allKeys <- warehouse@manifest[,warehous@key,drop=FALSE]
+            built <- sapply(1L:nrow(allkeys),
+                            function (k)
+                              !is.null(WarehouseFetch(warehouse,allKeys[k,]))
+                            )
+            allkeys[built, ,drop=FALSE]})
+
 setMethod(is.PnetWarehouse,"BNWarehouse",
           function(obj) {TRUE})
 
@@ -92,7 +105,12 @@ setMethod(ClearWarehouse,"NNWarehouse",
 setMethod(WarehouseManifest,"NNWarehouse",
           function(warehouse) {warehouse@manifest})
 setMethod("WarehouseManifest<-",c("NNWarehouse","data.frame"),
-          function(warehouse,value) {warehouse@manifest<-value; warehouse})
+          function(warehouse,value) {
+            for (ky in key) {
+              value[[ky]] <- trimws(value[[ky]])
+            }
+            warehouse@manifest<-value;
+            warehouse})
 
 setMethod(WarehouseData,"NNWarehouse",
           function(warehouse,name) {
@@ -139,3 +157,12 @@ setMethod(WarehouseFree,"NNWarehouse",
 
 setMethod(is.PnodeWarehouse,"NNWarehouse",
           function(obj) {TRUE})
+
+setMethod(WarehouseInventory,"NNWarehouse",
+          function(warehouse) {
+            allKeys <- warehouse@manifest[,warehous@key,drop=FALSE]
+            built <- sapply(1L:nrow(allkeys),
+                            function (k)
+                              !is.null(WarehouseFetch(warehouse,allKeys[k,]))
+                            )
+            allkeys[built, ,drop=FALSE]})

@@ -1,0 +1,41 @@
+// ~->[DNET-1]->~
+
+// File created by an unlicensed user using Netica 5.04 on 08/04/2019 at 03:30:00 PM.
+
+bnet PPdurAttEM {
+autoupdate = FALSE;
+title = "Duration and Attemtps";
+comment = "An evidence model with continuous variables.";
+whenchanged = 1564946824;
+user U1 {
+	Hub = "miniPP_CM";
+	Pathname = "PPdurAttEM.dne";
+	};
+
+node Attempts {
+	kind = NATURE;
+	discrete = FALSE;
+	states = (one, two, three, fourPlus);
+	statetitles = ("1", "2", "3", "4 or more");
+	levels = (0.1, 1.1, 2.1, 3.1, INFINITY);
+	parents = ();
+	title = "Number of Attempts";
+	comment = "The number of times level was started or restarted";
+	whenchanged = 1564946777;
+	};
+
+node Duration {
+	kind = NATURE;
+	discrete = FALSE;
+	states = (Q1, Q2, Q3, Q4);
+	statetitles = ("0\E2\80\9330.190", "30.190\E2\80\9367.037", "67.037\E2\80\93154.893", "154.893\E2\80\94Inf");
+	levels = (0, 30.19, 67.037, 154.893, INFINITY);
+	parents = ();
+	title = "Time spent on level";
+	comment = "Total time spent on level less time spent on learning supports";
+	whenchanged = 1564946824;
+	};
+NodeSet pnodes {Nodes = (Attempts, Duration);};
+NodeSet onodes {Nodes = (Attempts, Duration);};
+NodeSet Observables {Nodes = (Attempts, Duration);};
+};

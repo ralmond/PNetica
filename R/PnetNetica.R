@@ -47,7 +47,7 @@ MakePnet.NeticaBN <-function (sess,name,data) {
     net <- as.Pnet(CreateNetwork(name,sess))
   }
   if (!is.null(data$Hub))
-    PnetHub(net) <- as.character(data$Hub)
+    PnetHub(net) <- trimws(as.character(data$Hub))
   if (!is.null(data$Title))
     PnetTitle(net) <- as.character(data$Title)
   if (!is.null(data$Pathname))
@@ -226,7 +226,7 @@ setMethod("Pnode","NeticaNode",
   PnodeQ(node) <- Q
   PnodeLinkScale(node) <- linkScale
   PnodePriorWeight(node) <- priorWeight
-  node
+  as.Pnode(node)
 })
 
 
@@ -323,9 +323,9 @@ MakePnode.NeticaNode <- function (net, name, data) {
   cont <- isTRUE(as.logical(data$Continuous[1]))
   if (is.null(node)) {
     if (cont)
-      node <- NewContinuousNodes(net,name)
+      node <- NewContinuousNode(net,name)
     else
-      node <- NewDiscreteNode(net,name,as.character(data$StateName))
+      node <- NewDiscreteNode(net,name,trimws(as.character(data$StateName)))
   }
   node <- as.Pnode(node)
   if (!is.null(data$NodeTitle))
@@ -338,10 +338,11 @@ MakePnode.NeticaNode <- function (net, name, data) {
   }
   if (cont) {
     ## Need to set values to create states.
-    PnetStateValues(node) <-c(as.numeric(data$StateValue),
-                              max(as.numeric(data$UpperBound),na.rm=TRUE))
+    valmat <- cbind(as.numeric(data$LowerBound),
+                    as.numeric(data$UpperBound))
+    PnodeStateBounds(node) <-valmat
   }
-  PnodeStates(node) <- as.character(data$StateName)
+  PnodeStates(node) <- trimws(as.character(data$StateName))
   if (!is.null(data$StateTitle))
     PnodeStateTitles(node) <- as.character(data$StateTitle)
   if (!is.null(data$StateDescription))

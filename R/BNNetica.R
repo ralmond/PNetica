@@ -70,11 +70,44 @@ setMethod("PnodeStateDescriptions<-","NeticaNode", function (node,value) {
 })
 
 setMethod("PnodeStateValues","NeticaNode", function (node)
-  NodeLevels(node)
-  )
+  if (is.continuous(node)) {
+    apply(PnodeStateBounds(node),1,median)
+  } else {
+    NodeLevels(node)
+  })
 
 setMethod("PnodeStateValues<-","NeticaNode", function (node,value) {
+  if (is.continuous(node))
+    stop("This function only available for discrete nodes, but ",
+         PnodeName(node), " is continuous. Use PnodeStateBounds instead.")
   NodeLevels(node) <- value
+  invisible(node)
+})
+
+setMethod("PnodeStateBounds","NeticaNode", function (node)
+  if (is.continuous(node)) {
+    vals <- NodeLevels(node)
+    k <- length(vals) -1L
+    bnds <- matrix(c(vals[1L:k],vals[2L:(k+1L)]),k,2L,
+                   dimnames=list(PnodeStates(node),
+                                 c("LowerBound","UpperBound")))
+
+    bnds
+  } else {
+    stop("This function only available for continuous nodes, but ",
+         PnodeName(node), " is discrete. Use PnodeStateValues instead.")
+  })
+
+setMethod("PnodeStateBounds<-","NeticaNode", function (node,value) {
+  if (!is.continuous(node))
+    stop("This function only available for continuous nodes, but ",
+         PnodeName(node), " is discrete. Use PnodeStateValues instead.")
+  k <- nrow(value)
+  if (!all(abs(value[2L:k,1L]-value[1L:(k-1L),2L])<.0001)) {
+    stop("Upper and lower bounds don't match for node ",PnodeName(node))
+  }
+  bnds <-c(value[1L:k,1L],value[k,2L])
+  NodeLevels(node) <- bnds
   invisible(node)
 })
 
@@ -89,6 +122,7 @@ setMethod("PnodeParents","NeticaNode", function (node)
   NodeParents(node)
 )
 setMethod("PnodeParents<-","NeticaNode", function (node,value) {
+  if (is.null(value)) value <- list()
   NodeParents(node) <- value
   invisible(node)
 })
