@@ -88,10 +88,15 @@ setMethod("PnodeStateBounds","NeticaNode", function (node)
   if (is.continuous(node)) {
     vals <- NodeLevels(node)
     k <- length(vals) -1L
-    bnds <- matrix(c(vals[1L:k],vals[2L:(k+1L)]),k,2L,
-                   dimnames=list(PnodeStates(node),
-                                 c("LowerBound","UpperBound")))
-
+    if (k < 1L) {
+      bnds <- matrix(vals,0,2,
+                     dimnames=list(character(),
+                                   c("LowerBound","UpperBound")))
+    } else {
+      bnds <- matrix(c(vals[1L:k],vals[2L:(k+1L)]),k,2L,
+                     dimnames=list(PnodeStates(node),
+                                   c("LowerBound","UpperBound")))
+    }
     bnds
   } else {
     stop("This function only available for continuous nodes, but ",
@@ -108,6 +113,10 @@ setMethod("PnodeStateBounds<-","NeticaNode", function (node,value) {
   }
   bnds <-c(value[1L:k,1L],value[k,2L])
   NodeLevels(node) <- bnds
+  if (!is.null(rownames(value)) &&
+      (length(PnodeStates(node)!=k) || all(nchar(PnodeStates(node))==0L))) {
+    PnodeStates(node) <- rownames(value)
+  }
   invisible(node)
 })
 
