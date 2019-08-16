@@ -1,6 +1,6 @@
 2019-07-29  Rusell Almond  <ralmond@Cherry>
 
-	* R/Warehouse.R: Added trimws to key columsn.
+	* R/Warehouse.R (WarehouseManifest<-): Added trimws to key columsn.
 
 	* R/PnetNetica.R (MakePnet.NeticaBN): Added some trimws.
 	(MakePnode.NeticaNode): Added some trimws.

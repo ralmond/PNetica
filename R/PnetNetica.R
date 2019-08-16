@@ -198,7 +198,7 @@ setMethod("PnodePriorWeight<-","NeticaNode", function (node,value) {
 })
 
 setMethod("PnodeParentTvals","NeticaNode", function (node) {
-  lapply(NodeParents(node),NodeLevels)
+  lapply(NodeParents(node),PnodeStateValues)
 })
 
 setMethod("Pnode","NeticaNode",

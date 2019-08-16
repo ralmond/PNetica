@@ -11,7 +11,7 @@ setMethod(WarehouseManifest,"BNWarehouse",
           function(warehouse) {warehouse@manifest})
 setMethod("WarehouseManifest<-",c("BNWarehouse","data.frame"),
           function(warehouse,value) {
-            for (ky in key) {
+            for (ky in warehouse@key) {
               value[[ky]] <- trimws(value[[ky]])
             }
             warehouse@manifest<-value; warehouse})
@@ -106,7 +106,7 @@ setMethod(WarehouseManifest,"NNWarehouse",
           function(warehouse) {warehouse@manifest})
 setMethod("WarehouseManifest<-",c("NNWarehouse","data.frame"),
           function(warehouse,value) {
-            for (ky in key) {
+            for (ky in warehouse@key) {
               value[[ky]] <- trimws(value[[ky]])
             }
             warehouse@manifest<-value;
