@@ -1,11 +1,12 @@
 ### Netica specific implementations for the generics.
 
 setMethod("PnodeName","NeticaNode", function (node)
-  NodeName(node)
+  NodeUserField(node,"Truename")
   )
 
 setMethod("PnodeName<-","NeticaNode", function (node,value) {
-  NodeName(node) <- value
+  NodeUserField(node,"Truename") <- value
+  NodeName(node) <- as.IDname(value)
   invisible(node)
 })
 
@@ -108,10 +109,10 @@ setMethod("PnodeStateBounds<-","NeticaNode", function (node,value) {
     stop("This function only available for continuous nodes, but ",
          PnodeName(node), " is discrete. Use PnodeStateValues instead.")
   k <- nrow(value)
-  if (!all(abs(value[2L:k,1L]-value[1L:(k-1L),2L])<.0001)) {
+  if (!all(abs(value[1L:(k-1L),1L]-value[2L:k,2L])<.0001)) {
     stop("Upper and lower bounds don't match for node ",PnodeName(node))
   }
-  bnds <-c(value[1L:k,1L],value[k,2L])
+  bnds <-c(value[1L,2L],value[1L:k,1L])
   NodeLevels(node) <- bnds
   if (!is.null(rownames(value)) &&
       (length(PnodeStates(node)!=k) || all(nchar(PnodeStates(node))==0L))) {
@@ -144,7 +145,7 @@ setMethod("PnodeParentNames","NeticaNode", function (node) {
     character()
   } else {
     parents <- NodeParents(node)
-    pnames <- sapply(parents,NodeName)
+    pnames <- sapply(parents,PnodeName)
     stubsp <- sapply(parents,function(nd) NodeKind(nd)=="Stub")
     if (any(stubsp))
       pnames[stubsp] <- names(parents)[stubsp]
@@ -159,11 +160,13 @@ setMethod("PnodeNumParents","NeticaNode", function (node)
 #### Net Functions
 
 setMethod("PnetName","NeticaBN", function (net){
-  NetworkName(net)
+  ##NetworkName(net)
+  NetworkUserField(net,"Truename")
 })
 
 setMethod("PnetName<-","NeticaBN", function (net, value) {
-  NetworkName(net) <- value
+  NetworkUserField(net,"Truename")
+  NetworkName(net) <- as.IDname(value)
   invisible(net)
 })
 
@@ -215,9 +218,9 @@ setMethod("PnetDescription<-","NeticaBN", function (net, value) {
 })
 
 
-setMethod("PnetFindNode","NeticaBN", function(net,name)
-  NetworkFindNode(net,name))
-
+setMethod("PnetFindNode","NeticaBN", function(net,name) {
+  NetworkFindNode(net,as.IDname(name))
+})
 
 setMethod("PnetSerialize","NeticaBN",
           function (net) {

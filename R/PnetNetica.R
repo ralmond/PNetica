@@ -44,7 +44,8 @@ MakePnet.NeticaBN <-function (sess,name,data) {
     net <-as.Pnet(ReadNetworks(pname,sess))
     PnetName(net) <- name
   } else {
-    net <- as.Pnet(CreateNetwork(name,sess))
+    net <- as.Pnet(CreateNetwork(as.IDname(name),sess))
+    NetworkUserField(net,"Truename") <- name
   }
   if (!is.null(data$Hub))
     PnetHub(net) <- trimws(as.character(data$Hub))
@@ -117,6 +118,8 @@ setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
 
 setMethod("as.Pnode","NeticaNode",function(x) {
   NodeSets(x) <- union("pnodes",NodeSets(x))
+  if (is.na(NodeUserField(x,"Truename")))
+    NodeUserField(x,"Truename") <- NodeName(x)
   x})
 setMethod("is.Pnode","NeticaNode",function(x)
   "pnodes" %in% NodeSets(x)
@@ -233,11 +236,16 @@ setMethod("Pnode","NeticaNode",
 ### Build CPTs from parameters
 
 setMethod("BuildTable","NeticaNode", function (node) {
-  node[] <- calcDPCFrame(ParentStates(node),NodeStates(node),
+  frame <- calcDPCFrame(ParentStates(node),NodeStates(node),
                           PnodeLnAlphas(node), PnodeBetas(node),
                           PnodeRules(node),PnodeLink(node),
                           PnodeLinkScale(node),PnodeQ(node),
-                          PnodeParentTvals(node))
+                        PnodeParentTvals(node))
+  if (any(is.na(frame))) {
+    flog.warn("Could not calculate CPT for node %s.",PnodeName(node))
+  } else {
+    node[] <- frame
+  }
   NodeExperience(node) <- GetPriorWeight(node)
   invisible(node)
 })
@@ -323,9 +331,11 @@ MakePnode.NeticaNode <- function (net, name, data) {
   cont <- isTRUE(as.logical(data$Continuous[1]))
   if (is.null(node)) {
     if (cont)
-      node <- NewContinuousNode(net,name)
+      node <- NewContinuousNode(net,as.IDname(name))
     else
-      node <- NewDiscreteNode(net,name,trimws(as.character(data$StateName)))
+      node <- NewDiscreteNode(net,as.IDname(name),
+                              trimws(as.character(data$StateName)))
+    NodeUserField(node,"Truename") <- name
   }
   node <- as.Pnode(node)
   if (!is.null(data$NodeTitle))
