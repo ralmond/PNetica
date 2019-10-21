@@ -2,6 +2,7 @@
 import(Peanut)
 import(RNetica)
 import(CPTtools)
+import(futile.logger)
 
 exportMethods(is.Pnet,as.Pnet,PnetPriorWeight,
               "PnetPriorWeight<-", PnetPnodes,

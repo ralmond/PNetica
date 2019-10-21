@@ -33,7 +33,7 @@ setMethod(WarehouseFetch,"BNWarehouse",
           function(warehouse,name) {
             if (length(name) != 1L)
               stop("Expected name ",name," to be unique.")
-            warehouse@session$nets[[name]]
+            warehouse@session$nets[[as.IDname(name)]]
           })
 
 setMethod("WarehouseSupply", c("ANY"), function(warehouse,name) {
@@ -41,7 +41,7 @@ setMethod("WarehouseSupply", c("ANY"), function(warehouse,name) {
   if (is.null(val))
     val <- WarehouseMake(warehouse,name)
   if (!is.active(val)) {
-    warehouse@session$nets[[name]] <- NULL
+    warehouse@session$nets[[as.IDname(name)]] <- NULL
     val <- WarehouseMake(warehouse,name)
   }
   val
@@ -53,9 +53,9 @@ setMethod(WarehouseMake,"BNWarehouse",
             if (length(name) != 1L)
               stop("Expected name to be unique.")
             sess <- warehouse@session
-            if (!is.null(sess$nets[[name]])) {
+            if (!is.null(sess$nets[[as.IDname(name)]])) {
               warning("Deleting old network ",name)
-              DeleteNetwork(sess$nets[[name]])
+              DeleteNetwork(sess$nets[[as.IDname(name)]])
             }
             dat <- WarehouseData(warehouse,name)
             MakePnet.NeticaBN(sess,name,dat)
@@ -82,7 +82,7 @@ setMethod(is.PnetWarehouse,"BNWarehouse",
 setMethod("WarehouseUnpack", "BNWarehouse",
           function(warehouse,serial) {
             unserializePnet(warehouse@session,serial)
-            warehouse@session$nets[[serial$name]]
+            warehouse@session$nets[[as.IDname(serial$name)]]
           })
 
 
@@ -130,20 +130,20 @@ setMethod(WarehouseFetch,"NNWarehouse",
             if (length(name) != 2L)
               stop("Expected key to look like (net, node).")
             sess <- warehouse@session
-            sess$nets[[name[1]]]$nodes[[name[2]]]
+            sess$nets[[as.IDname(name[1])]]$nodes[[as.IDname(name[2])]]
           })
 
 setMethod(WarehouseMake,"NNWarehouse",
           function(warehouse,name) {
             if (length(name) != 2L)
               stop("Expected name to be of the form (net,node).")
-            net <- warehouse@session$nets[[name[1]]]
+            net <- warehouse@session$nets[[as.IDname(name[1])]]
             if (is.null(net)) {
               stop("Network ",name[1]," does not exist.")
             }
-            if (!is.null(net$nodes[[name[2]]])) {
+            if (!is.null(net$nodes[[as.IDname(name[2])]])) {
               warning("Deleting old node ",paste(name,collapse="::"))
-              DeleteNodes(net$nodes[[name[2]]])
+              DeleteNodes(net$nodes[[as.IDname(name[2])]])
             }
             dat <- WarehouseData(warehouse,name)
             MakePnode.NeticaNode(net,name[2],dat)
