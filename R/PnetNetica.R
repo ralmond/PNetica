@@ -40,20 +40,20 @@ setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
 
 MakePnet.NeticaBN <-function (sess,name,data) {
   pname <- as.character(data$Pathname)
-  if (!is.null(pname) && file.exists(pname)) {
+  if (!is.null(pname) && nchar(pname) > 0L && file.exists(pname)) {
     net <-as.Pnet(ReadNetworks(pname,sess))
     PnetName(net) <- name
   } else {
     net <- as.Pnet(CreateNetwork(as.IDname(name),sess))
     NetworkUserField(net,"Truename") <- name
   }
-  if (!is.null(data$Hub))
+  if (!is.null(data$Hub) && !is.na(data$Hub))
     PnetHub(net) <- trimws(as.character(data$Hub))
-  if (!is.null(data$Title))
+  if (!is.null(data$Title) && !is.na(data$Title))
     PnetTitle(net) <- as.character(data$Title)
-  if (!is.null(data$Pathname))
+  if (!is.null(data$Pathname) && !is.na(data$Pathname))
     PnetPathname(net) <- as.character(data$Pathname)
-  if (!is.null(data$Description))
+  if (!is.null(data$Description) && !is.na(data$Description))
     PnetDescription(net) <- as.character(data$Description)
   net
 }
@@ -338,11 +338,12 @@ MakePnode.NeticaNode <- function (net, name, data) {
     NodeUserField(node,"Truename") <- name
   }
   node <- as.Pnode(node)
-  if (!is.null(data$NodeTitle))
+  if (!is.null(data$NodeTitle) && !is.na(data$NodeTitle))
     PnodeTitle(node) <- as.character(data$NodeTitle[1])
-  if (!is.null(data$NodeDescription))
+  if (!is.null(data$NodeDescription) &&
+      !is.na(data$NodeDescription))
     PnodeDescription(node) <- as.character(data$NodeDescription[1])
-  if (!is.null(data$NodeLabels)) {
+  if (!is.null(data$NodeLabels) && !is.na(data$NodeLabels)) {
     labels <- strsplit(data$NodeLabels[1],",")[[1]]
     PnodeLabels(node) <- as.character(labels)
   }
@@ -350,13 +351,23 @@ MakePnode.NeticaNode <- function (net, name, data) {
     ## Need to set values to create states.
     valmat <- cbind(as.numeric(data$LowerBound),
                     as.numeric(data$UpperBound))
-    PnodeStateBounds(node) <-valmat
+    if (any(is.na(valmat))) {
+      warning("NAs in states bounds for node",name)
+    } else {
+      PnodeStateBounds(node) <-valmat
+    }
   }
   PnodeStates(node) <- trimws(as.character(data$StateName))
-  if (!is.null(data$StateTitle))
-    PnodeStateTitles(node) <- as.character(data$StateTitle)
-  if (!is.null(data$StateDescription))
-    PnodeStateDescriptions(node) <- as.character(data$StateDescription)
+  if (!is.null(data$StateTitle)) {
+    titles <- as.character(data$StateTitle)
+    if (all(!is.na(titles)))
+      PnodeStateTitles(node) <- titles
+  }
+  if (!is.null(data$StateDescription)) {
+    desc <- as.character(data$StateDescription)
+    if (all(!is.na(desc)))
+      PnodeStateDescriptions(node) <- desc
+  }
   if (!cont && !is.null(data$StateValue) && !any(is.na(data$StateValue)))
     PnodeStateValues(node) <- as.numeric(data$StateValue)
 
