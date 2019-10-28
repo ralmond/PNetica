@@ -42,12 +42,14 @@ exportMethods(PnetFindNode)
 export(MakePnet.NeticaBN,MakePnode.NeticaNode) ## Not actually S3 Methods
 export(BNWarehouse,NNWarehouse)
 exportClasses(BNWarehouse,NNWarehouse)
+export(WarehouseDirectory,"WarehouseDirectory<-")
 exportMethods(ClearWarehouse,
               WarehouseManifest,"WarehouseManifest<-",
        WarehouseData,WarehouseFetch,WarehouseSupply,
        WarehouseMake,WarehouseFree, WarehouseUnpack,
        WarehouseInventory,
-       is.PnodeWarehouse,is.PnetWarehouse)
+       is.PnodeWarehouse,is.PnetWarehouse,
+       WarehouseDirectory,"WarehouseDirectory<-")
 ##export(Free,Save,Reload,Delete)     #Warehouse protocol
 ##exportMethods(Free,Save,Reload,Delete)     #Warehouse protocol
 

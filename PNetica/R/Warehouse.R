@@ -1,7 +1,8 @@
 BNWarehouse <- setClass("BNWarehouse",
                        slots=c(manifest="data.frame",
-                                session="NeticaSession",
-                                key="character")
+                               session="NeticaSession",
+                               address="character",
+                               key="character")
                        )
 setMethod(ClearWarehouse,"BNWarehouse",
           function(warehouse) {
@@ -14,7 +15,24 @@ setMethod("WarehouseManifest<-",c("BNWarehouse","data.frame"),
             for (ky in warehouse@key) {
               value[[ky]] <- trimws(value[[ky]])
             }
-            warehouse@manifest<-value; warehouse})
+            warehouse@manifest<- value; warehouse})
+
+
+setGeneric("WarehouseDirectory",
+           function (warehouse) standardGeneric("WarehouseDirectory"))
+setMethod("WarehouseDirectory","BNWarehouse",
+          function (warehouse) {
+            warehouse@address
+          })
+setGeneric("WarehouseDirectory<-",
+           function (warehouse, value) standardGeneric("WarehouseDirectory<-"))
+setMethod("WarehouseDirectory<-","BNWarehouse",
+          function (warehouse,value) {
+            warehouse@address <- value
+            warehouse
+          })
+
+
 
 setMethod(WarehouseData,"BNWarehouse",
           function(warehouse,name) {
@@ -26,7 +44,12 @@ setMethod(WarehouseData,"BNWarehouse",
             for (i in 1:length(key)) {
               whch <- whch & manifest[[key[i]]] == name[i]
             }
-            manifest[whch,,drop=FALSE]
+            dat <- manifest[whch,,drop=FALSE]
+            ## Add directory information to pathnames.
+            dir <- do.call("file.path",as.list(warehouse@address))
+            if (length(dir) > 0L)
+              dat$Pathname <- file.path(dir,dat$Pathname)
+            dat
           })
 
 setMethod(WarehouseFetch,"BNWarehouse",
@@ -52,12 +75,16 @@ setMethod(WarehouseMake,"BNWarehouse",
           function(warehouse,name) {
             if (length(name) != 1L)
               stop("Expected name to be unique.")
+            dat <- WarehouseData(warehouse,name)
+            if (nrow(dat) <1L)
+              stop("Cannot find manifest data for network ",name)
+            if (nrow(dat) >2L)
+              warning("Multiple manifest data row for network ",name)
             sess <- warehouse@session
             if (!is.null(sess$nets[[as.IDname(name)]])) {
               warning("Deleting old network ",name)
               DeleteNetwork(sess$nets[[as.IDname(name)]])
             }
-            dat <- WarehouseData(warehouse,name)
             MakePnet.NeticaBN(sess,name,dat)
           })
 

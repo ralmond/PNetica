@@ -109,10 +109,23 @@ setMethod("PnodeStateBounds<-","NeticaNode", function (node,value) {
     stop("This function only available for continuous nodes, but ",
          PnodeName(node), " is discrete. Use PnodeStateValues instead.")
   k <- nrow(value)
-  if (!all(abs(value[1L:(k-1L),1L]-value[2L:k,2L])<.0001)) {
-    stop("Upper and lower bounds don't match for node ",PnodeName(node))
+  mon1 <- isMonotonic(value[,1L])
+  direct <- attr(mon1,"direction")
+  mon2 <- isMonotonic(value[,2L])
+  if (!mon1 || !mon2 || direct!=attr(mon2,"direction")) {
+    stop ("State bounds for node",PnodeName(node),"are not monotonic.")
   }
-  bnds <-c(value[1L,2L],value[1L:k,1L])
+  if (direct>0) {                       #Increasing
+    if (!all(abs(value[2L:k,1L]-value[1L:(k-1L),2L])<.0001)) {
+      stop("Upper and lower bounds don't match for node ",PnodeName(node))
+    }
+    bnds <-c(value[1L:k,1L],value[k,2L])
+  } else {                              #Decreasing
+    if (!all(abs(value[1L:(k-1L),1L]-value[2L:k,2L])<.0001)) {
+      stop("Upper and lower bounds don't match for node ",PnodeName(node))
+    }
+    bnds <-c(value[1L,2L],value[1L:k,1L])
+  }
   NodeLevels(node) <- bnds
   if (!is.null(rownames(value)) &&
       (length(PnodeStates(node)!=k) || all(nchar(PnodeStates(node))==0L))) {
