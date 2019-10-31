@@ -85,7 +85,9 @@ Delete.NeticaBN <- function (obj) {
 ## deleted later
 setMethod("PnetMakeStubNodes","NeticaBN", function (net,nodes) {
   if (!is.list(nodes)) nodes <- list(nodes)
-  CopyNodes(nodes,newnet=net)
+  out <- CopyNodes(nodes,newnet=net)
+  if (!is.list(out)) out <- list(out)
+  out
 })
 
 ## Deleting the node makes it a stub.
