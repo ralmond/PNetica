@@ -116,12 +116,12 @@ setMethod("PnodeStateBounds<-","NeticaNode", function (node,value) {
     stop ("State bounds for node",PnodeName(node),"are not monotonic.")
   }
   if (direct>0) {                       #Increasing
-    if (!all(abs(value[2L:k,1L]-value[1L:(k-1L),2L])<.0001)) {
+    if (!all(abs(value[2L:k,1L]-value[1L:(k-1L),2L])<.002)) {
       stop("Upper and lower bounds don't match for node ",PnodeName(node))
     }
     bnds <-c(value[1L:k,1L],value[k,2L])
   } else {                              #Decreasing
-    if (!all(abs(value[1L:(k-1L),1L]-value[2L:k,2L])<.0001)) {
+    if (!all(abs(value[1L:(k-1L),1L]-value[2L:k,2L])<.002)) {
       stop("Upper and lower bounds don't match for node ",PnodeName(node))
     }
     bnds <-c(value[1L,2L],value[1L:k,1L])
