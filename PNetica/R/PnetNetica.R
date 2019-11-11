@@ -238,6 +238,12 @@ setMethod("Pnode","NeticaNode",
 ### Build CPTs from parameters
 
 setMethod("BuildTable","NeticaNode", function (node) {
+  if (length(PnodeBetas(node)) == 0L) {
+    flog.warn("Beta vector for node %s is empty.",PnodeName(node))
+  }
+  if (length(PnodeAlphas(node)) == 0L) {
+    flog.warn("Alpha vector for node %s is empty.",PnodeName(node))
+  }
   frame <- calcDPCFrame(ParentStates(node),NodeStates(node),
                           PnodeLnAlphas(node), PnodeBetas(node),
                           PnodeRules(node),PnodeLink(node),
