@@ -1,8 +1,9 @@
-#import(methods)
+import(methods)
 import(Peanut)
 import(RNetica)
 import(CPTtools)
 import(futile.logger)
+importFrom("stats", "median")
 
 exportMethods(is.Pnet,as.Pnet,PnetPriorWeight,
               "PnetPriorWeight<-", PnetPnodes,
