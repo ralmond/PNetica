@@ -96,12 +96,12 @@ setMethod(WarehouseFree,"BNWarehouse",
 
 setMethod(WarehouseInventory,"BNWarehouse",
           function(warehouse) {
-            allKeys <- warehouse@manifest[,warehous@key,drop=FALSE]
-            built <- sapply(1L:nrow(allkeys),
+            allKeys <- warehouse@manifest[,warehouse@key,drop=FALSE]
+            built <- sapply(1L:nrow(allKeys),
                             function (k)
                               !is.null(WarehouseFetch(warehouse,allKeys[k,]))
                             )
-            allkeys[built, ,drop=FALSE]})
+            allKeys[built, ,drop=FALSE]})
 
 setMethod(is.PnetWarehouse,"BNWarehouse",
           function(obj) {TRUE})
@@ -187,9 +187,9 @@ setMethod(is.PnodeWarehouse,"NNWarehouse",
 
 setMethod(WarehouseInventory,"NNWarehouse",
           function(warehouse) {
-            allKeys <- warehouse@manifest[,warehous@key,drop=FALSE]
-            built <- sapply(1L:nrow(allkeys),
+            allKeys <- warehouse@manifest[,warehouse@key,drop=FALSE]
+            built <- sapply(1L:nrow(allKeys),
                             function (k)
                               !is.null(WarehouseFetch(warehouse,allKeys[k,]))
                             )
-            allkeys[built, ,drop=FALSE]})
+            allKeys[built, ,drop=FALSE]})
