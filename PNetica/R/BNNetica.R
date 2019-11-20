@@ -1,8 +1,12 @@
 ### Netica specific implementations for the generics.
 
-setMethod("PnodeName","NeticaNode", function (node)
-  NodeUserField(node,"Truename")
-  )
+setMethod("PnodeName","NeticaNode", function (node) {
+    nme <- NodeUserField(node,"Truename")
+    if (is.null(nme) || is.na(nme)) {
+        nme <- NodeName(node)
+    }
+    nme
+})
 
 setMethod("PnodeName<-","NeticaNode", function (node,value) {
   NodeUserField(node,"Truename") <- value
@@ -173,8 +177,11 @@ setMethod("PnodeNumParents","NeticaNode", function (node)
 #### Net Functions
 
 setMethod("PnetName","NeticaBN", function (net){
-  ##NetworkName(net)
-  NetworkUserField(net,"Truename")
+    nme <- NetworkUserField(net,"Truename")
+    if (is.null(nme) || is.na(nme)) {
+        nme <- NetworkName(net)
+    }
+    nme
 })
 
 setMethod("PnetName<-","NeticaBN", function (net, value) {
