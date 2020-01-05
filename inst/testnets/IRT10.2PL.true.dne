@@ -2,7 +2,7 @@
 
 // File created by an unlicensed user using Netica 5.04 on 06/25/2015 at 01:46:44 PM.
 
-bnet IRT10_2PL {
+bnet IRT10_2PL_true {
 autoupdate = FALSE;
 whenchanged = 1435254363;
 user U1 {

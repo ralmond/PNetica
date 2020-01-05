@@ -4,6 +4,7 @@ BNWarehouse <- setClass("BNWarehouse",
                                address="character",
                                key="character")
                        )
+setIs("BNWarehouse","PnetWarehouse")
 setMethod(ClearWarehouse,"BNWarehouse",
           function(warehouse) {
             warning("To clear warehouse, stop and restart session.")
@@ -122,6 +123,7 @@ NNWarehouse <- setClass("NNWarehouse",
                                key="character")
                        )
 
+setIs("NNWarehouse","PnodeWarehouse")
 
 setMethod(ClearWarehouse,"NNWarehouse",
           function(warehouse) {
