@@ -174,6 +174,74 @@ setMethod("PnodeNumParents","NeticaNode", function (node)
   length(NodeParents(node)))
 
 
+setMethod("PnodeEvidence","NeticaNode",
+          function(node) {
+            if (is.continuous(node)) {
+              res <- NodeValue(node)
+            } else {
+              res <- NodeFinding(node)
+              if (res=="@NO FINDING") {
+                res <- NA
+              } else if (res=="@LIKELIHOOD") {
+                res <- NodeLikelihood(node)
+              } else if (res=="@NEGATIVE FINDINGS") {
+                res <- NodeLikelihood(node)
+              }
+            }
+            res
+          })
+
+
+setMethod("PnodeEvidence<-",c("NeticaNode","numeric"),
+          function (node,value) {
+            if (length(value) == 1L) {
+              NodeValue(node) <- value
+            } else if (length(value)==PnodeNumStates(node)) {
+              NodeLikelihood(node) <- value
+            }
+            invisible(node)
+          })
+
+setOldClass("difftime")
+setMethod("PnodeEvidence<-",c("NeticaNode","difftime"),
+          function (node,value) {
+            units(value) <- "secs"
+            NodeValue(node) <- as.numeric(value)
+          })
+setMethod("PnodeEvidence<-",c("NeticaNode","character"),
+          function (node,value) {
+            ov1 <- value
+            sts <- NodeStates(node)
+            if (!(ov1 %in% sts)) {
+              ov1 <- sts[toupper(sts)==toupper(ov1)]
+            }
+            if (length(ov1) > 0L) {
+              flog.trace("Setting observable %s to %s.",NodeName(node),ov1)
+              NodeFinding(node) <- ov1
+            } else {
+              flog.warn("Observable %s has unknown value %s, skipping.",
+                        NodeName(node), ov1)
+            }
+            invisible(node)
+          })
+setMethod("PnodeEvidence<-",c("NeticaNode","factor"),
+          function (node,value) {
+            PnodeEvidence(node) <- as.character(value)
+            })
+setMethod("PnodeEvidence<-",c("NeticaNode","NULL"),
+          function (node,value) {
+            RetractNodeFinding(node)
+            })
+
+setMethod("PnodeEvidence<-",c("NeticaNode","ANY"),
+          function(node,value) {
+            warning("Don't know how to set ",NodeName(node)," to ",
+                 as.character(value),".  Skipping.")
+          })
+
+
+
+##############################################################
 #### Net Functions
 
 setMethod("PnetName","NeticaBN", function (net){
@@ -265,3 +333,4 @@ setMethod("unserializePnet","NeticaSession",
             ReadNetworks(tmpfile,factory)
           })
 
+setMethod("PnetCompile","NeticaBN",function(net) CompileNetwork(net))

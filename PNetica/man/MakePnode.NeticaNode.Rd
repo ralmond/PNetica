@@ -2,7 +2,9 @@
 \alias{MakePnode.NeticaNode}
 \title{Makes a Pnode which is also a Netica Node}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+
+  This does the actual work of making a node from a warehose manifest.
+
 }
 \usage{
 MakePnode.NeticaNode(net, name, data)

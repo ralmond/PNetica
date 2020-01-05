@@ -31,13 +31,19 @@ exportMethods(PnodeName,"PnodeName<-",
               "PnodeStateValues<-",PnodeParents,
               PnodeStateBounds, "PnodeStateBounds<-",
               "PnodeParents<-", isPnodeContinuous,
-              PnodeParentNames,PnodeNumParents) #NeticaNode
+              PnodeParentNames,PnodeNumParents,
+              PnodeEvidence,"PnodeEvidence<-",
+              PnodePriorWeight, "PnodePriorWeight<-",
+              PnodePostWeight,
+              PnodeProbs, "PnodeProbs<-"
+              ) #NeticaNode
 
 exportMethods(PnetName,"PnetName<-",
               PnetTitle,"PnetTitle<-",
               PnetDescription,"PnetDescription<-",
               PnetPathname,"PnetPathname<-",
-              PnetHub,"PnetHub<-") #NeticaBN
+              PnetHub,"PnetHub<-",
+              PnetCompile) #NeticaBN
 
 exportMethods(PnetFindNode)
 export(MakePnet.NeticaBN,MakePnode.NeticaNode) ## Not actually S3 Methods

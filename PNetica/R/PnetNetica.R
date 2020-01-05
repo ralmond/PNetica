@@ -8,7 +8,10 @@
 ## A field called "priorWeight" which gives the default prior weight
 ## to use.
 
-
+## This is a total hack, but R won't let me modify Peanut after it is
+## locked and loaded.
+setClassUnion("net.bridge","NeticaBN")
+setIs("net.bridge","Pnet")
 setMethod("as.Pnet","NeticaBN",function(x) x)
 setMethod("is.Pnet","NeticaBN",function(x) TRUE)
 
@@ -101,7 +104,7 @@ setMethod("PnetAdjoin","NeticaBN", function (hub, spoke) {
 
 setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
   # Bug in RN_AbsorbNodes
-  # AbsorbNodes(NetworkNodesInSet(motif,paste("Spoke",NetworkName(spoke),sep="_")))
+  AbsorbNodes(NetworkNodesInSet(motif,paste("Spoke",NetworkName(spoke),sep="_")))
 })
 
 
@@ -117,6 +120,8 @@ setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
 ## priorWeight -- a numeric value or a vector of numeric values for
 ## each row of the CPT.   Inherits from the net if not available.
 
+setClassUnion("node.bridge","NeticaNode")
+setIs("node.bridge","Pnode")
 
 setMethod("as.Pnode","NeticaNode",function(x) {
   NodeSets(x) <- union("pnodes",NodeSets(x))
@@ -201,6 +206,20 @@ setMethod("PnodePriorWeight<-","NeticaNode", function (node,value) {
   NodeUserObj(node,"priorWeight") <- value
   node
 })
+
+setMethod("PnodePostWeight","NeticaNode", function (node) {
+  NodeExperience(node)
+})
+
+setMethod("PnodeProbs","NeticaNode", function (node) {
+  NodeProbs(node)
+})
+
+setMethod("PnodeProbs<-","NeticaNode", function (node,value) {
+  NodeProbs(node) <- value
+  node
+})
+
 
 setMethod("PnodeParentTvals","NeticaNode", function (node) {
   lapply(NodeParents(node),PnodeStateValues)

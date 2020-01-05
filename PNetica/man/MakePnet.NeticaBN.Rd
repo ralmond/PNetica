@@ -2,7 +2,11 @@
 \alias{MakePnet.NeticaBN}
 \title{Creates a NeticaBN object which is also a Pnet}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+
+  This does the actual work of making a Pnet from the manifest
+  description.
+  
+
 }
 \usage{
 MakePnet.NeticaBN(sess, name, data)
