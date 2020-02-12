@@ -1,3 +1,7 @@
+2020-02-12  Rusell Almond  <ralmond@Cherry>
+
+	* R/Warehouse.R: WarehouseFree now actually deletes the network.
+
 2019-07-29  Rusell Almond  <ralmond@Cherry>
 
 	* R/Warehouse.R (WarehouseManifest<-): Added trimws to key columsn.
