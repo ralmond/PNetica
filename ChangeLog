@@ -1,6 +1,8 @@
 2020-02-12  Rusell Almond  <ralmond@Cherry>
 
 	* R/Warehouse.R: WarehouseFree now actually deletes the network.
+	ClearWarehouse also deletes all the nets.
+	
 
 2019-07-29  Rusell Almond  <ralmond@Cherry>
 

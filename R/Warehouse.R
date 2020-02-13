@@ -5,10 +5,19 @@ BNWarehouse <- setClass("BNWarehouse",
                                key="character")
                        )
 setIs("BNWarehouse","PnetWarehouse")
+
 setMethod(ClearWarehouse,"BNWarehouse",
           function(warehouse) {
-            warning("To clear warehouse, stop and restart session.")
+            objs <- objects(warehouse@session$nets)
+            for (obj in objs) {
+              net <- warehouse@session$nets[[obj]]
+              if (is.NeticaBN(net) && is.active(net)) {
+                flog.trace("Clearing Network %s",obj)
+                DeleteNetwork(net)
+              }
+            }
           })
+
 setMethod(WarehouseManifest,"BNWarehouse",
           function(warehouse) {warehouse@manifest})
 setMethod("WarehouseManifest<-",c("BNWarehouse","data.frame"),
@@ -92,7 +101,12 @@ setMethod(WarehouseMake,"BNWarehouse",
 
 setMethod(WarehouseFree,"BNWarehouse",
           function(warehouse,name) {
-            warning("To free network, call DeleteNetworks.")
+            net <- WarehouseFetch(warehouse,name)
+            if (is.null(net)) {
+              flog.trace("Network for name %s not found, skipping.",name)
+            } else {
+              DeleteNetwork(net)
+            }
           })
 
 setMethod(WarehouseInventory,"BNWarehouse",
