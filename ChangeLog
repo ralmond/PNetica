@@ -1,3 +1,8 @@
+2020-03-08  Russell Almond  <ralmond@Cherry>
+
+	* R/Warehouse.R
+	(WarehouseCopy,is.legal.name,as.legal.name,is.valid): Added.
+
 2020-02-12  Rusell Almond  <ralmond@Cherry>
 
 	* R/Warehouse.R: WarehouseFree now actually deletes the network.

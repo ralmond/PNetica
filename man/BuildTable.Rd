@@ -61,7 +61,8 @@
   \code{\link[Peanut]{PnodeLinkScale}},\code{\link[Peanut]{GetPriorWeight}},
   \code{\link[CPTtools]{calcDPCTable}},
   \code{\link[RNetica]{NodeExperience}(node)}, 
-  \code{\link[RNetica]{[.NeticaNode}} % ]  
+  \code{\link[RNetica]{Extract.NeticaNode}} (\code{[}) %]
+  
 
 }
 \examples{

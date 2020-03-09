@@ -144,6 +144,9 @@
     \item{\code{key}:}{Object of class \code{"character"} giving the
       name of the column which has the key for the manifest.  This is
       usually \code{"Name"}. }
+    \item{\code{prefix}:}{Object of class \code{"character"} giving a
+      short string to insert in front of numeric names to make legal
+      Netica names (see \code{\link[RNetica]{as.IDname}}).}
   }
 }
 \section{Extends}{
@@ -196,16 +199,21 @@ stopifnot(is.PnetWarehouse(Nethouse))
 stopifnot(all.equal(WarehouseManifest(Nethouse),netman1))
 
 ## WarehouseData
-stopifnot(all.equal(WarehouseData(Nethouse,"miniPP_CM"),
-   netman1["miniPP_CM",]))
+stopifnot(all.equal(WarehouseData(Nethouse,"miniPP_CM")[-4],
+   netman1["miniPP_CM",-4]),
+   ## Pathname has leading address prefix instered.
+   basename(WarehouseData(Nethouse,"miniPP_CM")$Pathname) ==
+   basename(netman1["miniPP_CM","Pathname"]))
 
 ## WarehouseManifest<- 
 netman2 <- netman1
 netman2["miniPP_CM","Pathname"] <- "mini_CM.dne"
 WarehouseManifest(Nethouse) <- netman2
 
-stopifnot(all.equal(WarehouseData(Nethouse,"miniPP_CM"),
-   netman2["miniPP_CM",]))
+stopifnot(all.equal(WarehouseData(Nethouse,"miniPP_CM")[,-4],
+   netman2["miniPP_CM",-4]),
+   basename(WarehouseData(Nethouse,"miniPP_CM")$Pathname) ==
+   basename(netman2["miniPP_CM","Pathname"]))
 WarehouseManifest(Nethouse) <- netman1
 
 ## Usually way to access nets is through warehouse supply

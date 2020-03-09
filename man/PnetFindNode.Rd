@@ -38,7 +38,7 @@ PnetAllNodes(net)
 }
 
 \value{
-  The \code{\link{PnetNode}} object or list of \code{PnetNode}
+  The \code{\link[Peanut]{Pnode}} object or list of \code{Pnode}
   objects corresponding to \code{names}, or a list of all node objects for
   \code{PnetAllNodes()}.  In the latter case, the names will be set
   to the node names.

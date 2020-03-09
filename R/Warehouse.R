@@ -2,8 +2,14 @@ BNWarehouse <- setClass("BNWarehouse",
                        slots=c(manifest="data.frame",
                                session="NeticaSession",
                                address="character",
-                               key="character")
+                               key="character",
+                               prefix="character")
                        )
+BNWarehouse <- function(manifest=data.frame(),session=getDefaultSession(),
+                        address=".",key=c("Name"),prefix="S")
+  new("BNWarehouse",manifest=manifest, session=session, address=address,
+      key=key, prefix=prefix)
+
 setIs("BNWarehouse","PnetWarehouse")
 
 setMethod(ClearWarehouse,"BNWarehouse",
@@ -105,9 +111,34 @@ setMethod(WarehouseFree,"BNWarehouse",
             if (is.null(net)) {
               flog.trace("Network for name %s not found, skipping.",name)
             } else {
-              DeleteNetwork(net)
+              if (is.active(net))
+                DeleteNetwork(net)
+              if (!is.null(warehouse@session$nets[[name]]))
+                rm(name,envir=warehouse@session$nets)
             }
           })
+
+setMethod(WarehouseCopy,c("BNWarehouse","NeticaBN"),
+          function(warehouse,obj,newname) {
+            newname <- as.legal.name(warehouse,newname)
+            CopyNetworks(obj,newname)
+          })
+
+setMethod(is.legal.name,"BNWarehouse",
+          function(warehouse,name)
+            is.IDname(name)
+          )
+
+setMethod(as.legal.name,"BNWarehouse",
+          function(warehouse,name)
+            as.IDname(name,warehouse@prefix)
+          )
+
+setMethod(is.valid,"BNWarehouse",
+          function(warehouse,object)
+            is.active(object)
+          )
+
 
 setMethod(WarehouseInventory,"BNWarehouse",
           function(warehouse) {
@@ -134,8 +165,13 @@ setMethod("WarehouseUnpack", "BNWarehouse",
 NNWarehouse <- setClass("NNWarehouse",
                        slots=c(manifest="data.frame",
                                session="NeticaSession",
-                               key="character")
+                               key="character",
+                               prefix="character")
                        )
+NNWarehouse <- function(manifest=data.frame(),session=getDefaultSession(),
+                        key=c("Model","NodeName"),prefix="V")
+  new("NNWarehouse",manifest=manifest, session=session,
+      key=key, prefix=prefix)
 
 setIs("NNWarehouse","PnodeWarehouse")
 
@@ -195,8 +231,40 @@ setMethod(WarehouseMake,"NNWarehouse",
 
 setMethod(WarehouseFree,"NNWarehouse",
           function(warehouse,name) {
-            warning("Delete the node to free it.")
+            node <- WarehouseFetch(warehouse,name)
+            if (is.null(node)) {
+              flog.trace("Node for name %s not found, skipping.",name)
+            } else {
+              if (is.active(node))
+                DeleteNodes(node)
+            }
           })
+
+setMethod(WarehouseCopy,c("NNWarehouse","NeticaNode"),
+          function(warehouse,obj,newname) {
+            newname <- as.legal.name(warehouse,newname)
+            if (length(newname) != 2L)
+              stop("Expected key to look like (net, node).")
+            newnet <- warehouse@session$nets[[newname[1]]]
+            if (is.null(newnet))
+              stop("Network ",newname[1]," does not exist.")
+            CopyNodes(obj,newname[2],newnet=newnet)
+          })
+
+setMethod(is.legal.name,"NNWarehouse",
+          function(warehouse,name)
+            is.IDname(name)
+          )
+
+setMethod(as.legal.name,"NNWarehouse",
+          function(warehouse,name)
+            as.IDname(name,warehouse@prefix)
+          )
+
+setMethod(is.valid,"NNWarehouse",
+          function(warehouse,object)
+            is.active(object)
+          )
 
 setMethod(is.PnodeWarehouse,"NNWarehouse",
           function(obj) {TRUE})

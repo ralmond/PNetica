@@ -19,7 +19,7 @@
 \item{\code{PnetSerialize}, \code{signature(net = "NeticaBN")}}{
   Returns a vector with three components.  The \code{name} field is the
   name of the network.  The \code{data} component is a raw vector
-  produced by calling \code{\link[base]{serialize(...,NULL)}} on the
+  produced by calling \code{\link[base]{serialize}(...,NULL)} on the
   output of a \code{\link[RNetica]{WriteNetworks}} operation.  The
   \code{factory} component is the name of the
   \code{\link[RNetica]{NeticaSession}} object.  Note that the

@@ -1,3 +1,11 @@
+* Looks like we can't directly make NeticaBN a subclass of PNet.  We
+   need to create a wrapper class, which will mean rewriting most of
+   PNetica.  [Fixed this by just using "ANY" instead of "PNet" or
+   "Pnode" classes.]
+* Create a mode for warehouses where they generate an error rather
+   than autogenerate a blank network.
+
+
 prepare_Rd: BuildTable.Rd:67-68: Dropping empty section \examples
 prepare_Rd: MakePnet.NeticaBN.Rd:26-28: Dropping empty section \details
 prepare_Rd: MakePnet.NeticaBN.Rd:29-35: Dropping empty section \value
