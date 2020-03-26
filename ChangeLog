@@ -1,3 +1,8 @@
+2020-03-14  Russell Almond  <ralmond@Cherry>
+
+	* R/Warehouse.R (WarehouseFree(BNWarehouse)): Added list argument
+	to rm.
+
 2020-03-08  Russell Almond  <ralmond@Cherry>
 
 	* R/Warehouse.R

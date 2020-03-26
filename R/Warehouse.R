@@ -114,7 +114,7 @@ setMethod(WarehouseFree,"BNWarehouse",
               if (is.active(net))
                 DeleteNetwork(net)
               if (!is.null(warehouse@session$nets[[name]]))
-                rm(name,envir=warehouse@session$nets)
+                rm(list=name,envir=warehouse@session$nets)
             }
           })
 
