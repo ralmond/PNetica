@@ -1,3 +1,7 @@
+2020-04-01  Russell Almond  <ralmond@Cherry>
+
+	* R/BNNetica.R: Added warning when replacing network.
+
 2020-03-14  Russell Almond  <ralmond@Cherry>
 
 	* R/Warehouse.R (WarehouseFree(BNWarehouse)): Added list argument
