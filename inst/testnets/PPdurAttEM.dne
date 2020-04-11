@@ -1,12 +1,39 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 5.04 on 08/04/2019 at 03:30:00 PM.
+// File created by AlmondR at FloridaStateU using Netica 5.24 on Apr 09, 2020 at 20:41:22 UTC.
 
 bnet PPdurAttEM {
 autoupdate = FALSE;
 title = "Duration and Attemtps";
 comment = "An evidence model with continuous variables.";
 whenchanged = 1564946824;
+
+visual V3 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	windowposn = (78, 78, 1054, 405);
+	resolution = 72;
+	drawingbounds = (1080, 720);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00e1e1e1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00f8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00d3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00c8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00ffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00ffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00dee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00f0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00ffffff;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
 user U1 {
 	Hub = "miniPP_CM";
 	Pathname = "PPdurAttEM.dne";
@@ -22,6 +49,10 @@ node Attempts {
 	title = "Number of Attempts";
 	comment = "The number of times level was started or restarted";
 	whenchanged = 1564946777;
+	visual V3 {
+		center = (462, 156);
+		height = 2;
+		};
 	};
 
 node Duration {
@@ -34,6 +65,10 @@ node Duration {
 	title = "Time spent on level";
 	comment = "Total time spent on level less time spent on learning supports";
 	whenchanged = 1564946824;
+	visual V3 {
+		center = (108, 174);
+		height = 1;
+		};
 	};
 NodeSet pnodes {Nodes = (Attempts, Duration);};
 NodeSet onodes {Nodes = (Attempts, Duration);};

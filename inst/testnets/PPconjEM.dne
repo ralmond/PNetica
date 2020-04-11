@@ -1,16 +1,52 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 5.04 on 04/09/2018 at 07:32:19 PM.
+// File created by AlmondR at FloridaStateU using Netica 5.24 on Apr 09, 2020 at 20:40:45 UTC.
 
 bnet PPconjEM {
 autoupdate = FALSE;
 title = "Conjuctive Evidence Model";
 comment = "An evidence model with a single conjuctive observable";
 whenchanged = 1523316634;
+
+visual V2 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	windowposn = (52, 52, 1028, 379);
+	resolution = 72;
+	drawingbounds = (1080, 720);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00e1e1e1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00f8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00d3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00c8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00ffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00ffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00dee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00f0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00ffffff;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
 user U1 {
 	Hub = "miniPP_CM";
 	Pathname = "PPconjEM.dne";
 	priorWeight = "10";
+	};
+
+param X_POfMom_1 {
+	kind = DISCONNECTED;
+	discrete = TRUE;
+	states = (High, Medium, Low);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	title = "POfMom";
+	whenchanged = 1523314216;
 	};
 
 param X_EnergyTransfer_2 {
@@ -20,15 +56,6 @@ param X_EnergyTransfer_2 {
 	StateComments = ("Can use to solve difficult problems", "Can use to solve simple but not difficult problems", "Can not solve simple problems.");
 	levels = (0.967421566101701, 0, -0.967421566101701);
 	title = "EnergyTransfer";
-	whenchanged = 1523314216;
-	};
-
-param X_POfMom_1 {
-	kind = DISCONNECTED;
-	discrete = TRUE;
-	states = (High, Medium, Low);
-	levels = (0.967421566101701, 0, -0.967421566101701);
-	title = "POfMom";
 	whenchanged = 1523314216;
 	};
 
@@ -60,6 +87,18 @@ node ConjunctiveObs {
 		Q = "TRUE";
 		lnAlphas = "0";
 		betas = "structure(c(-0.5, 0.5), .Names = c(\"EnergyTransfer\", \"POfMom\" ))";
+		};
+	visual V2 {
+		center = (210, 60);
+		height = 1;
+		link 1 {
+			labelposn = (241, 9, 325, 24);
+			path = ((239, 9), (224, 34));
+			};
+		link 2 {
+			labelposn = (186, 0, 233, 15);
+			path = ((176, 0), (196, 34));
+			};
 		};
 	};
 NodeSet onodes {Nodes = (ConjunctiveObs);};

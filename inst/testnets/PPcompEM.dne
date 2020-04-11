@@ -1,25 +1,43 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 5.04 on 04/09/2018 at 07:32:19 PM.
+// File created by AlmondR at FloridaStateU using Netica 5.24 on Apr 09, 2020 at 20:39:21 UTC.
 
 bnet PPcompEM {
 autoupdate = FALSE;
 title = "Compensatory Evidence Model";
 comment = "An evidence model with a single compensatory observable";
 whenchanged = 1523316631;
+
+visual V1 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	windowposn = (26, 26, 1002, 353);
+	resolution = 72;
+	drawingbounds = (1080, 720);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00e1e1e1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00f8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00d3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00c8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00ffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00ffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00dee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00f0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00ffffff;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
 user U1 {
 	Hub = "miniPP_CM";
 	Pathname = "PPcompEM.dne";
 	priorWeight = "10";
-	};
-
-param X_NTL_2 {
-	kind = DISCONNECTED;
-	discrete = TRUE;
-	states = (High, Medium, Low);
-	levels = (0.967421566101701, 0, -0.967421566101701);
-	title = "NTL";
-	whenchanged = 1523314216;
 	};
 
 param X_POfMom_1 {
@@ -28,6 +46,15 @@ param X_POfMom_1 {
 	states = (High, Medium, Low);
 	levels = (0.967421566101701, 0, -0.967421566101701);
 	title = "POfMom";
+	whenchanged = 1523314216;
+	};
+
+param X_NTL_2 {
+	kind = DISCONNECTED;
+	discrete = TRUE;
+	states = (High, Medium, Low);
+	levels = (0.967421566101701, 0, -0.967421566101701);
+	title = "NTL";
 	whenchanged = 1523314216;
 	};
 
@@ -59,6 +86,18 @@ node CompensatoryObs {
 		Q = "TRUE";
 		lnAlphas = "structure(c(-0.105360515657826, 0.0953101798043249), .Names = c(\"NTL\",  \"POfMom\"))";
 		betas = "0.3";
+		};
+	visual V1 {
+		center = (210, 60);
+		height = 1;
+		link 1 {
+			labelposn = (241, 9, 264, 24);
+			path = ((239, 9), (224, 34));
+			};
+		link 2 {
+			labelposn = (186, 0, 233, 15);
+			path = ((176, 0), (196, 34));
+			};
 		};
 	};
 NodeSet onodes {Nodes = (CompensatoryObs);};
