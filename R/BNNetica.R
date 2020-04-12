@@ -328,6 +328,8 @@ setMethod("unserializePnet","NeticaSession",
             writeLines(unserialize(data$data),tmpfile)
             oldnet <- factory$findNet(name)
             if (!is.null(oldnet) && is.active(oldnet)) {
+              flog.warn("Replacing old version of network %s.",
+                           name)
               DeleteNetwork(oldnet)
             }
             ReadNetworks(tmpfile,factory)

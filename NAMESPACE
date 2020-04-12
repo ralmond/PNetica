@@ -56,7 +56,8 @@ exportMethods(ClearWarehouse,
        WarehouseMake,WarehouseFree, WarehouseUnpack,
        WarehouseInventory,
        is.PnodeWarehouse,is.PnetWarehouse,
-       WarehouseDirectory,"WarehouseDirectory<-")
+       WarehouseDirectory,"WarehouseDirectory<-",
+       WarehouseCopy,is.legal.name,as.legal.name,is.valid)
 ##export(Free,Save,Reload,Delete)     #Warehouse protocol
 ##exportMethods(Free,Save,Reload,Delete)     #Warehouse protocol
 

@@ -1,3 +1,11 @@
+* Looks like we can't directly make NeticaBN a subclass of PNet.  We
+   need to create a wrapper class, which will mean rewriting most of
+   PNetica.  [Fixed this by just using "ANY" instead of "PNet" or
+   "Pnode" classes.]
+* Create a mode for warehouses where they generate an error rather
+   than autogenerate a blank network.
+
+
 prepare_Rd: BuildTable.Rd:67-68: Dropping empty section \examples
 prepare_Rd: MakePnet.NeticaBN.Rd:26-28: Dropping empty section \details
 prepare_Rd: MakePnet.NeticaBN.Rd:29-35: Dropping empty section \value
@@ -14,18 +22,10 @@ prepare_Rd: MakePnode.NeticaNode.Rd:34-36: Dropping empty section \references
 prepare_Rd: MakePnode.NeticaNode.Rd:46-48: Dropping empty section \seealso
 prepare_Rd: MakePnode.NeticaNode.Rd:49-50: Dropping empty section \examples
 prepare_Rd: maxCPTParam.Rd:83-85: Dropping empty section \examples
-Missing link or links in documentation object 'BuildTable.Rd':
-  ‘Pnode.NeticaNode’ ‘[RNetica]{[.NeticaNode}’
 
 Missing link or links in documentation object 'PNetica-package.Rd':
   ‘Pnet.NeticaBN’ ‘Pnode.NeticaNode’ ‘PnetPnodes.NeticaBN’
   ‘PnetPriorWeight.NeticaBN’ ‘[Peanut]{Pnet.default}’
-
-Missing link or links in documentation object 'PnetFindNode.Rd':
-  ‘PnetNode’
-
-Missing link or links in documentation object 'PnetSerialize.Rd':
-  ‘[base]{serialize(...,NULL)}’
 
 Missing link or links in documentation object 'PnodeParentTvals.Rd':
   ‘Pnode.NeticaNode’
@@ -44,13 +44,12 @@ See section 'Cross-references' in the 'Writing R Extensions' manual.
 * checking for missing documentation entries ... WARNING
 
    Undocumented code objects:
-  ‘BNWarehouse’ ‘NNWarehouse’ ‘WarehouseDirectory’
+  ‘WarehouseDirectory’
   ‘WarehouseDirectory<-’
 Undocumented S4 classes:
-  ‘BNWarehouse’ ‘NNWarehouse’
+  ‘NNWarehouse’
 Undocumented S4 methods:
   generic 'BuildTable' and siglist 'NeticaNode'
-  generic 'ClearWarehouse' and siglist 'BNWarehouse'
   generic 'ClearWarehouse' and siglist 'NNWarehouse'
   generic 'PnetCompile' and siglist 'NeticaBN'
   generic 'PnetDescription' and siglist 'NeticaBN'

@@ -103,8 +103,16 @@ setMethod("PnetAdjoin","NeticaBN", function (hub, spoke) {
 })
 
 setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
-  # Bug in RN_AbsorbNodes
-  AbsorbNodes(NetworkNodesInSet(motif,paste("Spoke",NetworkName(spoke),sep="_")))
+    ## Bug in RN_AbsorbNodes
+    spokename <- paste("Spoke",NetworkName(spoke),sep="_")
+    tryCatch(
+        AbsorbNodes(NetworkNodesInSet(motif,spokename)),
+        error = function (e) {
+            flog.error("While absorbing nodes from %s in %s, got error %s",
+                       spokename,NetworkName(motif),conditionMessage(e))
+            flog.info("This could be a known Netica bug in version 5.04")
+        })
+    motif
 })
 
 
