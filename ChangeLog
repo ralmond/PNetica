@@ -1,3 +1,13 @@
+2020-08-09  Russell Almond  <ralmond@Cherry>
+
+	* R/BNNetica.R (PnodeEvidence<-): Added a logical method as that
+	seems to fall through the cracks.
+
+2020-08-08  Russell Almond  <ralmond@Cherry>
+
+	* R/Statistics.R: Added Chararcter methods to statistic
+	operators. 
+
 2020-04-01  Russell Almond  <ralmond@Cherry>
 
 	* R/BNNetica.R: Added warning when replacing network.
