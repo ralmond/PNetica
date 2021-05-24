@@ -104,6 +104,23 @@ setMethod(WarehouseMake,"BNWarehouse",
             MakePnet.NeticaBN(sess,name,dat)
           })
 
+setMethod(WarehouseSave,c("BNWarehouse","character"),
+          function(warehouse,obj) {
+            net <- warehouse@session$nets[[as.IDname(obj)]]
+            if (is.null(net)) {
+              warning("Network named ",obj," does not exist, not saving.")
+            } else {
+              WarehouseSave(warehouse,net)
+            }
+          })
+
+setMethod(WarehouseSave,c("BNWarehouse","NeticaBN"),
+          function(warehouse,obj) {
+            name <- PnetName(obj)
+            pname <- WarehouseData(warehouse,name)$Pathname
+            WriteNetworks(obj,pname)
+          })
+
 
 setMethod(WarehouseFree,"BNWarehouse",
           function(warehouse,name) {
@@ -239,6 +256,10 @@ setMethod(WarehouseFree,"NNWarehouse",
                 DeleteNodes(node)
             }
           })
+
+setMethod(WarehouseSave,"NNWarehouse",
+          function(warehouse,obj) {})   #Null Action.
+
 
 setMethod(WarehouseCopy,c("NNWarehouse","NeticaNode"),
           function(warehouse,obj,newname) {

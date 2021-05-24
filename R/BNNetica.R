@@ -232,6 +232,21 @@ setMethod("PnodeEvidence<-",c("NeticaNode","NULL"),
           function (node,value) {
             RetractNodeFinding(node)
             })
+setMethod("PnodeEvidence<-",c("NeticaNode","logical"),
+          function (node,value) {
+            levs <- NodeLevels(node)
+            if (length(levs) != 2L) {
+              PnodeEvidence(node) <- as.character(value)
+            } else {
+              v1 <- names(levs)[levs==as.numeric(value)]
+              if (length(v1) != 1L) {
+                stop("When setting ",NodeName(node)," expected ",names(levs),
+                     " got ",value)
+              }
+              PnodeEvidence(node) <- v1
+            }
+            node
+          })
 
 setMethod("PnodeEvidence<-",c("NeticaNode","ANY"),
           function(node,value) {

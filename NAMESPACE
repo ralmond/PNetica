@@ -54,7 +54,7 @@ exportMethods(ClearWarehouse,
               WarehouseManifest,"WarehouseManifest<-",
        WarehouseData,WarehouseFetch,WarehouseSupply,
        WarehouseMake,WarehouseFree, WarehouseUnpack,
-       WarehouseInventory,
+       WarehouseInventory,WarehouseSave,
        is.PnodeWarehouse,is.PnetWarehouse,
        WarehouseDirectory,"WarehouseDirectory<-",
        WarehouseCopy,is.legal.name,as.legal.name,is.valid)
