@@ -4,53 +4,98 @@
 \description{
 
   This does the actual work of making a Pnet from the manifest
-  description.
-  
+  description.  It is typically called from
+  \code{\link[Peanut]{WarehouseMake}}. 
 
 }
 \usage{
 MakePnet.NeticaBN(sess, name, data)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{sess}{
-%%     ~~Describe \code{sess} here~~
-}
-  \item{name}{
-%%     ~~Describe \code{name} here~~
-}
-  \item{data}{
-%%     ~~Describe \code{data} here~~
-}
+  \item{sess}{The Netica session (\code{\link[RNetica]{NeticaSession}})
+    object in which the net will be created.}
+  \item{name}{A character scalar with the name of the network.  This
+    should follow the \code{\link[RNetica]{IDname}} rules.}
+  \item{data}{A list providing data and metadata about the network.  See details.}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+
+  This is a key piece of the \code{\link[Peanut]{Warehouse}}
+  infrastructure.  The idea is that a network can be constructed given a
+  session, a name, and a collection of metadata.  The metadata can be
+  stored in a table which is the the manifest of the warehouse.
+
+  The current system expects the following fields in the \code{data}
+  argument.
+
+  \describe{
+    \item{Hub}{For a network which represents an evidence model (spoke),
+    this is the name of the network to which it should be attached (the
+    \emph{hub}).}
+    \item{Title}{This is a longer unconstrained name for the network.}
+    \item{Pathname}{This is the location in which the \code{.neta} or
+    \code{.dne} file which stores the network.}
+    \item{Description}{This is a longer string describing the network.}
+  }
+  
+These correspond to fields in the \code{\link{RNetica}{NeticaBN}} object.
+
+}
+\section{Names and Truenames}{
+
+The truename system is designed to implement the name restrictions
+inherent in Netica (see \link[RNetica]{IDname}) without imposing the
+same limits on the Peanut framework.  This is done by adding a
+\code{Truename} field to the net object and then mangling the actual
+name to follow the Netica rules using the
+\code{\link[RNetica]{as.IDname}} function.
+
+The object should be available from the warehouse via its truename, but
+it is best to stick to the Netica naming conventions for networks and
+nodes.
+
+
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+  An object of class \code{\link[RNetica]{NeticaBN}} which is also in the
+  \code{\link[Peanut]{Pnet}} abtract class.
 
+}
+\author{Russell Almond}
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+
+  RNetica Package:
+  \code{\link[RNetica]{CreateNetwork}}, 
+  \code{\link[RNetica]{NeticaBN}},
+  \code{\link[RNetica]{IDname}}
+
+  Peanut Package:
+  \code{\link[Peanut]{Warehouse}}, \code{\link[Peanut]{WarehouseMake}}
+  
+  PNetica Pacakge
+  \code{\link{BNWarehouse}}
 }
 \examples{
+
+sess <- NeticaSession()
+startSession(sess)
+
+anet <- MakePnet.NeticaBN(sess,"Anet",
+                          list(Title="A Network",Hub="",
+                               Description="A Sample Network."))
+
+DeleteNetwork(anet)
+
+netman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
+                          "Mini-PP-Nets.csv", sep=.Platform$file.sep),
+                    row.names=1, stringsAsFactors=FALSE)
+## Build the first network (proficiency model)
+miniPP <- MakePnet.NeticaBN(sess,"miniPP",netman1[1,,drop=FALSE])
+
+DeleteNetwork(miniPP)
+stopSession(sess)
+
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ manip }
+\keyword{ graph }

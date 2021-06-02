@@ -1,5 +1,5 @@
 \name{PnodeParentTvals.NeticaNode}
-\alias{PnodeParentTvals.NeticaNode}
+\alias{PnodeParentTvals,NeticaNode-method}
 \title{Fetches a list of numeric variables corresponding to parent states}
 \description{
 
@@ -12,7 +12,7 @@
 
 }
 \usage{
-\method{PnodeParentTvals}{NeticaNode}(node)
+\S4method{PnodeParentTvals}{NeticaNode}(node)
 }
 \arguments{
   \item{node}{A \code{\link{Pnode}} which is also a
@@ -66,8 +66,8 @@
 \seealso{
        \code{\link{Pnode.NeticaNode}}, \code{\link[Peanut]{Pnode}}, 
        \code{\link[CPTtools]{effectiveThetas}},
-       \code{\link{BuildTable.NeticaNode}},
-       \code{\link{maxCPTParam.NeticaNode}}
+       \code{\link{BuildTable,NeticaNode-method}},
+       \code{\link{maxCPTParam,NeticaNode-method}}
 }
 \examples{
 sess <- NeticaSession()

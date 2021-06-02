@@ -1,6 +1,6 @@
 \name{PnetAdjoin}
-\alias{PnetAdjoin}
-\alias{PnetDetach}
+\alias{PnetAdjoin,NeticaBN-method}
+\alias{PnetDetach,NeticaBN-method}
 \title{Merges (or separates) two Pnets with common variables}
 \description{
   
@@ -14,8 +14,8 @@
 
 }
 \usage{
-PnetAdjoin(hub, spoke)
-PnetDetach(motif, spoke) 
+\S4method{PnetAdjoin}{NeticaBN}(hub, spoke)
+\S4method{PnetDetach}{NeticaBN}(motif, spoke) 
 }
 \arguments{
   \item{hub}{A complete \code{\link{Pnet}} to which new variables will

@@ -43,7 +43,8 @@ setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
 
 MakePnet.NeticaBN <-function (sess,name,data) {
   pname <- as.character(data$Pathname)
-  if (!is.null(pname) && nchar(pname) > 0L && file.exists(pname)) {
+  ## this will convert NULL to character(0)
+  if (length(pname) >0L && nchar(pname) > 0L && file.exists(pname)) {
     net <-as.Pnet(ReadNetworks(pname,sess))
     PnetName(net) <- name
   } else {

@@ -1,3 +1,17 @@
+2021-06-01  Russell Almond  <ralmond@cherry>
+
+	* R/Warehouse.R (BNWarehouse): Changed WarehouseSave method to
+	look at PnetPathname property of network rather than the one in
+	the manifest.
+	(BNWarehouse): Split the WarehouseSupply method for BNWarehouse
+	and NNWarehouse as the branch for what to do if the cached value
+	is not valid is different.
+
+2021-05-29  Russell Almond  <ralmond@cherry>
+
+	* R/PnetNetica.R (MakePnet.NeticaBN): Fixed bug with null pathname.
+	
+
 2020-08-09  Russell Almond  <ralmond@Cherry>
 
 	* R/BNNetica.R (PnodeEvidence<-): Added a logical method as that

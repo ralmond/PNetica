@@ -1,5 +1,5 @@
 \name{BuildTable.NeticaNode}
-\alias{BuildTable.NeticaNode}
+\alias{BuildTable,NeticaNode-method}
 \title{Builds the conditional probability table for a Pnode}
 \description{
 
@@ -13,11 +13,11 @@
 
 }
 \usage{
-\method{BuildTable}{NeticaNode}(node)
+\S4method{BuildTable}{NeticaNode}(node)
 }
 \arguments{
-  \item{node}{A \code{\link{Pnode.NeticaNode}} object whose table is to
-    be built.} 
+  \item{node}{A \code{\link[Peanut]{Pnode}} and
+    \code{\link[RNetica]{NeticaNode}} object whose table is to be built.} 
 
 }
 \details{
@@ -66,6 +66,46 @@
 
 }
 \examples{
+
+sess <- NeticaSession()
+startSession(sess)
+
+## Network with two proficiency variables and observables for each
+## different type of rule
+
+binAll <- CreateNetwork("binAll", session=sess)
+PnetPriorWeight(binAll) <- 11           #Give it something to see.
+
+## Set up Proficiency Model.
+thetas <- NewDiscreteNode(binAll,paste("theta",0:1,sep=""),
+                          c("Low","Med","High")) # Create the variable with 3 levels
+names(thetas) <- paste("theta",0:1,sep="")
+NodeParents(thetas[[2]]) <- thetas[1]
+
+for (nd in thetas) {
+  NodeLevels(nd) <- effectiveThetas(NodeNumStates(nd))
+  PnodeRules(nd) <- "Compensatory"
+  PnodeLink(nd) <- "normalLink"
+  PnodeBetas(nd) <- 0 # A numeric vector of intercept parameters
+  PnodeQ(nd) <- TRUE # All parents are relevant.
+  NodeSets(nd) <- c("pnodes","Proficiency") # A character vector containing the names of the node sets
+}
+
+## Standard normal prior.
+PnodeAlphas(thetas[[1]]) <- numeric() # A numeric vector of (log) slope parameters
+PnodeLinkScale(thetas[[1]]) <- 1 # A positive numeric value, or NULL
+                                 # if the scale parameter is not used
+                                 # for the link function.
+## Regression with a correlation of .6
+PnodeAlphas(thetas[[2]]) <- .6
+PnodeLinkScale(thetas[[2]]) <- .8
+
+BuildTable(thetas[[1]])
+BuildAllTables(binAll)
+
+DeleteNetwork(binAll)
+stopSession(sess)
+
 }
 \keyword{ distribution }
 

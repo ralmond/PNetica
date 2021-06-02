@@ -224,6 +224,7 @@ setMethod("PnodeEvidence<-",c("NeticaNode","character"),
             }
             invisible(node)
           })
+
 setMethod("PnodeEvidence<-",c("NeticaNode","factor"),
           function (node,value) {
             PnodeEvidence(node) <- as.character(value)

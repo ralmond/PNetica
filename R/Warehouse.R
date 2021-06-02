@@ -75,7 +75,7 @@ setMethod(WarehouseFetch,"BNWarehouse",
             warehouse@session$nets[[as.IDname(name)]]
           })
 
-setMethod("WarehouseSupply", c("ANY"), function(warehouse,name) {
+setMethod("WarehouseSupply", c("BNWarehouse"), function(warehouse,name) {
   val <- WarehouseFetch(warehouse,name)
   if (is.null(val))
     val <- WarehouseMake(warehouse,name)
@@ -117,7 +117,7 @@ setMethod(WarehouseSave,c("BNWarehouse","character"),
 setMethod(WarehouseSave,c("BNWarehouse","NeticaBN"),
           function(warehouse,obj) {
             name <- PnetName(obj)
-            pname <- WarehouseData(warehouse,name)$Pathname
+            pname <- PnetPathname(obj)
             WriteNetworks(obj,pname)
           })
 
@@ -298,3 +298,15 @@ setMethod(WarehouseInventory,"NNWarehouse",
                               !is.null(WarehouseFetch(warehouse,allKeys[k,]))
                             )
             allKeys[built, ,drop=FALSE]})
+setMethod("WarehouseSupply", c("NNWarehouse"), function(warehouse,name) {
+  val <- WarehouseFetch(warehouse,name)
+  if (is.null(val))
+    val <- WarehouseMake(warehouse,name)
+  if (!is.active(val)) {
+    warehouse@session$nets[[as.IDname(name[1])]]$nodes[[as.IDname(name[2])]] <- NULL
+    val <- WarehouseMake(warehouse,name)
+  }
+  val
+})
+
+

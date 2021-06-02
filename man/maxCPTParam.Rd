@@ -1,5 +1,5 @@
 \name{maxCPTParam.NeticaNode}
-\alias{maxCPTParam.NeticaNode}
+\alias{maxCPTParam,NeticaNode-method}
 \title{Find optimal parameters of a Pnode.NeticaNode to match expected tables}
 \description{
 
@@ -13,7 +13,7 @@
 
 }
 \usage{
-\method{maxCPTParam}{NeticaNode}(node, Mstepit = 5, tol = sqrt(.Machine$double.eps))
+\S4method{maxCPTParam}{NeticaNode}(node, Mstepit = 5, tol = sqrt(.Machine$double.eps))
 }
 \arguments{
   \item{node}{A \code{\link{Pnode}} object giving the parameterized node.}
@@ -81,6 +81,62 @@
 
 }
 \examples{
+
+## This method is mostly a wrapper for CPTtools::mapDPC
+getMethod(maxCPTParam,"NeticaNode")
+
+
+sess <- NeticaSession()
+startSession(sess)
+
+irt10.base <- ReadNetworks(paste(library(help="PNetica")$path,
+                           "testnets","IRT10.2PL.base.dne",
+                           sep=.Platform$file.sep),
+                           session=sess)
+irt10.base <- as.Pnet(irt10.base)  ## Flag as Pnet, fields already set.
+irt10.theta <- NetworkFindNode(irt10.base,"theta")
+irt10.items <- PnetPnodes(irt10.base)
+## Flag items as Pnodes
+for (i in 1:length(irt10.items)) {
+  irt10.items[[i]] <- as.Pnode(irt10.items[[i]])
+  ## Add node to list of observed nodes
+  PnodeLabels(irt10.items[[1]]) <-
+     union(PnodeLabels(irt10.items[[1]]),"onodes")
+}
+
+casepath <- paste(library(help="PNetica")$path,
+                           "testdat","IRT10.2PL.200.items.cas",
+                           sep=.Platform$file.sep)
+
+
+BuildAllTables(irt10.base)
+PnetCompile(irt10.base) ## Netica requirement
+
+item1 <- irt10.items[[1]]
+priB <- PnodeBetas(item1)
+priA <- PnodeAlphas(item1)
+priCPT <- PnodeProbs(item1)
+
+gemout <- GEMfit(irt10.base,casepath,trace=TRUE)
+
+calcExpTables(irt10.base,casepath)
+
+maxAllTableParams(irt10.base)
+
+postB <- PnodeBetas(item1)
+postA <- PnodeAlphas(item1)
+BuildTable(item1)
+postCPT <- PnodeProbs(item1)
+
+## Posterior should be different
+stopifnot(
+  postB != priB, postA != priA
+)
+
+
+DeleteNetwork(irt10.base)
+stopSession(sess)
+
 
 }
 \keyword{ manip }

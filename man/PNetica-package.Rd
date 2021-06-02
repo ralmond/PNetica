@@ -20,12 +20,14 @@ classes.  This package provides concrete implementations of those classes
 using the built in classes of \code{\link[RNetica]{RNetica}}.  In
 particular, \code{\link{Pnet.NeticaBN}} extends
 \code{\link[RNetica]{NeticaBN}} and \code{\link{Pnode.NeticaNode}} extends
-\code{\link[RNetica]{NeticaNode}}.
+\code{\link[RNetica]{NeticaNode}}.  The documentation object
+\code{\link{Pnode.States}} documents additional fields of this object.
 
 The properties of the \code{\link[Peanut]{Pnet}} and
 \code{\link[Peanut]{Pnode}} objects are stored as serialized Netica user
 fields (see \code{\link[RNetica]{NetworkUserObj}} and
-\code{\link[RNetica]{NodeUserObj}}).  
+\code{\link[RNetica]{NodeUserObj}}).  The documentation object
+\code{\link{Pnode.Properties}} documents the methods.
 
 The \code{as.Pnet} (\code{as.Pnode}) method for
 a \code{\link[RNetica]{NeticaBN}} (\code{\link[RNetica]{NeticaNode}})
@@ -44,27 +46,27 @@ recommended in case this is used in the future.
   \code{\link[Peanut]{Peanut}} package.
 
   \enumerate{
-    \item{The \code{cases} argument to \code{\link{calcPnetLLike.NeticaBN}},
-      \code{\link{calcExpTables.NeticaBN}} and
+    \item{The \code{cases} argument to \code{\link{calcPnetLLike}},
+      \code{\link{calcExpTables}} and
       \code{\link[Peanut]{GEMfit}} all 
       expect the pathname of a Netica case file (see
       \code{\link[RNetica]{write.CaseFile}}). }
-    \item{The methods \code{\link{calcPnetLLike.NeticaBN}},
-      \code{\link{calcExpTables.NeticaBN}}, and therefore 
+    \item{The methods \code{\link{calcPnetLLike}},
+      \code{\link{calcExpTables}}, and therefore 
       \code{\link[Peanut]{GEMfit}} when called with a
-      \code{\link{Pnet.NeticaBN}} as the first argument, expect that
+      \code{\link{Pnet}} as the first argument, expect that
       there exists a node set (see
       \code{\link[RNetica]{NetworkNodesInSet}}) called \dQuote{onodes}
       corresponding to 
       the observable variables in the case file \code{cases}.}
     \item{The function \code{\link[RNetica]{CompileNetwork}} needs to be
-      called before calls to \code{\link{calcPnetLLike.NeticaBN}},
-      \code{\link{calcExpTables.NeticaBN}} and
+      called before calls to \code{\link{calcPnetLLike}},
+      \code{\link{calcExpTables}} and
       \code{\link[Peanut]{GEMfit}}.}
-    \item{The method \code{\link{PnetPnodes.NeticaBN}} stores its value
-      in a nodeset called \dQuote{pnodes}.  It is recommended that the
-      accessor function be used for modifying this field.}
-    \item{The \code{\link{PnetPriorWeight.NeticaBN}} field of the
+    \item{The method \code{\link[=Pnode.NeticaBN]{PnetPnodes}} stores
+    its value in a nodeset called \dQuote{pnodes}.  It is recommended
+    that the accessor function be used for modifying this field.}
+    \item{The \code{\link{PnetPriorWeight}} field of the
       \code{\link{Pnet.NeticaBN}} object and all of the fields of the
       \code{\link{Pnode.NeticaNode}} are stored in serialized user fields
       with somewhat obvious names (see
@@ -79,17 +81,13 @@ As both the nodesets and and user fields are serialized when Netica
 serializes a network (\code{\link[RNetica]{WriteNetworks}}) the
 fields of the \code{\link{Pnet.NeticaBN}} and
 \code{\link{Pnode.NeticaNode}} objects should be properly saved and
-restored.  The only thing which will not be restored is the code
-\dQuote{Pnet} or \dQuote{Pnode} class marker.  These can be restored by
-calling \code{\link[Peanut]{as.Pnet}} on the restored network and
-\code{\link[Peanut]{as.Pnode}} on each of the restored \code{Pnode}s
-(see Examples).  
+restored.  
 
 The first time the network and nodes are created, it is recommended that
-\code{\link[Peanut]{Pnet.default}} and \code{\link{Pnode.NeticaNode}}
+\code{\link[Peanut]{Pnet}} and \code{\link{Pnode.NeticaNode}}
 (or simply the generic functions \code{\link[Peanut]{Pnet}} and
 \code{\link[Peanut]{Pnode}}.  Note that calling
-\code{\link{Pnode.NeticaNode}} will calculate defaults for the
+\code{\link{Pnode}} will calculate defaults for the
 \code{\link[Peanut]{PnodeLnAlphas}} and \code{\link[Peanut]{PnodeBetas}}
 based on the current value of \code{\link[RNetica]{NodeParents}(node)},
 so this should be set before calling this function. (See examples).

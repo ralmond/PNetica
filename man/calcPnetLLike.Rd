@@ -1,5 +1,5 @@
 \name{calcPnetLLike.NeticaBN}
-\alias{calcPnetLLike.NeticaBN}
+\alias{calcPnetLLike,NeticaBN-method}
 \title{Calculates the log likelihood for a set of data under a Pnet.NeticaBN model}
 \description{
 
@@ -11,7 +11,7 @@
 
 }
 \usage{
-\method{calcPnetLLike}{NeticaBN}(net, cases)
+\S4method{calcPnetLLike}{NeticaBN}(net, cases)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

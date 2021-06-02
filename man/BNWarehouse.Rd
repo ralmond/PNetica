@@ -4,7 +4,7 @@
 \description{
 
   This is the constructor for the \code{\linkS4class{BNWarehouse}}
-  class.  This produces \code{\link[Netica]{NeticaBN}} objects, which
+  class.  This produces \code{\link[RNetica]{NeticaBN}} objects, which
   are instances of the \code{\link[Peanut]{Pnet}} abstract class.
   
 }

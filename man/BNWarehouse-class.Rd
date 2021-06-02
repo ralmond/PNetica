@@ -14,6 +14,13 @@
 \alias{WarehouseManifest,BNWarehouse-method}
 \alias{WarehouseManifest<-,BNWarehouse,data.frame-method}
 \alias{WarehouseUnpack,BNWarehouse-method}
+\alias{WarehouseSupply,BNWarehouse-method}
+\alias{WarehouseCopy,BNWarehouse,NeticaBN-method}
+\alias{WarehouseSave,BNWarehouse,NeticaBN-method}
+\alias{WarehouseSave,BNWarehouse,character-method}
+\alias{as.legal.name,BNWarehouse-method}
+\alias{is.legal.name,BNWarehouse-method}
+\alias{is.valid,BNWarehouse-method}
 
 \title{Class \code{"BNWarehouse"}}
 \description{
@@ -28,11 +35,16 @@
 
 }
 \section{Objects from the Class}{
+
   Objects can be created by calls of the form \code{\link{BNWarehouse}(
     ...)}. 
 
   This class is a subclass of \code{PnetWarehouse} in the
   \code{\link{Peanut-package}}.  
+
+  This is a reference object and typically there is only one instance
+  per project.
+
 }
 \section{Methods}{
 
@@ -86,6 +98,29 @@
       network, in particular, it is used for saving network state across
       sessions.  See \code{\link{PnetSerialize}} for an example.}
 
+    \item{as.legal.name}{\code{signature(warehouse = "BNWarehouse")}:
+      If necessary, mangles a node name to follow the Netica
+      \link[RNetica]{IDname} conventions. }
+
+    \item{is.legal.name}{\code{signature(warehouse = "BNWarehouse")}:
+      Checks to see if a node name follows the Netica
+      \link[RNetica]{IDname} conventions. }
+
+    \item{WarehouseCopy}{\code{signature(warehouse = "BNWarehouse", obj
+	= "NeticaBN")}: Makes a copy of a network. }
+
+    \item{is.valid}{\code{signature(warehouse = "BNWarehouse")}: Checks
+      an object to see if it is a valid Netica Network. }
+
+    \item{WarehouseSave}{\code{signature(warehouse = "NNWarehouse", obj
+	= "NeticaBN")}: Saves the network to the pathname in the
+	\code{\link[Peanut]{PnetPathname}} property.  }
+
+    \item{WarehouseSave}{\code{signature(warehouse = "NNWarehouse", obj
+	= "character")}: Saves the network with the given name.
+    }
+
+
   }
 }
 \details{
@@ -127,7 +162,7 @@
       \code{\link[Peanut]{PnetDescription}}.} 
   }
   
-  The function \code{\link[Pnet]{BuildNetManifest}} will build a manifest for
+  The function \code{\link[Peanut]{BuildNetManifest}} will build a manifest for
   an existing collection of networks.
   
 }
@@ -151,6 +186,13 @@
 }
 \section{Extends}{
 Class \code{"\linkS4class{PnetWarehouse}"}, directly.
+
+}
+\references{
+
+  The following is a Google sheet where an example network manifest can be
+  found on the \code{nets} tab.
+  \url{https://docs.google.com/spreadsheets/d/1SiHQTLBNHQ-FUPnNzf9jPm9ifUG-c8f_6ljOrEcdl9M/}
 
 }
 \author{Russell Almond}
@@ -178,7 +220,7 @@ Class \code{"\linkS4class{PnetWarehouse}"}, directly.
 
   Implementation in the \code{PNetica} package:
   \code{\link{BNWarehouse}},
-  \code{\link[PNetica]{MakePnet.NeticaBN}}
+  \code{\link{MakePnet.NeticaBN}}
 
 }
 \examples{

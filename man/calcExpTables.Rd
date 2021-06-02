@@ -1,5 +1,5 @@
 \name{calcExpTables.NeticaBN}
-\alias{calcExpTables.NeticaBN}
+\alias{calcExpTables,NeticaBN-method}
 \title{Calculate expected tables for a Pnet.NeticaBN}
 \description{
 
@@ -13,7 +13,7 @@
 
 }
 \usage{
-\method{calcExpTables}{NeticaBN}(net, cases, Estepit = 1,
+\S4method{calcExpTables}{NeticaBN}(net, cases, Estepit = 1,
                          tol = sqrt(.Machine$double.eps))
 }
 \arguments{
