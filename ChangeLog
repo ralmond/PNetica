@@ -1,3 +1,10 @@
+2022-04-10  Russell Almond  <ralmond@cherry.local>
+
+	* R/PnetNetica.R (maxCPTParam): set it up so that it should fall
+	back to GetPriorWeight() if NodeExperience() returns NA.  This
+	allows the function to be used to set parameters to match an
+	existing CPT.
+
 2021-06-01  Russell Almond  <ralmond@cherry>
 
 	* R/Warehouse.R (BNWarehouse): Changed WarehouseSave method to
