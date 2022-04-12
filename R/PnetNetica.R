@@ -328,11 +328,13 @@ setMethod("maxCPTParam","NeticaNode", function (node, Mstepit=5,
                                     tol=sqrt(.Machine$double.eps)) {
   ## Get the posterior pseudo-counts by multiplying each row of the
   ## node's CPT by its experience.
-  np <- length(NodeParents(node))
-  if (np==0L) {
-    counts <- NodeProbs(node)*NodeExperience(node)
+  ne <- NodeExperience(node)
+  if (is.na(ne) || is.null(ne)) ne <- GetPriorWeight(node)
+  np <- length(dim(NodeProbs(node)))-1L
+  if (np==0L || length(ne) == 1L) {
+    counts <- NodeProbs(node)*ne
   } else {
-    counts <- sweep(NodeProbs(node),1L:np,NodeExperience(node),"*")
+    counts <- sweep(NodeProbs(node),1L:np,ne,"*")
   }
   withCallingHandlers(
       est <- mapDPC(counts,ParentStates(node),NodeStates(node),
