@@ -63,7 +63,7 @@ recommended in case this is used in the future.
       called before calls to \code{\link{calcPnetLLike}},
       \code{\link{calcExpTables}} and
       \code{\link[Peanut]{GEMfit}}.}
-    \item{The method \code{\link[=Pnode.NeticaBN]{PnetPnodes}} stores
+    \item{The method \code{\link[=Pnet.NeticaBN]{PnetPnodes}} stores
     its value in a nodeset called \dQuote{pnodes}.  It is recommended
     that the accessor function be used for modifying this field.}
     \item{The \code{\link{PnetPriorWeight}} field of the
