@@ -89,9 +89,8 @@ getMethod(maxCPTParam,"NeticaNode")
 sess <- NeticaSession()
 startSession(sess)
 
-irt10.base <- ReadNetworks(paste(library(help="PNetica")$path,
-                           "testnets","IRT10.2PL.base.dne",
-                           sep=.Platform$file.sep),
+irt10.base <- ReadNetworks(system.file("testnets","IRT10.2PL.base.dne",
+                           package="PNetica"),
                            session=sess)
 irt10.base <- as.Pnet(irt10.base)  ## Flag as Pnet, fields already set.
 irt10.theta <- NetworkFindNode(irt10.base,"theta")
@@ -104,9 +103,9 @@ for (i in 1:length(irt10.items)) {
      union(PnodeLabels(irt10.items[[1]]),"onodes")
 }
 
-casepath <- paste(library(help="PNetica")$path,
-                           "testdat","IRT10.2PL.200.items.cas",
-                           sep=.Platform$file.sep)
+casepath <- system.file("testdat","IRT10.2PL.200.items.cas",
+                        package="PNetica")
+
 
 
 BuildAllTables(irt10.base)

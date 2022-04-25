@@ -1,8 +1,14 @@
 Package: PNetica
-Version: 0.8-5
-Date: 2021/06/01
+Version: 0.9-1
+Date: 2022/04/24
 Title: Parameterized Bayesian Networks Netica Interface
 Author: Russell Almond
+Authors@R: 
+    person(given = "Russell",
+           family = "Almond",
+           role = c("aut", "cre"),
+           email = "ralmond@fsu.edu",
+           comment = c(ORCID = "0000-0002-8876-9337"))
 Maintainer: Russell Almond <ralmond@fsu.edu>
 Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), futile.logger, methods
 Description: This package provides RNetica implementation of Peanut interface.

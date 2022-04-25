@@ -192,8 +192,8 @@ BuildTable(partial4)
 
 ## Fitting Model to data
 
-irt10.base <- ReadNetworks(file.path(library(help="PNetica")$path,
-                           "testnets","IRT10.2PL.base.dne"), session=sess)
+irt10.base <- ReadNetworks(system.file("testnets","IRT10.2PL.base.dne",
+                                       package="PNetica"), session=sess)
 irt10.base <- as.Pnet(irt10.base)  ## Flag as Pnet, fields already set.
 irt10.theta <- NetworkFindNode(irt10.base,"theta")
 irt10.items <- PnetPnodes(irt10.base)
@@ -204,8 +204,8 @@ for (i in 1:length(irt10.items)) {
 }
 
 
-casepath <- file.path(library(help="PNetica")$path,
-                           "testdat","IRT10.2PL.200.items.cas")
+casepath <- system.file("testdat","IRT10.2PL.200.items.cas",
+                        package="PNetica")
 ## Record which nodes in the casefile we should pay attention to
 NetworkNodesInSet(irt10.base,"onodes") <-
    NetworkNodesInSet(irt10.base,"observables")

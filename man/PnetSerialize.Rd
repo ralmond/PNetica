@@ -39,8 +39,8 @@
 MySession <- NeticaSession(SessionName="MySession")
 startSession(MySession)
 
-irt5 <- ReadNetworks(file.path(library(help="RNetica")$path,
-                           "sampleNets","IRT5.dne"), session=MySession)
+irt5 <- ReadNetworks(system.file("sampleNets","IRT5.dne",
+                                 package="RNetica"), session=MySession)
 NetworkAllNodes(irt5)
 CompileNetwork(irt5) ## Ready to enter findings
 NodeFinding(irt5$nodes$Item_1) <- "Right"
