@@ -10,7 +10,12 @@ Authors@R:
            email = "ralmond@fsu.edu",
            comment = c(ORCID = "0000-0002-8876-9337"))
 Maintainer: Russell Almond <ralmond@fsu.edu>
-Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), futile.logger, methods
+Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), methods
+Imports: futile.logger
+Suggests:     knitr,
+    rmarkdown,
+    tidyr
+VignetteBuilder: knitr
 Description: This package provides RNetica implementation of Peanut interface.
 License: Artistic-2.0 
 URL: http://pluto.coe.fsu.edu/RNetica
