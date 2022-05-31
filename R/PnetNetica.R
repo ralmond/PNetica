@@ -329,7 +329,7 @@ setMethod("maxCPTParam","NeticaNode", function (node, Mstepit=5,
   ## Get the posterior pseudo-counts by multiplying each row of the
   ## node's CPT by its experience.
   ne <- NodeExperience(node)
-  if (is.na(ne) || is.null(ne)) ne <- GetPriorWeight(node)
+  if (any(is.na(ne)) || is.null(ne)) ne <- GetPriorWeight(node)
   np <- length(dim(NodeProbs(node)))-1L
   if (np==0L || length(ne) == 1L) {
     counts <- NodeProbs(node)*ne
@@ -376,12 +376,12 @@ MakePnode.NeticaNode <- function (net, name, data) {
     NodeUserField(node,"Truename") <- name
   }
   node <- as.Pnode(node)
-  if (!is.null(data$NodeTitle) && !is.na(data$NodeTitle))
+  if (!is.null(data$NodeTitle[1]) && !is.na(data$NodeTitle[1]))
     PnodeTitle(node) <- as.character(data$NodeTitle[1])
-  if (!is.null(data$NodeDescription) &&
-      !is.na(data$NodeDescription))
+  if (!is.null(data$NodeDescription[1]) &&
+      !is.na(data$NodeDescription[1]))
     PnodeDescription(node) <- as.character(data$NodeDescription[1])
-  if (!is.null(data$NodeLabels) && !is.na(data$NodeLabels)) {
+  if (!is.null(data$NodeLabels[1]) && !is.na(data$NodeLabels[1])) {
     labels <- strsplit(data$NodeLabels[1],",")[[1]]
     PnodeLabels(node) <- as.character(labels)
   }
