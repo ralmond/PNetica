@@ -1,3 +1,8 @@
+2022-11-09  Russell Almond  <ralmond@pei>
+
+	* R/BNNetica.R: (PnetSerialize) -- Added remove.file if necessary to catch growing file sizes.
+	
+
 2022-04-10  Russell Almond  <ralmond@cherry.local>
 
 	* R/PnetNetica.R (maxCPTParam): set it up so that it should fall
