@@ -269,8 +269,16 @@ setMethod("PnetName","NeticaBN", function (net){
 })
 
 setMethod("PnetName<-","NeticaBN", function (net, value) {
-  NetworkUserField(net,"Truename")
-  NetworkName(net) <- as.IDname(value)
+  NetworkUserField(net,"Truename") <- value
+  tryCatch({
+    idname <- as.IDname(value)
+    if (NetworkName(net) != idname) {
+      # Also need to rename the net.
+      NetworkName(net) <- idname
+    }
+  },
+  message = function(m) flog.info(conditionMessage(m))
+  )
   invisible(net)
 })
 
@@ -326,11 +334,20 @@ setMethod("PnetFindNode","NeticaBN", function(net,name) {
   NetworkFindNode(net,as.IDname(name))
 })
 
+
 setMethod("PnetSerialize","NeticaBN",
           function (net) {
             factory <- net$Session$SessionName
             name <- PnetName(net)
-            tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
+            tmp <- options()$PNetica.serialize.tmpdir
+            if (is.null(tmp)) {
+              tmp <- tempdir()
+              options(PNetica.serialize.tmpdir=tmp)
+            }
+            inet <- options()$PNetica.debug.serialize
+            if (!is.numeric(inet))
+              options(PNetica.debug.serialize=inet+1)
+            tmpfile <- file.path(tmp,paste(name,inet,"dne",sep="."))
             WriteNetworks(net,tmpfile)
             data <- serialize(readLines(tmpfile),NULL)
             list(name=name,factory=factory,data=data)

@@ -1,3 +1,9 @@
+2022-09-29  Russell Almond  <ralmond@cherry.local>
+
+	* R/Warehouse.R (BNWarehouse$WarhouseCopy): There was a problem
+	where the truename was not being updated on copy.  Should now be
+	fixed, but needs a test.
+
 2022-04-10  Russell Almond  <ralmond@cherry.local>
 
 	* R/PnetNetica.R (maxCPTParam): set it up so that it should fall
