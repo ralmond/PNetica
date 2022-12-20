@@ -49,17 +49,15 @@ netman1 <- read.csv(system.file("auxdata", "Mini-PP-Nets.csv",
 
 
 ### Test Net building
-Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name")
-stopifnot(is.PnetWarehouse(Nethouse))
+Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name",
+                        address=system.file("testnets",package="PNetica"))
 
-curd <- setwd(system.file("testnets",package="PNetica"))
 CM <- WarehouseSupply(Nethouse,"miniPP_CM")
 stopifnot(is.null(WarehouseFetch(Nethouse,"PPcompEM")))
 EM1 <- WarehouseMake(Nethouse,"PPcompEM")
 
 EMs <- lapply(c("PPcompEM","PPconjEM", "PPtwostepEM", "PPdurAttEM"),
               function(nm) WarehouseSupply(Nethouse,nm))
-setwd(curd)
 
 }
 \keyword{ manip }

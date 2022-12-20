@@ -57,10 +57,9 @@ netman1 <- read.csv(system.file("auxdata", "Mini-PP-Nets.csv",
 
 
 ### Test Net building
-Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name")
-stopifnot(is.PnetWarehouse(Nethouse))
+Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name",
+                        address=system.file("testnets",package="PNetica"))
 
-curd <- setwd(system.file("testnets",package="PNetica"))
 CM <- WarehouseSupply(Nethouse,"miniPP_CM")
 stopifnot(is.null(WarehouseFetch(Nethouse,"PPcompEM")))
 EM1 <- WarehouseMake(Nethouse,"PPcompEM")
@@ -73,7 +72,6 @@ EMs <- lapply(c("PPcompEM","PPconjEM", "PPtwostepEM", "PPdurAttEM"),
 Nodehouse <- NNWarehouse(manifest=nodeman1,
                          key=c("Model","NodeName"),
                          session=sess)
-stopifnot(is.PnodeWarehouse(Nodehouse))
 
 phyd <- WarehouseData(Nodehouse,c("miniPP_CM","Physics"))
 
@@ -91,8 +89,8 @@ for (n in 1:nrow(nodeman1)) {
 }
 
 WarehouseFree(Nethouse,PnetName(EM1))
-stopifnot(!is.valid(Nethouse,EM1))
-setwd(curd)
+
+
 
 }
 \keyword{ manip }

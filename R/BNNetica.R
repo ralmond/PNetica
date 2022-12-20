@@ -339,17 +339,12 @@ setMethod("PnetSerialize","NeticaBN",
           function (net) {
             factory <- net$Session$SessionName
             name <- PnetName(net)
-            tmp <- options()$PNetica.serialize.tmpdir
-            if (is.null(tmp)) {
-              tmp <- tempdir()
-              options(PNetica.serialize.tmpdir=tmp)
-            }
-            inet <- options()$PNetica.debug.serialize
-            if (!is.numeric(inet))
-              options(PNetica.debug.serialize=inet+1)
-            tmpfile <- file.path(tmp,paste(name,inet,"dne",sep="."))
+            tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
+            if (file.exists(tmpfile)) file.remove(tmpfile)
             WriteNetworks(net,tmpfile)
+            flog.info(system(paste("wc",tmpfile),intern=TRUE))
             data <- serialize(readLines(tmpfile),NULL)
+            flog.info("Network size %d",length(data))
             list(name=name,factory=factory,data=data)
           })
 
@@ -358,6 +353,7 @@ setMethod("unserializePnet","NeticaSession",
           function(factory,data) {
             name <- data$name
             tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
+            if (file.exists(tmpfile)) file.remove(tmpfile)
             writeLines(unserialize(data$data),tmpfile)
             oldnet <- factory$findNet(name)
             if (!is.null(oldnet) && is.active(oldnet)) {
