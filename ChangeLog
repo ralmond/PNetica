@@ -1,3 +1,7 @@
+2023-02-13  Russell Almond  <ralmond@cherry>
+
+	* R/PnetNetica.R (MakePnode.NeticaNode): Added trimws to node labels as that presents and issue for Netica.
+	
 
 2022-11-09  Russell Almond  <ralmond@pei>
 

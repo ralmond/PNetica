@@ -337,7 +337,7 @@ setMethod("maxCPTParam","NeticaNode", function (node, Mstepit=5,
     counts <- sweep(NodeProbs(node),1L:np,ne,"*")
   }
   withCallingHandlers(
-      est <- mapDPC(counts,ParentStates(node),NodeStates(node),
+      est <- CPTtools::mapDPC(counts,ParentStates(node),NodeStates(node),
                     PnodeLnAlphas(node), PnodeBetas(node),
                     PnodeRules(node),PnodeLink(node),
                     PnodeLinkScale(node),PnodeQ(node),
@@ -382,7 +382,7 @@ MakePnode.NeticaNode <- function (net, name, data) {
       !is.na(data$NodeDescription))
     PnodeDescription(node) <- as.character(data$NodeDescription[1])
   if (!is.null(data$NodeLabels) && !is.na(data$NodeLabels)) {
-    labels <- strsplit(data$NodeLabels[1],",")[[1]]
+    labels <- trimws(strsplit(data$NodeLabels[1],",")[[1]])
     PnodeLabels(node) <- as.character(labels)
   }
   if (cont) {
