@@ -376,12 +376,12 @@ MakePnode.NeticaNode <- function (net, name, data) {
     NodeUserField(node,"Truename") <- name
   }
   node <- as.Pnode(node)
-  if (!is.null(data$NodeTitle) && !is.na(data$NodeTitle))
+  if (!is.null(data$NodeTitle[1]) && !is.na(data$NodeTitle[1]))
     PnodeTitle(node) <- as.character(data$NodeTitle[1])
-  if (!is.null(data$NodeDescription) &&
-      !is.na(data$NodeDescription))
+  if (!is.null(data$NodeDescription[1]) &&
+      !is.na(data$NodeDescription[1]))
     PnodeDescription(node) <- as.character(data$NodeDescription[1])
-  if (!is.null(data$NodeLabels) && !is.na(data$NodeLabels)) {
+  if (!is.null(data$NodeLabels[1]) && !is.na(data$NodeLabels[1])) {
     labels <- trimws(strsplit(data$NodeLabels[1],",")[[1]])
     PnodeLabels(node) <- as.character(labels)
   }

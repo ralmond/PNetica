@@ -1,11 +1,20 @@
+2023-02-16  Russell Almond  <ralmond@cherry>
+
+	* R/PnetNetica.R (MakePnode.NeticaNode): added some [1] on values
+	which are scalar to suppress warnings and errors.
+	
+	
+
 2023-02-13  Russell Almond  <ralmond@cherry>
 
-	* R/PnetNetica.R (MakePnode.NeticaNode): Added trimws to node labels as that presents and issue for Netica.
+	* R/PnetNetica.R (MakePnode.NeticaNode): Added trimws to node
+	labels as that presents and issue for Netica. 
 	
 
 2022-11-09  Russell Almond  <ralmond@pei>
 
-	* R/BNNetica.R: (PnetSerialize) -- Added remove.file if necessary to catch growing file sizes.
+	* R/BNNetica.R: (PnetSerialize) -- Added remove.file if necessary
+	to catch growing file sizes. 
 
 2022-09-29  Russell Almond  <ralmond@cherry.local>
 
