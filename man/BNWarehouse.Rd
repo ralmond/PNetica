@@ -9,7 +9,8 @@
   
 }
 \usage{
-BNWarehouse(manifest = data.frame(), session = getDefaultSession(), address = ".", key = c("Name"), prefix = "S")
+BNWarehouse(manifest = data.frame(), session = getDefaultSession(),
+            address = ".", key = c("Name"), prefix = "S")
 }
 \arguments{
   \item{manifest}{A data frame containing instructions for building the

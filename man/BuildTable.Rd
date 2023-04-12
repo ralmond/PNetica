@@ -88,7 +88,8 @@ for (nd in thetas) {
   PnodeLink(nd) <- "normalLink"
   PnodeBetas(nd) <- 0 # A numeric vector of intercept parameters
   PnodeQ(nd) <- TRUE # All parents are relevant.
-  NodeSets(nd) <- c("pnodes","Proficiency") # A character vector containing the names of the node sets
+  NodeSets(nd) <- c("pnodes","Proficiency") # A character vector
+                   # containing the names of the node sets
 }
 
 ## Standard normal prior.

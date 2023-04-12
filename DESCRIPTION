@@ -16,7 +16,12 @@ Suggests:     knitr,
     rmarkdown,
     tidyr
 VignetteBuilder: knitr
-Description: This package provides RNetica implementation of Peanut interface.
+Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), futile.logger, methods
+Description: This package provides RNetica implementation of Peanut
+    interface.This provides an implementation of the Peanut protocol using
+    the Netica (RNetica) Bayesian network engine.  This allows parameters
+    of parametric Bayesian network models written and Netica and using Peanut to be
+    processed with R tools, and the parameter saved in the Netica objects.   
 License: Artistic-2.0 
 URL: http://pluto.coe.fsu.edu/RNetica
 Support: c(
