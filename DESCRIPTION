@@ -17,7 +17,6 @@ Suggests:     knitr,
     tidyr,
     shiny
 VignetteBuilder: knitr
-Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), futile.logger, methods
 Description: This package provides RNetica implementation of Peanut
     interface.This provides an implementation of the Peanut protocol using
     the Netica (RNetica) Bayesian network engine.  This allows parameters
