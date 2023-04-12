@@ -99,8 +99,7 @@
 \examples{
 sess <- NeticaSession()
 startSession(sess)
-curd <- getwd()
-setwd(file.path(library(help="PNetica")$path, "testnets"))
+curd <- setwd(system.file("testnets",package="PNetica"))
 
 ## PnetHub
 PM <- ReadNetworks("miniPP-CM.dne", session=sess)

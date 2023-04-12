@@ -127,14 +127,14 @@ startSession(sess)
 
 ### This tests the manifest and factory protocols.
 
-netman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
-                          "Mini-PP-Nets.csv", sep=.Platform$file.sep),
+netman1 <- read.csv(system.file("auxdata", "Mini-PP-Nets.csv", 
+                                 package="Peanut"),
                     row.names=1, stringsAsFactors=FALSE)
 ## Build the first network (proficiency model)
 miniPP <- MakePnet.NeticaBN(sess,"miniPP",netman1[1,,drop=FALSE])
 
-nodeman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
-                           "Mini-PP-Nodes.csv", sep=.Platform$file.sep),
+nodeman1 <- read.csv(system.file("auxdata", "Mini-PP-Nodes.csv", 
+                                 package="Peanut"),
                      row.names=1,stringsAsFactors=FALSE)
 
 ## Discrete Example

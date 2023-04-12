@@ -221,13 +221,13 @@ startSession(sess)
 
 ## BNWarehouse is the PNetica Net Warehouse.
 ## This provides an example network manifest.
-netman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
-                          "Mini-PP-Nets.csv", sep=.Platform$file.sep),
+netman1 <- read.csv(system.file("auxdata", "Mini-PP-Nets.csv",
+                     package="Peanut"),
                     row.names=1, stringsAsFactors=FALSE)
 Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name")
 
-nodeman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
-                           "Mini-PP-Nodes.csv", sep=.Platform$file.sep),
+nodeman1 <- read.csv(system.file("auxdata", "Mini-PP-Nodes.csv", 
+                     package="Peanut"),
                      row.names=1,stringsAsFactors=FALSE)
 
 Nodehouse <- NNWarehouse(manifest=nodeman1,

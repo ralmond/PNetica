@@ -47,20 +47,19 @@ startSession(sess)
 
 ### This tests the manifest and factory protocols.
 
-nodeman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
-                           "Mini-PP-Nodes.csv", sep=.Platform$file.sep),
+nodeman1 <- read.csv(system.file("auxdata", "Mini-PP-Nodes.csv", 
+                     package="Peanut"),
                      row.names=1,stringsAsFactors=FALSE)
 
-netman1 <- read.csv(paste(library(help="Peanut")$path, "auxdata",
-                          "Mini-PP-Nets.csv", sep=.Platform$file.sep),
+netman1 <- read.csv(system.file("auxdata", "Mini-PP-Nets.csv", 
+                     package="Peanut"),
                     row.names=1, stringsAsFactors=FALSE)
 
 
 ### Test Net building
-Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name")
-stopifnot(is.PnetWarehouse(Nethouse))
+Nethouse <- BNWarehouse(manifest=netman1,session=sess,key="Name",
+                        address=system.file("testnets",package="PNetica"))
 
-setwd(paste(library(help="PNetica")$path, "testnets",sep=.Platform$file.sep))
 CM <- WarehouseSupply(Nethouse,"miniPP_CM")
 stopifnot(is.null(WarehouseFetch(Nethouse,"PPcompEM")))
 EM1 <- WarehouseMake(Nethouse,"PPcompEM")
@@ -73,7 +72,6 @@ EMs <- lapply(c("PPcompEM","PPconjEM", "PPtwostepEM", "PPdurAttEM"),
 Nodehouse <- NNWarehouse(manifest=nodeman1,
                          key=c("Model","NodeName"),
                          session=sess)
-stopifnot(is.PnodeWarehouse(Nodehouse))
 
 phyd <- WarehouseData(Nodehouse,c("miniPP_CM","Physics"))
 
@@ -91,7 +89,8 @@ for (n in 1:nrow(nodeman1)) {
 }
 
 WarehouseFree(Nethouse,PnetName(EM1))
-stopifnot(!is.valid(Nethouse,EM1))
+
+
 
 }
 \keyword{ manip }

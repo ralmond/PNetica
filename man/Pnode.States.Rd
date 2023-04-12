@@ -125,8 +125,7 @@
 \examples{
 sess <- NeticaSession()
 startSession(sess)
-curd <- getwd()
-setwd(file.path(library(help="PNetica")$path, "testnets"))
+curd <- setwd(system.file("testnets",package="PNetica"))
 
 ## Making states
 anet <- CreateNetwork("Annette", session=sess)

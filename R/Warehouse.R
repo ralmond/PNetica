@@ -384,8 +384,10 @@ setMethod(WarehouseFree,"BNWarehouse",
 
 setMethod(WarehouseCopy,c("BNWarehouse","NeticaBN"),
           function(warehouse,obj,newname) {
-            newname <- as.legal.name(warehouse,newname)
-            CopyNetworks(obj,newname)
+            newname1 <- as.legal.name(warehouse,newname)
+            newnet <- CopyNetworks(obj,newname1)
+            PnetName(newnet) <- newname
+            newnet
           })
 
 setMethod(is.legal.name,"BNWarehouse",

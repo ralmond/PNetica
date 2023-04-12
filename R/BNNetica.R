@@ -888,8 +888,16 @@ setMethod("PnetName","NeticaBN", function (net){
 })
 
 setMethod("PnetName<-","NeticaBN", function (net, value) {
-  NetworkUserField(net,"Truename")
-  NetworkName(net) <- as.IDname(value)
+  NetworkUserField(net,"Truename") <- value
+  tryCatch({
+    idname <- as.IDname(value)
+    if (NetworkName(net) != idname) {
+      # Also need to rename the net.
+      NetworkName(net) <- idname
+    }
+  },
+  message = function(m) flog.info(conditionMessage(m))
+  )
   invisible(net)
 })
 
@@ -1080,6 +1088,7 @@ setMethod("PnetFindNode","NeticaBN", function(net,name) {
   NetworkFindNode(net,as.IDname(name))
 })
 
+
 ##'Methods for (un)serializing a Netica Network
 ##'
 ##'Methods for functions \code{\link[Peanut]{PnetSerialize}} and
@@ -1171,8 +1180,11 @@ setMethod("PnetSerialize","NeticaBN",
             factory <- net$Session$SessionName
             name <- PnetName(net)
             tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
+            if (file.exists(tmpfile)) file.remove(tmpfile)
             WriteNetworks(net,tmpfile)
+            flog.info(system(paste("wc",tmpfile),intern=TRUE))
             data <- serialize(readLines(tmpfile),NULL)
+            flog.info("Network size %d",length(data))
             list(name=name,factory=factory,data=data)
           })
 
@@ -1181,6 +1193,7 @@ setMethod("unserializePnet","NeticaSession",
           function(factory,data) {
             name <- data$name
             tmpfile <- file.path(tempdir(),paste(name,"dne",sep="."))
+            if (file.exists(tmpfile)) file.remove(tmpfile)
             writeLines(unserialize(data$data),tmpfile)
             oldnet <- factory$findNet(name)
             if (!is.null(oldnet) && is.active(oldnet)) {

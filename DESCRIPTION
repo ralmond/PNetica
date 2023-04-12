@@ -1,9 +1,21 @@
 Package: PNetica
-Version: 0.8-5
-Date: 2021/06/01
+Version: 0.9-1
+Date: 2022/04/24
 Title: Parameterized Bayesian Networks Netica Interface
 Author: Russell Almond
+Authors@R: 
+    person(given = "Russell",
+           family = "Almond",
+           role = c("aut", "cre"),
+           email = "ralmond@fsu.edu",
+           comment = c(ORCID = "0000-0002-8876-9337"))
 Maintainer: Russell Almond <ralmond@fsu.edu>
+Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), methods
+Imports: futile.logger
+Suggests:     knitr,
+    rmarkdown,
+    tidyr
+VignetteBuilder: knitr
 Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), futile.logger, methods
 Description: This package provides RNetica implementation of Peanut
     interface.This provides an implementation of the Peanut protocol using
@@ -12,5 +24,16 @@ Description: This package provides RNetica implementation of Peanut
     processed with R tools, and the parameter saved in the Netica objects.   
 License: Artistic-2.0 
 URL: http://pluto.coe.fsu.edu/RNetica
+Support: c(
+   'Bill & Melinda Gates Foundation grant
+   "Games as Learning/Assessment:  Stealth Assessment" (#0PP1035331,
+   Val Shute, PI)',
+   'National Science Foundation grant "DIP:
+   Game-based Assessment and Support of STEM-related Competencies"
+   (#1628937, Val Shute, PI)',
+   'National Scient Foundation grant "Mathematical Learning via
+   Architectual Design and Modeling Using E-Rebuild." (\#1720533,
+   Fengfeng Ke, PI)',
+   'Institute of Educational Statistics Grant: "Exploring adaptive cognitive and affective learning support for next-generation STEM learning games." (#R305A170376-20, Val Shute and Russell Almond, PIs')	
 
 
