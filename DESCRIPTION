@@ -14,7 +14,8 @@ Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), metho
 Imports: futile.logger
 Suggests:     knitr,
     rmarkdown,
-    tidyr
+    tidyr,
+    shiny
 VignetteBuilder: knitr
 Depends: R (>= 3.0), RNetica (>= 0.7), CPTtools (>= 0.5), Peanut (>= 0.8), futile.logger, methods
 Description: This package provides RNetica implementation of Peanut
