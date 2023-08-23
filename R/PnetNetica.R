@@ -122,13 +122,19 @@ setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
 ##'
 ##'
 ##'@export MakePnet.NeticaBN
-MakePnet.NeticaBN <-function (sess,name,data) {
+MakePnet.NeticaBN <-function (sess,name,data,restoreOnly=FALSE) {
   pname <- as.character(data$Pathname)
   ## this will convert NULL to character(0)
-  if (length(pname) >0L && nchar(pname) > 0L && file.exists(pname)) {
-    net <-as.Pnet(ReadNetworks(pname,sess))
-    PnetName(net) <- name
-  } else {
+  net <- NULL
+  if (length(pname) >0L && nchar(pname) > 0L) {
+    if (file.exists(pname)) {
+      net <-as.Pnet(ReadNetworks(pname,sess))
+      PnetName(net) <- name
+    } else if (restoreOnly) {
+      stop(paste("Can't create",name,", can't find file ",pname))
+    }
+  }
+  if (is.null(net)) {
     net <- as.Pnet(CreateNetwork(as.IDname(name),sess))
     NetworkUserField(net,"Truename") <- name
   }
