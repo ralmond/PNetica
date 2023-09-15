@@ -1,0 +1,60 @@
+---
+title: "Build Test Network"
+output: html_notebook
+---
+
+```{r libs}
+library(CPTtools)
+library(RNetica)
+library(Peanut)
+library(PNetica)
+```
+
+Generate the session
+
+```{r sess}
+sess <- NeticaSession()
+startSession(sess)
+```
+
+## Build the Net
+
+Create an empty net and add the nodes.
+
+```{r make network}
+testNet <- CreateNetwork("testNet",sess)
+skills <- NewDiscreteNode(testNet,paste("Skill",1:2,sep=""),
+                          c("H","M","L"))
+rules <- list(
+  comp=Compensatory,
+  conj=OffsetConjunctive,
+  dis=OffsetDisjunctive,
+  mixed=list(OffsetConjunctive,Compensatory,Compensatory,OffsetDisjunctive)
+  )
+
+correct <- NewDiscreteNode(testNet,paste(names(rules),"correct",sep="_"),
+                           c("Correct","Incorrect"))
+names(correct) <- names(rules)
+graded <- NewDiscreteNode(testNet,paste(names(rules),"graded",sep="_"),
+                          c("A","B","C","D","F"))
+names(graded) <- names(rules)
+```
+
+Now add the links.
+
+```{r parents]
+NodeParents(skills[[2]]) <- skills[1]
+for (r in names(rules)) {
+  NodeParents(correct[[r]]) <- skills
+  NodeParents(graded[[r]]) <- skills
+}
+```
+
+## Add distributions
+
+### Normal Link
+
+```{r pm}
+
+
+```

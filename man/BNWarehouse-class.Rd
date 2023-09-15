@@ -51,7 +51,7 @@
   \describe{
 
     \item{\link{WarehouseSupply}}{\code{signature(warehouse =
-        "BNWarehouse", name = "character")}.  This finds a network
+        "BNWarehouse", name = "character", restoreOnly)}.  This finds a network
       with the appropriate name in the session.  If one does not exist,
       it is created by reading it from the pathname specified in the
       manifest.  If no file exists at the pathname, a new blank network
@@ -63,9 +63,11 @@
       \code{NULL} if it has not been built in Netica yet.} 
 
     \item{\link{WarehouseMake}}{\code{signature(warehouse =
-        "BNWarehouse", name = "character")}.  This loads the network
-      from a file into the Netica session, or builds the network (in the
-      Netica session) using the data in the Manifest.} 
+        "BNWarehouse", name = "character", restoreOnly)}.  This loads
+        the network from a file into the Netica session, or builds the
+        network (in the Netica session) using the data in the Manifest.
+        If \code{restoreOnly=TRUE}, then the function will generate an
+        error if there is not file to restore the network from.} 
 
     \item{\link{WarehouseFree}}{\code{signature(warehouse =
         "BNWarehouse", name = "character")}.  This removes the network

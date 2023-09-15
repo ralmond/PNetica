@@ -9,14 +9,18 @@
 
 }
 \usage{
-MakePnet.NeticaBN(sess, name, data)
+MakePnet.NeticaBN(sess, name, data, restoreOnly=FALSE)
 }
 \arguments{
   \item{sess}{The Netica session (\code{\link[RNetica]{NeticaSession}})
     object in which the net will be created.}
   \item{name}{A character scalar with the name of the network.  This
     should follow the \code{\link[RNetica]{IDname}} rules.}
-  \item{data}{A list providing data and metadata about the network.  See details.}
+  \item{data}{A list providing data and metadata about the network.  See
+    details.}
+  \item{restoreOnly}{A logical flag.  If true, will signal an error if
+    the network file does not exist.  If false, a new empty network will
+    be created.}
 }
 \details{
 
@@ -54,6 +58,16 @@ The object should be available from the warehouse via its truename, but
 it is best to stick to the Netica naming conventions for networks and
 nodes.
 
+
+}
+\note{
+
+  There seem to be two use cases for this function (and
+  \code{\link[Peanut]{WarehouseSupply}} from which it is called.  During
+  model construction, calling this function should create a new blank
+  network.  During scoring, it should load a prebuilt network and signal
+  an error if the network is missing.  The \code{restoreOnly} flag is
+  designed to distinguish between these cases.
 
 }
 \value{

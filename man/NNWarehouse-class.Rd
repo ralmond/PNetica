@@ -65,7 +65,8 @@ Class \code{"\linkS4class{PnodeWarehouse}"}, directly.
   \describe{
 
     \item{\link{WarehouseSupply}}{\code{signature(warehouse =
-        "NNWarehouse", name = "character")}.  In this case the name is
+        "NNWarehouse", name = "character", restoreOnly)}.  In this case
+        the name is 
         expected to be a vector of length 2 with the first component
         identifying the network and the second the node within the
         network.  This finds a node with the appropriate name in the
@@ -76,9 +77,10 @@ Class \code{"\linkS4class{PnodeWarehouse}"}, directly.
       name="character")}:   Fetches the node if it already exists, or
       returns \code{NULL} if it does not. }
 
-    \item{WarehouseMake}{\code{signature(warehouse = "NNWarehouse")}:
-      Makes a new node, calling \code{\link{MakePnode.NeticaNode}}. }
-
+    \item{WarehouseMake}{\code{signature(warehouse = "NNWarehouse",
+      restoreOnly)}: Makes a new node, calling
+      \code{\link{MakePnode.NeticaNode}}. The \code{restoreOnly}
+      argument is ignored.} 
 
     \item{as.legal.name}{\code{signature(warehouse = "NNWarehouse")}:
       If necessary, mangles a node name to follow the Netica

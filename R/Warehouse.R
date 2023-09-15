@@ -322,20 +322,21 @@ setMethod(WarehouseFetch,"BNWarehouse",
             warehouse@session$nets[[as.IDname(name)]]
           })
 
-setMethod("WarehouseSupply", c("BNWarehouse"), function(warehouse,name) {
+setMethod("WarehouseSupply", c("BNWarehouse"),
+          function(warehouse,name, restoreOnly=FALSE) {
   val <- WarehouseFetch(warehouse,name)
   if (is.null(val))
-    val <- WarehouseMake(warehouse,name)
+    val <- WarehouseMake(warehouse,name, restoreOnly)
   if (!is.active(val)) {
     warehouse@session$nets[[as.IDname(name)]] <- NULL
-    val <- WarehouseMake(warehouse,name)
+    val <- WarehouseMake(warehouse,name, restoreOnly)
   }
   val
 })
 
 
 setMethod(WarehouseMake,"BNWarehouse",
-          function(warehouse,name) {
+          function(warehouse,name, restoreOnly=FALSE) {
             if (length(name) != 1L)
               stop("Expected name to be unique.")
             dat <- WarehouseData(warehouse,name)
@@ -348,7 +349,7 @@ setMethod(WarehouseMake,"BNWarehouse",
               warning("Deleting old network ",name)
               DeleteNetwork(sess$nets[[as.IDname(name)]])
             }
-            MakePnet.NeticaBN(sess,name,dat)
+            MakePnet.NeticaBN(sess,name,dat,restoreOnly)
           })
 
 setMethod(WarehouseSave,c("BNWarehouse","character"),
@@ -708,7 +709,7 @@ setMethod(WarehouseFetch,"NNWarehouse",
           })
 
 setMethod(WarehouseMake,"NNWarehouse",
-          function(warehouse,name) {
+          function(warehouse,name, restoreOnly=FALSE) {
             if (length(name) != 2L)
               stop("Expected name to be of the form (net,node).")
             net <- warehouse@session$nets[[as.IDname(name[1])]]
@@ -720,6 +721,10 @@ setMethod(WarehouseMake,"NNWarehouse",
               DeleteNodes(net$nodes[[as.IDname(name[2])]])
             }
             dat <- WarehouseData(warehouse,name)
+            if (nrow(dat)==0L) {
+              stop(paste("Don't have instructions for making node",
+                         name[2],"in",name[1]))
+            }
             MakePnode.NeticaNode(net,name[2],dat)
           })
 
@@ -776,13 +781,13 @@ setMethod(WarehouseInventory,"NNWarehouse",
                               !is.null(WarehouseFetch(warehouse,allKeys[k,]))
                             )
             allKeys[built, ,drop=FALSE]})
-setMethod("WarehouseSupply", c("NNWarehouse"), function(warehouse,name) {
+setMethod("WarehouseSupply", c("NNWarehouse"), function(warehouse,name, restoreOnly=FALSE) {
   val <- WarehouseFetch(warehouse,name)
   if (is.null(val))
-    val <- WarehouseMake(warehouse,name)
+    val <- WarehouseMake(warehouse,name,restoreOnly)
   if (!is.active(val)) {
     warehouse@session$nets[[as.IDname(name[1])]]$nodes[[as.IDname(name[2])]] <- NULL
-    val <- WarehouseMake(warehouse,name)
+    val <- WarehouseMake(warehouse,name,restoreOnly)
   }
   val
 })
