@@ -18,6 +18,7 @@ exportMethods(is.Pnode,as.Pnode, Pnode, PnodeNet,
               PnodeBetas, "PnodeBetas<-",
               PnodeLinkScale, "PnodeLinkScale<-",
               BuildTable, PnodeParentTvals,
+              PnodeVisPos,"PnodeVisPos<-",
               maxCPTParam)  #NeticaNode
 
 exportMethods(PnodeName,"PnodeName<-",
