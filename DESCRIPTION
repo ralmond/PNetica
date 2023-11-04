@@ -15,7 +15,8 @@ Imports: futile.logger
 Suggests:     knitr,
     rmarkdown,
     tidyr,
-    shiny
+    shiny,
+    igraph
 VignetteBuilder: knitr
 Description: This package provides RNetica implementation of Peanut
     interface.This provides an implementation of the Peanut protocol using
