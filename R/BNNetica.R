@@ -202,9 +202,9 @@ setMethod("PnodeLabels<-","NeticaNode", function (node,value) {
 setMethod("PnodeVisPos","NeticaNode", function(node)
   NodeVisPos(node))
 
-setMethod("PnodeVisPos<-","NeticaNode",function(node,value)
+setMethod("PnodeVisPos<-","NeticaNode",function(node,value) {
   NodeVisPos(node) <- value
-  node)
+  node})
     
 
 ### States
