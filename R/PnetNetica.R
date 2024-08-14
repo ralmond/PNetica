@@ -38,6 +38,13 @@ setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
   NetworkNodesInSet(net,"pnodes") <- value
   invisible(net)
 })
+setMethod("PnetOnodes","NeticaBN", function (net) {
+  NetworkNodesInSet(net,"onodes")
+})
+setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
+  NetworkNodesInSet(net,"onodes") <- value
+  invisible(net)
+})
 
 ## To fit PnetFactory Protocol
 
@@ -562,8 +569,16 @@ setMethod("as.Pnode","NeticaNode",function(x) {
 setMethod("is.Pnode","NeticaNode",function(x)
   "pnodes" %in% NodeSets(x)
   )
+setMethod("is.Onode","NeticaNode",function(x)
+  "onodes" %in% NodeSets(x)
+)
 
-
+setMethod("is.Onode<-","NeticaNode",function(x,value) {
+  labels <- setdiff(NodeSets(x),"onodes")
+  if (isTRUE(value)) labels <- c("onodes",labels)
+  NodeSets(x) <- labels
+  x
+})
 ## as.Pnode.NeticaNode <- function (x) {
 ##   if (!("Pnode" %in% class(x)))
 ##     class(x) <- c(class(x),"Pnode")

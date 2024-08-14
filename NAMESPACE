@@ -6,11 +6,13 @@ import(futile.logger)
 importFrom("stats", "median")
 
 exportMethods(is.Pnet,as.Pnet,PnetPriorWeight,
-              "PnetPriorWeight<-", PnetPnodes,
+              "PnetPriorWeight<-", PnetPnodes, PnetOnodes,
+              "PnetOnodes<-",
               "PnetPnodes<-", calcPnetLLike, calcExpTables) # NeticaBN
 exportMethods("PnetSerialize","unserializePnet")
 
 exportMethods(is.Pnode,as.Pnode, Pnode, PnodeNet,
+              is.Onode,"is.Onode<-",
               PnodeQ, "PnodeQ<-", PnodePriorWeight,
               "PnodePriorWeight<-", PnodeRules,
               "PnodeRules<-", PnodeLink, "PnodeLink<-",
