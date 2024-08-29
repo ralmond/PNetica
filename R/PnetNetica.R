@@ -41,7 +41,7 @@ setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
 setMethod("PnetOnodes","NeticaBN", function (net) {
   NetworkNodesInSet(net,"onodes")
 })
-setMethod("PnetPnodes<-","NeticaBN", function (net, value) {
+setMethod("PnetOnodes<-","NeticaBN", function (net, value) {
   NetworkNodesInSet(net,"onodes") <- value
   invisible(net)
 })

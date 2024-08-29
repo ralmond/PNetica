@@ -670,6 +670,8 @@ setMethod("PnodeEvidence","NeticaNode",
 
 setMethod("PnodeEvidence<-",c("NeticaNode","numeric"),
           function (node,value) {
+            if (all(is.na(value))) 
+              return(PnodeEvidence(node) <- NULL)
             if (length(value) == 1L) {
               NodeValue(node) <- value
             } else if (length(value)==PnodeNumStates(node)) {
@@ -686,6 +688,8 @@ setMethod("PnodeEvidence<-",c("NeticaNode","difftime"),
           })
 setMethod("PnodeEvidence<-",c("NeticaNode","character"),
           function (node,value) {
+            if (all(is.na(value))) 
+              return(PnodeEvidence(node) <- NULL)
             ov1 <- value
             sts <- NodeStates(node)
             if (!(ov1 %in% sts)) {
