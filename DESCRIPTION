@@ -1,6 +1,6 @@
 Package: PNetica
-Version: 0.9-6
-Date: 2024/08/14
+Version: 0.10-1
+Date: 2025/01/01
 Title: Parameterized Bayesian Networks Netica Interface
 Author: Russell Almond
 Authors@R: 
@@ -16,6 +16,8 @@ Suggests:     knitr,
     rmarkdown,
     tidyr,
     shiny,
+    withr,
+    testthat,
     igraph
 VignetteBuilder: knitr
 Description: This package provides RNetica implementation of Peanut
