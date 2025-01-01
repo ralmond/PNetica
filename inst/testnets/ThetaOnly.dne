@@ -1,0 +1,56 @@
+// ~->[DNET-1]->~
+
+// File created by AlmondR at FloridaStateU using Netica 6.09 on Jan 01, 2025 at 00:00:27 UTC.
+
+bnet ThetaOnly {
+AutoCompile = TRUE;
+autoupdate = TRUE;
+whenchanged = 1735689627;
+
+visual V2 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	ShowLinkStrengths = 1;
+	windowposn = (66, 66, 1141, 510);
+	resolution = 72;
+	drawingbounds = (1080, 720);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00e1e1e1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00f8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00d3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00c8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00ffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00ffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00dee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00f0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00ffffff;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
+
+node theta {
+	discrete = TRUE;
+	states = (VH, High, Mid, Low, VL);
+	levels = (1.2815515655446, 0.524400512708041, 0, -0.524400512708041, -1.2815515655446);
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// VH           High         Mid          Low          VL           
+		  (0.2,         0.2,         0.2,         0.2,         0.2);
+	whenchanged = 1735689580;
+	belief = (0.2, 0.2, 0.2, 0.2, 0.2);
+	visual V2 {
+		center = (108, 126);
+		height = 1;
+		};
+	};
+ElimOrder = (theta);
+};

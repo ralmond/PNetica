@@ -68,6 +68,7 @@ exportMethods(ClearWarehouse,
 exportMethods(PnodeMargin, PnodeEAP, PnodeSD, PnodeMedian,
               PnodeMode)
 
+export(local_PNetica_net)
 
 
 

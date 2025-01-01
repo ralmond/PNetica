@@ -793,8 +793,31 @@ setMethod("WarehouseSupply", c("NNWarehouse"), function(warehouse,name, restoreO
 })
 
 
-
-
+#' Temporarily load PNetica test network
+#'
+#' This function allows loading one of the sample
+#' networks distributed with PNetica, using the 
+#' [withr::defer] protocol, so that it is automatically
+#' closed when the environment is not longer active.  Primarily
+#' intended for test scripts, as the Warehouse mechanism 
+#' is recommended for more general use.
+#' 
+#' @param netname -- The file name of the network, should be 
+#'   value in `list.files(system.file("testnets",package="PNetica"))`.
+#' @param env -- When this environment exits, the network 
+#' will be deleted.
+#'
+#' @return The `NeticaBN` read from the file.
+#' @export
+#'
+#' @seealso [RNetica::local_load_nets]
+#'
+#' @examples
+local_PNetica_net <- 
+function(netname, env=parent.frame()) {
+    RNetica::local_load_nets(system.file(file.path("testnets",netname),package="PNetica",
+                             mustWork=TRUE),env=env)
+}
 
 
 
