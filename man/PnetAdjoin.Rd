@@ -141,7 +141,7 @@ Phys <- PnetFindNode(PM,"Physics")
 
 ## Prior probability for high level node
 PnetCompile(PM)
-bel1 <- PnodeMargin(PM, Phys)
+bel1 <- PnodeMargin(Phys,PM)
 
 ## Adjoin the networks.
 EM1.obs <- PnetAdjoin(PM,EM1)
@@ -151,13 +151,13 @@ PnetCompile(PM)
 PnodeEvidence(EM1.obs[[1]]) <- "Right"
 ## Posterior probability for high level node
 
-bel2 <- PnodeMargin(PM,Phys)
+bel2 <- PnodeMargin(Phys,PM)
 
 PnetDetach(PM,EM1)
 PnetCompile(PM)
 
 ## Findings are unchanged
-bel2a <- PnodeMargin(PM,Phys)
+bel2a <- PnodeMargin(Phys,PM)
 stopifnot(all.equal(bel2,bel2a,tol=1e-6))
 
 DeleteNetwork(list(PM,EM1))
