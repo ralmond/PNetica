@@ -18,7 +18,7 @@
 ##'PnodeProbs,NeticaNode-method PnodeProbs<-,NeticaNode-method
 ##'PnodeNumParents,NeticaNode-method PnodeParentNames,NeticaNode-method
 ##'PnodeParents,NeticaNode-method PnodeParents<-,NeticaNode-method
-##'is.PnodeContinuous,NeticaNode-method
+##'isPnodeContinuous,NeticaNode-method
 ##'@docType class
 ##'@note
 ##'
@@ -60,7 +60,7 @@
 ##'\code{\link[Peanut]{PnodeNumParents}},
 ##'\code{\link[Peanut]{PnodeParentNames}}, \code{\link[Peanut]{PnodeParents}},
 ##'\code{\link[Peanut]{PnodeProbs}}, \code{\link[Peanut]{as.Pnode}},
-##'\code{\link[Peanut]{is.Pnode}}, \code{\link[Peanut]{is.PnodeContinuous}}.
+##'\code{\link[Peanut]{is.Pnode}}, \code{\link[Peanut]{isPnodeContinuous}}.
 ##'@keywords classes graphs
 ##'@examples
 ##'
@@ -483,7 +483,7 @@ setMethod("PnodeStateBounds<-","NeticaNode", function (node,value) {
   invisible(node)
 })
 
-setMethod("is.PnodeContinuous","NeticaNode", function (node)
+setMethod("isPnodeContinuous","NeticaNode", function (node)
   is.continuous(node))
 
 #### Parents
