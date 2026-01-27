@@ -324,12 +324,13 @@ setMethod("PnetRemoveStubNodes","NeticaBN", function (net,nodes) {
 ##'
 ##'@exportMethod
 setMethod("PnetAdjoin","NeticaBN", function (hub, spoke) {
-  AdjoinNetwork(hub,spoke,paste("Spoke",NetworkName(spoke),sep="_"))
+  AdjoinNetwork(hub,spoke,
+                as.IDname(paste("Spoke",NetworkName(spoke),sep="_")))
 })
 
 setMethod("PnetDetach","NeticaBN", function (motif, spoke) {
     ## Bug in RN_AbsorbNodes
-    spokename <- paste("Spoke",NetworkName(spoke),sep="_")
+    spokename <- as.IDname(paste("Spoke",NetworkName(spoke),sep="_"))
     tryCatch(
         AbsorbNodes(NetworkNodesInSet(motif,spokename)),
         error = function (e) {
